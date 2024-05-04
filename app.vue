@@ -200,7 +200,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
         <!-- 9X9: -->
         <section
         id="previewArea"
-       
+        class="mx-auto"
         :style="`width: ${settings.frameSize.x/2}px; height: ${settings.frameSize.y/2}px;`"
         >
           <div ref="previewArea" class="w-full h-full flex relative" :class="settings.bigTextAlign, settings.bigTextVerticalAlign">
