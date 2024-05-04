@@ -200,11 +200,10 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
         <!-- 9X9: -->
         <section
         id="previewArea"
-        ref="previewArea"
-        class="mx-auto slide-enter-content overflow-hidden"
+       
         :style="`width: ${settings.frameSize.x/2}px; height: ${settings.frameSize.y/2}px;`"
         >
-          <div class="w-full h-full flex" :class="settings.bigTextAlign, settings.bigTextVerticalAlign">
+          <div ref="previewArea" class="w-full h-full flex relative" :class="settings.bigTextAlign, settings.bigTextVerticalAlign">
             <!-- GRADIENT -->
             <div
               class="w-full h-full absolute z-10 top-0 left-0 opacity-50"
@@ -345,7 +344,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
               <UButton
                 icon="i-heroicons-arrow-down-on-square-16-solid"
                 size="md"
-                @click="previewArea && downloadPreview(previewArea, filename+'-previa')"
+                @click="previewArea && downloadPreview(previewArea, filename+settings.frameSize.label)"
                 :loading="previewDownloading"
               >
                 DESCARGAR
@@ -389,36 +388,4 @@ body {
 .v-leave-to {
   opacity: 0;
 }
-
-@keyframes slide-enter {
-	0% {
-		transform: translateY(10px);
-		opacity: 0
-	}
-
-	to {
-		transform: translateY(0);
-		opacity: 100
-	}
-}
-
-@media (prefers-reduced-motion:no-preference) {
-	.slide-enter-content > * {
-		--enter-stage: 0;
-		--enter-step: 150ms;
-		--enter-initial: 0ms;
-		animation: slide-enter 1s both 1;
-		animation-delay: calc(var(--enter-initial) + var(--enter-stage) * var(--enter-step));
-	}
-	.slide-enter-content > *:nth-child(1) { --enter-stage: 1; }
-	.slide-enter-content > *:nth-child(2) { --enter-stage: 2; }
-	.slide-enter-content > *:nth-child(3) { --enter-stage: 3; }
-	.slide-enter-content > *:nth-child(4) { --enter-stage: 4; }
-	.slide-enter-content > *:nth-child(5) { --enter-stage: 5; }
-	.slide-enter-content > *:nth-child(6) { --enter-stage: 6; }
-	.slide-enter-content > *:nth-child(7) { --enter-stage: 7; }
-	.slide-enter-content > *:nth-child(8) { --enter-stage: 8; }
-	.slide-enter-content > *:nth-child(9) { --enter-stage: 9; }
-}
-
 </style>
