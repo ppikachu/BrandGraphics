@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 const model: any = defineModel()
 const sizes = [
-  { spacing:  70, label: 'sm'},
-  { spacing:  85, label: 'md'},
-  { spacing: 150, label: 'lg'},
-  { spacing: 200, label: 'xl'},
+  { spacing:  .80, label: 'sm'},
+  { spacing: 1.00, label: 'md'},
+  { spacing: 1.50, label: 'lg'},
+  { spacing: 2.00, label: 'xl'},
 ]
 </script>
 

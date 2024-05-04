@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 const model: any = defineModel()
 const sizes = [
-  { size: 100, label: 'sm'},
-  { size: 150, label: 'md'},
-  { size: 250, label: 'lg'},
-  { size: 450, label: 'xl'},
+  { size: 20, label: 'sm'},
+  { size: 40, label: 'md'},
+  { size: 60, label: 'lg'},
+  { size: 85, label: 'xl'},
 ]
 </script>
 

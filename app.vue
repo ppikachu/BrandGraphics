@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { toJpeg } from 'html-to-image'
-import testImage from '~/assets/test.jpg'
+//@ts-ignore
+import testImage from '@/assets/test.jpg'
 
 const runtimeConfig = useRuntimeConfig()
 useSeoMeta({
@@ -49,7 +50,6 @@ const debug = false
 const loaded = ref(false)
 const dropZoneRef = ref<HTMLDivElement>()
 const previewArea = ref<HTMLElement>()
-const piece = ref<HTMLElement[]>([])
 const { isOverDropZone } = useDropZone(dropZoneRef, {
   onDrop,
   // specify the types of data to be received.
@@ -57,25 +57,21 @@ const { isOverDropZone } = useDropZone(dropZoneRef, {
 })
 const file = shallowRef()
 const filename = ref('test')
-const textBlur = ref()
-const piecesDownloaded = ref(0)
-const piecesDownloading = ref(false)
 const previewDownloading = ref(false)
-
-// linkedInSizes from google ai
-const socialSizes = {
-  "Square": {x:1080, y: 1080},
-  "Landscape": {x: 1200, y: 627},
-  "Portrait": {x: 627, y: 1200},
-  "Article featured image": {x: 1200, y: 644},
-  "Article banner image": {x: 600, y: 322},
-  "Blog post link images": {x: 1200, y: 627 },
-  "Profile photo": {x: 400, y: 400},
-  "Cover photo": {x: 1128, y: 191},
-}
 
 const config = {
   startFile: '/test.jpg',
+// linkedInSizes from google ai
+  socialSizes: [[
+    { label: "Square",                 x: 1080, y: 1080 },
+    { label: "Landscape",              x: 1200, y:  627 },
+    { label: "Portrait",               x:  627, y: 1200 },
+    { label: "Article featured image", x: 1200, y:  644 },
+    { label: "Article banner image",   x:  600, y:  322 },
+    { label: "Blog post link images",  x: 1200, y:  627 },
+    { label: "Profile photo",          x:  400, y:  400 },
+    { label: "Cover photo",            x: 1128, y:  191 },
+  ]],
   matrices: [
     //  -----------------------------------------------
     // | - - - | - - = | - = * | - - - | = = - | - = = |
@@ -135,17 +131,19 @@ const config = {
 const defaultSettings = {
   activeTab: 0,
   startbase64: testImage,
-  bgColor: { label: "Indigo", color: "indigo" },
+  photoAlign: 'object-center',
+  frameSize: { label: "Square", x: 1080, y: 1080 },
+  bgColor: { label: "Red", color: "red" },
   bgMatrix: config.matrices[1],
   bgBlendMode: "overlay",
   bgOpacity: 0.5,
-  bigText: 'GRI\nLLA\nGRAM.',
+  bigText: 'LINKED\nIN.',
   bigTextFont: { id: 'Alfa Slab One', label: 'Pesada', weight: '400' },
-  bigTextSize: 450,
-  bigTextLineHeight: 150,
-  bigTextColor: { label: "Rojo", color: "red" },
+  bigTextSize: 40,
+  bigTextLineHeight: 1,
+  bigTextColor: { label: "Blanco", color: "white" },
   bigTextShadow: true,
-  bigTextAlign: 'text-left',
+  bigTextAlign: 'left',
   bigTextVerticalAlign: 'items-center',
 }
 const settings = useStorageAsync('linkedin-local-storage', defaultSettings)
@@ -156,8 +154,8 @@ function onFileInput(e: Event) {
   const { base64: fileBase64 } = useBase64((e.target as HTMLInputElement).files![0])
   settings.value.startbase64 = fileBase64 as unknown as string
 }
+// called when files are dropped on zone
 function onDrop(files: File[] | null) {
-  // called when files are dropped on zone
   if (files) {
     file.value = files[0]
     filename.value = file.value.name
@@ -179,7 +177,12 @@ function downloadPreview(area: HTMLElement, name: string): void {
 function blendMode(mode: number) {
   settings.value.bgBlendMode = config.blendmodes[0][mode].mode
 }
-const paragraphs = computed(() => settings.value.bigText.split(/\n+/))
+
+const updateColor = computed(() => {
+  return 'outline-2 hover:outline-dotted hover:outline-'+settings.value.bigTextColor.color
+})
+
+const paragraphs = computed(() => settings.value.bigText.split(/\n/))
 // #endregion
 
 onMounted(() => { nextTick(() => { loaded.value = true }) })
@@ -193,45 +196,55 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
       <UProgress animation="swing" size="xs" />
     </div>
     <Transition>
-      <div v-show="loaded" class="flex flex-col gap-2 md:gap-4 md:flex-row">
+      <div v-show="loaded" class="flex flex-col gap-8">
         <!-- 9X9: -->
-        <section ref="previewArea" class="w-96 h-96 mx-auto slide-enter-content">
-          <div class="w-96 h-96 flex" :class="settings.bigTextAlign, settings.bigTextVerticalAlign">
-          <!-- GRADIENT -->
-          <div
-            class="w-full h-full absolute z-10 top-0 left-0 opacity-50"
-            :style="`
-              background-color: ${settings.bgColor.color};
-              mix-blend-mode: ${settings.bgBlendMode};
-              opacity: ${settings.bgOpacity};
-            `"
-          />
+        <section
+        id="previewArea"
+        ref="previewArea"
+        class="mx-auto slide-enter-content overflow-hidden"
+        :style="`width: ${settings.frameSize.x/2}px; height: ${settings.frameSize.y/2}px;`"
+        >
+          <div class="w-full h-full flex" :class="settings.bigTextAlign, settings.bigTextVerticalAlign">
+            <!-- GRADIENT -->
+            <div
+              class="w-full h-full absolute z-10 top-0 left-0 opacity-50"
+              :style="`
+                background-color: ${settings.bgColor.color};
+                mix-blend-mode: ${settings.bgBlendMode};
+                opacity: ${settings.bgOpacity};
+              `"
+            />
             <!-- BIG TEXT -->
             <UTextarea
               v-model="settings.bigText"
               variant="none"
+              class="absolute w-full p-2 z-10"
               auroresize
               :rows="paragraphs.length"
-              class="absolute p-2 z-10"
-              :class="{ textshadow : settings.bigTextShadow }"
               :style="`
-                font-size: ${settings.bigTextSize}%;
+                font-size: ${settings.bigTextSize}px;
                 font-family: ${settings.bigTextFont.id};
                 font-weight: ${settings.bigTextFont.weight || '400'};
                 color: ${settings.bigTextColor.color};
-                line-height: ${settings.bigTextLineHeight}%;
+                line-height: ${settings.bigTextSize * settings.bigTextLineHeight}px;
                 text-align: ${settings.bigTextAlign};
+                text-shadow: ${settings.bigTextShadow ? '1px 1px 1px #000' : 'none'}
               `"
-              :ui="{ form: 'w-full overflow-hidden' }"
+              :ui="{ variant: { none: updateColor }, form: 'w-full overflow-hidden' }"
             />
-            <!-- importante! ui base: 'w-auto' para ocultar la barra de scroll -->
+            <!-- importante! ui para ocultar la barra de scroll -->
 
             <!-- IMAGE -->
-            <img :src="settings.startbase64" alt="fondo-pieza" class="w-96 h-96 object-cover">
+            <img
+            :src="settings.startbase64"
+            alt="fondo-pieza"
+            class="w-full h-full object-cover"
+            :class="settings.photoAlign"
+            >
           </div>
         </section>
         <!-- CONFIG and EXPORT: -->
-        <section class="w-96 lg:w-[36rem]">
+        <section class="w-96 mx-auto lg:w-[36rem]">
           <!-- CONFIG: -->
           <section class="space-y-2">
             <UTabs
@@ -248,24 +261,16 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
               </template>
               <template #bigText>
                 <UCard>
-                  <!-- INPUT IMAGE -->
-                  <div class="relative h-16 w-full">
-                    <input id="image_uploads"
-                      type="file"
-                      name="image_uploads"
-                      accept=".jpg, .jpeg, .png"
-                      class="hidden"
-                      @change="onFileInput"
-                    >
-                    <label
-                      ref="dropZoneRef"
-                      for="image_uploads"
-                      class="flex h-full items-center gap-2 px-2 w-full cursor-pointer text-primary absolute border-dashed border-primary border-2 rounded-md"
-                      :class="{'border-green-500 text-green-500': isOverDropZone }"
-                    >
-                      <UIcon name="i-heroicons-arrow-up-on-square" class="w-8 h-8" />
-                      <span>Elegir o arrastrar (PNG, JPG)</span>
-                    </label>
+                  <div class="grid grid-cols-2 gap-2">
+                    <UFormGroup label="Formato" size="xs" class="mb-2">
+                      <UDropdown :items="config.socialSizes">
+                        <UButton :label="settings.frameSize.label" trailing-icon="i-heroicons-chevron-up-20-solid" />
+                        <template #item="{ item }">
+                          <UButton color="white" variant="ghost" :label="item.label" @click="settings.frameSize = item" />
+                        </template>
+                      </UDropdown>
+                    </UFormGroup>
+                    <PhotoAlign v-model="settings.photoAlign" />
                   </div>
                   <template #footer>
                     <TextFormat
@@ -336,15 +341,34 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           </section>
           <!-- BUTTONS: -->
           <section class="pt-2 space-y-2 relative">
-            <div class="flex justify-center">
+            <div class="grid grid-cols-2 gap-2">
               <UButton
                 icon="i-heroicons-arrow-down-on-square-16-solid"
                 size="md"
                 @click="previewArea && downloadPreview(previewArea, filename+'-previa')"
                 :loading="previewDownloading"
               >
-                DESCARGAR PREVIA
+                DESCARGAR
               </UButton>
+              <!-- INPUT IMAGE -->
+              <div class="relative w-full">
+                <input id="image_uploads"
+                  type="file"
+                  name="image_uploads"
+                  accept=".jpg, .jpeg, .png"
+                  class="hidden"
+                  @change="onFileInput"
+                >
+                <label
+                  ref="dropZoneRef"
+                  for="image_uploads"
+                  class="flex w-full h-full items-center gap-2 px-2 cursor-pointer text-primary absolute border-dashed border-primary border-2 rounded-md"
+                  :class="{'border-green-500 text-green-500': isOverDropZone }"
+                >
+                  <UIcon name="i-heroicons-arrow-up-on-square" class="w-5 h-5" />
+                  <span class="text-sm uppercase">click o arrastra</span>
+                </label>
+              </div>
             </div>
           </section>
         </section>

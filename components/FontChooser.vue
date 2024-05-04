@@ -8,18 +8,18 @@ function update(c: number) {
 }
 const sushiFonts = [
   { id: 'Montserrat', label: 'Moderna', weight: '700' },
-  { id: 'UnifrakturMaguntia', label: 'Germánica' },
+  // { id: 'UnifrakturMaguntia', label: 'Germánica' },
   { id: 'Abril Fatface', label: 'Elegante' },
   { id: 'Alfa Slab One', label: 'Pesada' },
   { id: 'Permanent Marker', label: 'Marcador' },
   { id: 'Special Elite', label: 'X-files' },
   { id: 'Vast Shadow', label: 'Sombra' },
-  { id: 'Bungee Shade', label: 'Retro' },
-  { id: 'Lobster Two', label: 'Caracol' },
-  { id: 'Pacifico', label: 'Pacifico' },
-  { id: 'Bungee Spice', label: 'Bungee Spice' },
-  { id: 'Nabla', label: 'Nabla' },
-  { id: 'Honk', label: 'Honk' },
+  // { id: 'Bungee Shade', label: 'Retro' },
+  // { id: 'Lobster Two', label: 'Caracol' },
+  // { id: 'Pacifico', label: 'Pacifico' },
+  // { id: 'Bungee Spice', label: 'Bungee Spice' },
+  // { id: 'Nabla', label: 'Nabla' },
+  // { id: 'Honk', label: 'Honk' },
   // { id: 'FontFamilyStyleBitter', label: 'Western' },
   // { id: 'Amatic SC', label: 'Amatic SC' },
   // { id: 'Press Start 2P', label: 'Arcade' },
@@ -61,9 +61,9 @@ const sushiFonts = [
   font-family: "Montserrat";
   font-weight: 700;
 }
-.UnifrakturMaguntia {
+/* .UnifrakturMaguntia {
   font-family: "UnifrakturMaguntia";
-}
+} */
 .AbrilFatface {
   font-family: "Abril Fatface";
 }
@@ -79,16 +79,16 @@ const sushiFonts = [
 .VastShadow {
   font-family: "Vast Shadow";
 }
-.BungeeShade {
+/* .BungeeShade {
   font-family: "Bungee Shade";
 }
 .Lobster {
   font-family: "Lobster Two";
-}
-.Pacifico {
+} */
+/* .Pacifico {
   font-family: "Pacifico";
-}
-.BungeeSpice {
+} */
+/* .BungeeSpice {
   font-family: "Bungee Spice";
 }
 .Nabla {
@@ -96,7 +96,7 @@ const sushiFonts = [
 }
 .Honk {
   font-family: "Honk";
-}
+} */
 /* .Nosifer {
   font-family: "Nosifer";
 } */
