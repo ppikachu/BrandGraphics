@@ -4,12 +4,12 @@ const sizes = [
   { size: 20, label: 'sm'},
   { size: 40, label: 'md'},
   { size: 60, label: 'lg'},
-  { size: 85, label: 'xl'},
+  // { size: 85, label: 'xl'},
 ]
 </script>
 
 <template>
-  <UFormGroup label="Tamaño" size="xs">
+  <UFormGroup label="Size" size="xs">
     <UButtonGroup :ui="{ wrapper: { horizontal: 'grid grid-flow-col-dense'} }">
       <UButton
         v-for="s in sizes"

@@ -3,7 +3,7 @@ const model: any = defineModel()
 </script>
 
 <template>
-  <UFormGroup label="Recorte de imagen" size="xs">
+  <UFormGroup label="Encuadre" size="xs">
     <UButtonGroup :ui="{ wrapper: { horizontal: 'grid grid-flow-col-dense'} }">
       <UButton :color="model === 'object-right-top' ? 'red' : 'white'"
         @click="model = 'object-right-top'" variant="solid"

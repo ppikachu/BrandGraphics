@@ -15,37 +15,35 @@
           <UContainer class="flex flex-col justify-center items-center">
             <h3 class="text-center text-primary my-4">Ayuda</h3>
             <div class="text-sm prose dark:prose-invert mb-4">
-              <p>Grillagram es una aplicación para transformar cualquier imagen en una grilla 9x9 perfecta para Instagram.</p>
+              <p>Esta es una aplicación para generar imagen compatibles con los formatos de LinkedIn.</p>
             </div>
             
             <UAccordion :items="items" color="primary" variant="solid" size="md">
               <template #caracteristicas>
                 <div class="text-sm prose dark:prose-invert">
                   <ol>
-                    <li>Generación de la grilla de 9x9 para el feed de Instagram.</li>
                     <li>Opciones de personalización: Sobreimpresiones de texto para que su imagen se destaque.</li>
                     <li>Aspecto consistente: Asegúrate de una presentación profesional y visualmente atractiva que refleje tu marca o estilo personal.</li>
                     <li>Salida de alta calidad: Disfruta resultados crujientes y de alta resolución.</li>
                     <li>Compartir fácilmente: Guarda en tu dispositivo para uso futuro.</li>
-                    <li>Compromiso con actualizar Grillagram con nuevas características y mejoras basadas en la interacción de usuarios.</li>
                   </ol>
                 </div>
               </template>
               <template #ideal-para>
                 <div class="text-sm prose dark:prose-invert">
                   <ul>
-                    <li>Influencers que buscan mejorar su contenido.</li>
                     <li>Empresas que desean mostrar productos o servicios de manera única.</li>
                     <li>Creativos que quieren experimentar con historias visuales innovadoras.</li>
+                    <li>Influencers que buscan mejorar su contenido.</li>
                   </ul>
                 </div>
               </template>
               <template #next-level>
                 <div class="text-sm prose dark:prose-invert">
                   <ol>
-                    <li>Arrastra una imagen al mosaico (desktop) o clickealo (en móviles y desktop) para elegir una imagen*. Verás la vista previa del mosaico.</li>
-                    <li>Cambia el texto y ajusta los parámetros hasta que estés conforme con lo que ves en la vista previa. Puedes agregar también texto en cada una de las piezas.</li>
-                    <li>Cuando estés conforme, dale clic a "Descargar piezas". Los números al final del archivo indican el órden en que se deben publicar. Puedes descargar la vista previa como referencia.</li>
+                    <li>Arrastra una imagen al area de la foto (desktop) o clickealo (en móviles y desktop) para elegir una imagen*. Verás la vista previa de la imagen.</li>
+                    <li>Elije el formato según lo que necesites. Cambia el texto y ajusta los parámetros hasta que estés conforme con lo que ves en la vista previa.</li>
+                    <li>Cuando estés conforme, dale clic a "Descargar".</li>
                   </ol>
                 </div>
               </template>

@@ -3,7 +3,7 @@ const model: any = defineModel()
 </script>
 
 <template>
-  <UFormGroup label="Alineación" size="xs">
+  <UFormGroup label="Align" size="xs">
     <UButtonGroup :ui="{ wrapper: { horizontal: 'grid grid-flow-col-dense'} }">
       <UButton :color="model === 'left' ? 'red' : 'white'"
         @click="model = 'left'" variant="solid"
