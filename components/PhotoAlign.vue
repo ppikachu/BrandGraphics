@@ -3,19 +3,19 @@ const model: any = defineModel()
 </script>
 
 <template>
-  <UFormGroup label="Encuadre" size="xs">
+  <UFormGroup label="Crop" size="xs">
     <UButtonGroup :ui="{ wrapper: { horizontal: 'grid grid-flow-col-dense'} }">
-      <UButton :color="model === 'object-right-top' ? 'red' : 'white'"
+      <UButton :color="model === 'object-right-top' ? 'blue' : 'white'"
         @click="model = 'object-right-top'" variant="solid"
         icon="i-heroicons-bars-3-bottom-right-16-solid"
         :ui="{ inline: 'justify-center' }"
       />
-      <UButton :color="model === 'object-center' ? 'red' : 'white'"
+      <UButton :color="model === 'object-center' ? 'blue' : 'white'"
         @click="model = 'object-center'" variant="solid"
         icon="i-heroicons-bars-3-16-solid"
         :ui="{ inline: 'justify-center' }"
       />
-      <UButton :color="model === 'object-left-bottom' ? 'red' : 'white'"
+      <UButton :color="model === 'object-left-bottom' ? 'blue' : 'white'"
         @click="model = 'object-left-bottom'" variant="solid"
         icon="i-heroicons-bars-3-bottom-left-16-solid"
         :ui="{ inline: 'justify-center' }"

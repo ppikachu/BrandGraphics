@@ -6,7 +6,7 @@ const model: any = defineModel()
   <UFormGroup label="Sombra" size="xs">
     <UButton
       icon="i-heroicons-square-2-stack-solid"
-      :color="model ? 'red' : 'white'"
+      :color="model ? 'blue' : 'white'"
       @click="model = !model"
       block
       :ui="{ rounded: 'rounded-l-none' }"

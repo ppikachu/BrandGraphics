@@ -46,14 +46,11 @@ useHead({
   ]
 })
 
-const config = {
-  startFile: '/test.jpg',
-}
 const defaultSettings = {
   startbase64: testImage,
   photoAlign: 'object-center',
   frameSize: { label: "Square", x: 1080, y: 1080 },
-  bgColor: { label: "Red", color: "red" },
+  bgColor: { label: "Red", color: "blue" },
   iso: { label:"Words 1", svg:"i_words1" },
   bgBlendMode: "overlay",
   bgOpacity: 0.5,
@@ -76,8 +73,8 @@ const file = shallowRef()
 const filename = ref('test')
 const previewDownloading = ref(false)
 
-const debug = process.env.NODE_ENV === "development" ? true : false
-// const debug = false
+// const debug = process.env.NODE_ENV === "development" ? true : false
+const debug = false
 
 // #region FUNCTIONS
 function onFileInput(e: Event) {
@@ -142,83 +139,88 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
     <Transition>
       <div v-show="loaded" class="space-y-4">
         <!-- 9X9: -->
-        <div id="previewArea" ref="previewArea" class="mx-auto w-fit h-full flex relative" :class="settings.bigTextAlign, settings.bigTextVerticalAlign">
-          <div class="absolute w-full z-20 flex flex-col p-2">
-            <!-- ISO -->
-            <nuxt-icon
-              :name="settings.iso.svg"
-              class="px-3"
-              :class="isoAlign, isoSize, settings.bigTextColor.color"
-              filled
-            />
-            <!-- BIG TEXT -->
-            <UTextarea
-              v-model="settings.bigText"
-              variant="none"
-              class="w-full"
-              auroresize
-              :rows="nLinesInParagraph"
-              :style="`
-                font-size: ${settings.bigTextSize}px;
-                font-family: ${settings.bigTextFont.id};
-                font-weight: ${settings.bigTextFont.weight || '400'};
-                color: ${settings.bigTextColor.color};
-                line-height: ${settings.bigTextSize * settings.bigTextLineHeight}px;
-                text-align: ${settings.bigTextAlign};
-                text-shadow: ${settings.bigTextShadow ? '1px 1px 1px #000' : 'none'}
-              `"
-              :ui="{ variant: { none: uiHoverInput }, form: 'w-full overflow-hidden' }"
-            />
-          </div>
-          <!-- ^^^ importante! ui para ocultar la barra de scroll -->
-          <!-- INPUT IMAGE -->
-          <div class="absolute top-0 left-0 w-full h-full">
-            <input id="image_uploads"
-              type="file"
-              name="image_uploads"
-              accept=".jpg, .jpeg, .png"
-              @change="onFileInput"
-              class="hidden"
-            >
-            <label
-              ref="dropZoneRef"
-              for="image_uploads"
-              class="group absolute z-10 top-0 left-0 flex w-full h-full items-center justify-center cursor-pointer hover:outline-dashed outline-offset-4 outline-primary outline-2 rounded"
-              :class="{'outline-dashed outline-green-500': isOverDropZone }"
-            >
-              <div class="hidden group-hover:flex bg-primary rounded px-2 py-1 space-x-1">
-                <UIcon name="i-heroicons-arrow-up-on-square" class="w-5 h-5" />
-                <span class="text-sm uppercase">click (o arrastrar) para cambiar la imagen</span>
-              </div>
-            </label>
-          </div>
-          <!-- GRADIENT -->
+        <div class="mx-auto w-fit">
           <div
-            class="w-full h-full absolute top-0 left-0 opacity-50"
-            :style="`
-              background-color: ${settings.bgColor.color};
-              mix-blend-mode: ${settings.bgBlendMode};
-              opacity: ${settings.bgOpacity};
-            `"
-          />
-          <!-- IMAGE -->
-          <img
-            :src="settings.startbase64"
-            alt="fondo-pieza"
-            class="object-cover"
-            :class="settings.photoAlign"
+            ref="previewArea"
+            class="flex relative"
+            :class="settings.bigTextAlign, settings.bigTextVerticalAlign"
             :style="`width: ${settings.frameSize.x/2}px; height: ${settings.frameSize.y/2}px;`"
           >
+            <div class="absolute w-full z-20 flex flex-col p-2">
+              <!-- ISO -->
+              <nuxt-icon
+                :name="settings.iso.svg"
+                class="px-3"
+                filled
+                :class="isoAlign, isoSize, settings.bigTextColor.color"
+              />
+              <!-- BIG TEXT -->
+              <UTextarea
+                v-model="settings.bigText"
+                variant="none"
+                class="w-full"
+                auroresize
+                :rows="nLinesInParagraph"
+                :style="`
+                  font-size: ${settings.bigTextSize}px;
+                  font-family: ${settings.bigTextFont.id};
+                  font-weight: ${settings.bigTextFont.weight || '400'};
+                  color: ${settings.bigTextColor.color};
+                  line-height: ${settings.bigTextSize * settings.bigTextLineHeight}px;
+                  text-align: ${settings.bigTextAlign};
+                  text-shadow: ${settings.bigTextShadow ? '1px 1px 1px #000' : 'none'}
+                `"
+                :ui="{ variant: { none: uiHoverInput }, form: 'w-full overflow-hidden' }"
+              /><!-- ^^^ importante! ui para ocultar la barra de scroll -->
+            </div>
+            <!-- INPUT IMAGE -->
+            <div class="absolute top-0 left-0 w-full h-full">
+              <input id="image_uploads"
+                type="file"
+                name="image_uploads"
+                accept=".jpg, .jpeg, .png"
+                @change="onFileInput"
+                class="hidden"
+              >
+              <label
+                ref="dropZoneRef"
+                for="image_uploads"
+                class="group absolute z-10 top-0 left-0 flex w-full h-full items-center justify-center cursor-pointer hover:outline-dashed outline-offset-4 outline-primary outline-2 rounded"
+                :class="{'outline-dashed outline-green-500': isOverDropZone }"
+              >
+                <div class="hidden group-hover:flex bg-primary rounded px-2 py-1 space-x-1">
+                  <UIcon name="i-heroicons-arrow-up-on-square" class="w-5 h-5" />
+                  <span class="text-sm uppercase">click (o arrastrar) para cambiar la imagen</span>
+                </div>
+              </label>
+            </div>
+            <!-- GRADIENT -->
+            <div
+              class="w-full h-full absolute top-0 left-0 opacity-50"
+              :style="`
+                background-color: ${settings.bgColor.color};
+                mix-blend-mode: ${settings.bgBlendMode};
+                opacity: ${settings.bgOpacity};
+              `"
+            />
+            <!-- IMAGE -->
+            <img
+              :src="settings.startbase64"
+              alt="fondo-pieza"
+              class="object-cover w-full h-full"
+              :class="settings.photoAlign"
+            >
+          </div>
         </div>
         <!-- CONFIG and EXPORT: -->
-        <section class="space-y-4 pt-4">
+        <section class="space-y-8">
           <!-- SETTINGS: -->
-          <UDivider label="Formato y encuadre de la imagen" />
-          <div class="grid grid-cols-2 gap-2">
+          <UDivider label="Format & image crop" />
+          <div class="grid grid-cols-2 gap-4">
             <Format v-model="settings.frameSize" />
             <PhotoAlign v-model="settings.photoAlign" />
           </div>
-          <div class="space-y-4 pt-4">
+          <div class="space-y-4">
             <TextFormat
               v-model:size="settings.bigTextSize"
               v-model:color="settings.bigTextColor"
@@ -227,8 +229,8 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
               v-model:valign="settings.bigTextVerticalAlign"
               v-model:iso="settings.iso"
             />
-            <UDivider label="Mezcla de color" class="pt-4" />
-            <div class="grid grid-cols-2 gap-2">
+            <UDivider label="Color tint" class="pt-4" />
+            <div class="grid grid-cols-2 gap-4">
               <div class="grid grid-cols-2">
                 <ColorChooser v-model="settings.bgColor" />
                 <BlendMode v-model="settings.bgBlendMode" />
@@ -239,7 +241,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           <!-- BUTTONS: -->
           <UButton
             icon="i-heroicons-arrow-down-on-square-16-solid"
-            size="md" class="pt-2"
+            size="md"
             block
             @click="previewArea && downloadPreview(previewArea, filename+settings.frameSize.label)"
             :loading="previewDownloading"

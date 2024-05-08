@@ -10,7 +10,7 @@
         <!-- <LocaleToggle /> -->
         <!-- <LocaleSwitch /> -->
         <!-- HELP: -->
-        <UButton icon="i-heroicons-question-mark-circle-16-solid" color="gray" variant="link" @click="isOpen = true"/>
+        <UButton icon="i-heroicons-question-mark-circle-16-solid" color="gray" variant="link" size="lg" @click="isOpen = true"/>
         <UModal v-model="isOpen" :ui="{ container: 'items-center sm:items-center' }" >
           <UContainer class="flex flex-col justify-center items-center">
             <h3 class="text-center text-primary my-4">Ayuda</h3>
@@ -55,7 +55,7 @@
               </template>
             </UAlert />
 
-            <UButton icon="i-mdi-close" label="Cerrar" @click="isOpen = false" :block="$device.isTablet" class="mb-4"/>
+            <UButton icon="i-mdi-close" label="Cerrar" @click="isOpen = false" :block="ismobile.isMobileOrTablet" class="mb-4"/>
           </UContainer>
         </UModal>
       </div>
@@ -65,6 +65,7 @@
 
 <script setup lang="ts">
 const runtimeConfig = useRuntimeConfig()
+const ismobile = useDevice()
 const isOpen = ref(false)
 const items = [
   {

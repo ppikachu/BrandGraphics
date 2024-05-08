@@ -19,7 +19,7 @@ const colores = [
   { label: "Fucsia", color: "fuchsia" },
   { label: "Rosa", color: "pink" },
   { label: "Rojo", color: "red" },
-  { label: "Naranja", color: "red" },
+  { label: "Naranja", color: "orange" },
   { label: "Amarillo", color: "yellow" },
   { label: "Lima", color: "lime" },
   { label: "Verde", color: "green" },

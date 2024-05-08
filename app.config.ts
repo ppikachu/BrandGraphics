@@ -1,6 +1,6 @@
 export default defineAppConfig({
   ui: {
-    primary: 'red',
+    primary: 'blue',
     gray: 'zinc',
     // MARK: Elements
     icons: {

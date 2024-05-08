@@ -5,7 +5,7 @@
 			:icon="colorMode.value === 'dark' ? 'i-heroicons-moon-solid' : 'i-heroicons-sun-solid'"
 			color="gray"
 			class="h-fit"
-			size="xs"
+			size="lg"
 			variant="link"
 			@click="isDark = !isDark"
 			:ui="{

@@ -10,10 +10,10 @@ const iso = defineModel('iso')
 </script>
 
 <template>
-  <UDivider label="Texto" />
+  <UDivider label="Text" />
   <section class="space-y-2">
     <!-- <FontChooser v-model="font" /> -->
-    <div class="grid grid-cols-2 gap-2">
+    <div class="grid grid-cols-2 gap-4">
       <div class="grid grid-cols-2 gap-2">
         <ColorChooser v-model="color" position="center"/>
         <IsoChooser v-model="iso" />
@@ -21,7 +21,7 @@ const iso = defineModel('iso')
       <!-- <SombraSet v-model="shadow"/> -->
       <TextSize v-model="size" />
     </div>
-    <section class="grid grid-cols-2 gap-2">
+    <section class="grid grid-cols-2 gap-4">
         <!-- BIG TEXT ALIGN -->
         <TextAlign v-model="align" />
         <!-- BIG TEXT VERTICAL ALIGN -->

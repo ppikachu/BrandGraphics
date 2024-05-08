@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
   devtools: { enabled: true },
   modules: [
     "@vueuse/nuxt",
@@ -12,7 +13,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       DEFAULT_LANGUAGE: "es",
-      NAME: "Linkedin thumbnail creator",
+      NAME: "Linkedin thumbnails",
       DESCRIPTION: "Generador de thumbnails.",
       OG_IMAGE: "/OGvisu.png",
       TWITTER_IMAGE: "/icon.png",
@@ -20,7 +21,7 @@ export default defineNuxtConfig({
       // FIXME: url
       HOST:
         process.env.NODE_ENV === "production"
-          ? "https://grillagram.vercel.app"
+          ? "https://linkedin-susan.vercel.app/"
           : "http://localhost:3000",
     },
   },

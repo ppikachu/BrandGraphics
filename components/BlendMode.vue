@@ -1,37 +1,37 @@
 <script lang="ts" setup>
 const model: any = defineModel()
 const blendmodes = [[
-  { label:"Normal",       mode:"normal",       click: () => { blendMode(0)  } },
-  { label:"Multiply",     mode:"multiply",     click: () => { blendMode(1)  } },
-  { label:"Screen",       mode:"screen",       click: () => { blendMode(2)  } },
-  { label:"Overlay",      mode:"overlay",      click: () => { blendMode(3)  } },
-  { label:"Darken",       mode:"darken",       click: () => { blendMode(4)  } },
-  { label:"Lighten",      mode:"lighten",      click: () => { blendMode(5)  } },
-  { label:"Color-dodge",  mode:"color-dodge",  click: () => { blendMode(6)  } },
-  { label:"Color-burn",   mode:"color-burn",   click: () => { blendMode(7)  } },
-  { label:"Hard-light",   mode:"hard-light",   click: () => { blendMode(8)  } },
-  { label:"Soft-light",   mode:"soft-light",   click: () => { blendMode(9)  } },
-  { label:"Difference",   mode:"difference",   click: () => { blendMode(10) } },
-  { label:"Exclusion",    mode:"exclusion",    click: () => { blendMode(11) } },
-  { label:"Hue",          mode:"hue",          click: () => { blendMode(12) } },
-  { label:"Saturation",   mode:"saturation",   click: () => { blendMode(13) } },
-  { label:"Color",        mode:"color",        click: () => { blendMode(14) } },
-  { label:"Luminosity",   mode:"luminosity",   click: () => { blendMode(15) } },
-  { label:"Plus-darker",  mode:"plus-darker",  click: () => { blendMode(16) } },
-  { label:"Plus-lighter", mode:"plus-lighter", click: () => { blendMode(17) } },
+  { label:"Normal",       mode:"normal",       click: () => { blendMode("normal")  } },
+  { label:"Multiply",     mode:"multiply",     click: () => { blendMode("multiply")  } },
+  { label:"Screen",       mode:"screen",       click: () => { blendMode("screen")  } },
+  { label:"Overlay",      mode:"overlay",      click: () => { blendMode("overlay")  } },
+  { label:"Darken",       mode:"darken",       click: () => { blendMode("darken")  } },
+  { label:"Lighten",      mode:"lighten",      click: () => { blendMode("lighten")  } },
+  { label:"Color-Dodge",  mode:"color-dodge",  click: () => { blendMode("color-dodge")  } },
+  { label:"Color-Burn",   mode:"color-burn",   click: () => { blendMode("color-burn")  } },
+  { label:"Hard-Light",   mode:"hard-light",   click: () => { blendMode("hard-light")  } },
+  { label:"Soft-Light",   mode:"soft-light",   click: () => { blendMode("soft-light")  } },
+  // { label:"Difference",   mode:"difference",   click: () => { blendMode("difference") } },
+  // { label:"Exclusion",    mode:"exclusion",    click: () => { blendMode("exclusion") } },
+  { label:"Hue",          mode:"hue",          click: () => { blendMode("hue") } },
+  { label:"Saturation",   mode:"saturation",   click: () => { blendMode("saturation") } },
+  { label:"Color",        mode:"color",        click: () => { blendMode("color") } },
+  { label:"Luminosity",   mode:"luminosity",   click: () => { blendMode("luminosity") } },
+  // { label:"Plus-darker",  mode:"plus-darker",  click: () => { blendMode("plus-darker") } },
+  // { label:"Plus-lighter", mode:"plus-lighter", click: () => { blendMode("plus-lighter") } },
 ]]
 
-function blendMode(mode: number) {
-  model.value = blendmodes[0][mode].mode
+function blendMode(mode: string) {
+  model.value = mode
 }
 </script>
 
 <template>
   <UFormGroup label="Blend Mode" size="xs">
     <UDropdown :items="blendmodes" :ui="{ wrapper: 'w-full', width: 'w-auto', item: { size: 'text-xs' } }">
-      <UButton :label="model?.label || 'Ninguno'" color="white" block :ui="{ rounded: 'rounded-l-none' }" />
+      <UButton :label="model || 'Ninguno'" color="white" block class="truncate capitalize" :ui="{ rounded: 'rounded-l-none' }" />
       <template #item="{ item }">
-        <span class="truncate" :class="{ 'text-primary': model === item.mode }">{{ item.label }}</span>
+        <span :class="{ 'text-primary': model === item.mode }">{{ item.label }}</span>
       </template>
     </UDropdown>
   </UFormGroup>

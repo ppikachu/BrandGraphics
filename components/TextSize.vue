@@ -13,7 +13,7 @@ const sizes = [
     <UButtonGroup :ui="{ wrapper: { horizontal: 'grid grid-flow-col-dense'} }">
       <UButton
         v-for="s in sizes"
-        :color="model === s.size ? 'red' : 'white'"
+        :color="model === s.size ? 'blue' : 'white'"
         @click="model = s.size"
         variant="solid"
         :label="s.label"

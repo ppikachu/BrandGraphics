@@ -43,7 +43,7 @@ const sushiFonts = [
               v-for="c, i in sushiFonts"
               :key="i"
               :label="c.label"
-              :color="model.id===c.id ? 'red' : 'black'"
+              :color="model.id===c.id ? 'blue' : 'black'"
               :variant="model.id===c.id ? 'solid' : 'outline'"
               :class="c.id.replace(/\s+/g, '')"
               size="md"

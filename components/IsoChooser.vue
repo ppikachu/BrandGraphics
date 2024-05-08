@@ -19,7 +19,7 @@ const blendmodes = [[
     <UDropdown :items="blendmodes" :popper="{ placement: 'top' }" :ui="{ wrapper: 'w-full', width: 'w-auto', item: { size: 'text-xs' } }">
       <UButton :label="model?.label || 'Ninguno'" color="white" class="truncate" block >
         <nuxt-icon :name="model.svg" filled class="w-4" />
-        {{ model?.label }}
+        <span class="truncate">{{ model?.label }}</span>
       </UButton>
 
       <template #item="{ item }">
