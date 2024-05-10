@@ -28,10 +28,10 @@ function blendMode(mode: string) {
 
 <template>
   <UFormGroup label="Blend Mode" size="xs">
-    <UDropdown :items="blendmodes" :ui="{ wrapper: 'w-full', width: 'w-auto', item: { size: 'text-xs' } }">
-      <UButton :label="model || 'Ninguno'" color="white" block class="truncate capitalize" :ui="{ rounded: 'rounded-l-none' }" />
+    <UDropdown :items="blendmodes" :ui="{ wrapper: 'w-full', width: 'w-auto', item: { size: 'text-sm' } }">
+      <UButton :label="model || 'Ninguno'" block class="truncate capitalize" :ui="{ rounded: 'rounded-l-none' }" />
       <template #item="{ item }">
-        <span :class="{ 'text-primary': model === item.mode }">{{ item.label }}</span>
+        <span class="truncate pr-2" :class="{ 'text-primary': model === item.mode }">{{ item.label }}</span>
       </template>
     </UDropdown>
   </UFormGroup>

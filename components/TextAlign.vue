@@ -4,21 +4,24 @@ const model: any = defineModel()
 
 <template>
   <UFormGroup label="Align" size="xs">
-    <UButtonGroup :ui="{ wrapper: { horizontal: 'grid grid-flow-col-dense'} }">
-      <UButton :color="model === 'left' ? 'blue' : 'white'"
-        @click="model = 'left'" variant="solid"
+    <UButtonGroup :ui="{ wrapper: { horizontal: 'grid grid-cols-3'} }">
+      <UButton
         icon="i-heroicons-bars-3-bottom-left-16-solid"
-        :ui="{ inline: 'justify-center' }"
+        block
+        @click="model = 'left'"
+        :class="model === 'left' ? 'opacity-100' : 'opacity-50'"
       />
-      <UButton :color="model === 'center' ? 'blue' : 'white'"
-        @click="model = 'center'" variant="solid"
+      <UButton
         icon="i-heroicons-bars-3-16-solid"
-        :ui="{ inline: 'justify-center' }"
+        block
+        @click="model = 'center'"
+        :class="model === 'center' ? 'opacity-100' : 'opacity-50'"
       />
-      <UButton :color="model === 'right' ? 'blue' : 'white'"
-        @click="model = 'right'" variant="solid"
+      <UButton
         icon="i-heroicons-bars-3-bottom-right-16-solid"
-        :ui="{ inline: 'justify-center' }"
+        block
+        @click="model = 'right'"
+        :class="model === 'right' ? 'opacity-100' : 'opacity-50'"
       />
     </UButtonGroup>
   </UFormGroup>

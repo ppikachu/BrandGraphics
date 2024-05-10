@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-// const font = defineModel('font')
 const size = defineModel('size')
 const color = defineModel('color')
-const shadow = defineModel('shadow')
 const align = defineModel('align')
 const valign = defineModel('valign')
 const iso = defineModel('iso')
+// const font = defineModel('font')
+// const shadow = defineModel('shadow')
 // const lineheight = defineModel('lineheight')
 </script>
 

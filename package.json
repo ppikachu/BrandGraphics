@@ -21,7 +21,7 @@
   "devDependencies": {
     "@nuxt/fonts": "^0.7.0",
     "@nuxtjs/device": "^3.1.1",
-    "@types/node": "^20.12.10",
+    "@types/node": "^20.12.11",
     "nuxt": "^3.11.2"
   }
 }

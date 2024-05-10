@@ -16,8 +16,8 @@ const blendmodes = [[
 
 <template>
   <UFormGroup label="Logo" size="xs">
-    <UDropdown :items="blendmodes" :popper="{ placement: 'top' }" :ui="{ wrapper: 'w-full', width: 'w-auto', item: { size: 'text-xs' } }">
-      <UButton :label="model?.label || 'Ninguno'" color="white" class="truncate" block >
+    <UDropdown :items="blendmodes" :popper="{ placement: 'top' }" :ui="{ wrapper: 'w-full', width: 'w-auto', item: { size: 'text-sm' } }">
+      <UButton :label="model?.label || 'Ninguno'" class="truncate" block >
         <nuxt-icon :name="model.svg" filled class="w-4" />
         <span class="truncate">{{ model?.label }}</span>
       </UButton>
@@ -25,7 +25,7 @@ const blendmodes = [[
       <template #item="{ item }">
         <nuxt-icon :name="item.svg" class="w-4" filled />
         <span
-          class="truncate"
+          class="truncate pr-1"
           :class="{ 'text-primary': model.label === item.label }"
           @click="model = item"
         >
