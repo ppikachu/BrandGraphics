@@ -134,7 +134,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
     <Transition>
       <div v-show="loaded" class="flex flex-col lg:flex-row items-center gap-4 md:gap-8">
         <!-- 9X9: -->
-        <div class="mx-auto w-96 overflow-hidden">
+        <div class="mx-auto w-96">
           <div
             ref="previewArea"
             class="flex relative"
@@ -181,7 +181,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
                 class="group absolute z-10 w-full h-full cursor-pointer hover:outline-dashed outline-offset-4 outline-primary outline-2 rounded"
                 :class="{'outline-dashed outline-green-500': isOverDropZone }"
               >
-                <div class="hidden group-hover:flex z-20 bg-primary rounded px-2 py-1 space-x-1 max-w-64 mx-auto top-8">
+                <div class="hidden group-hover:flex z-20 bg-primary rounded px-2 py-1 space-x-1 max-w-64 mx-auto relative top-8">
                   <UIcon name="i-heroicons-arrow-up-on-square" class="w-5 h-5 flex-shrink-0" />
                   <span class="text-sm uppercase">click (o arrastrar) para cambiar la imagen</span>
                 </div>
