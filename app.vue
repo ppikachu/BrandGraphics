@@ -50,7 +50,7 @@ const defaultSettings = {
   startbase64: testImage,
   photoAlign: 'object-center',
   frameSize: { label: "Square", x: 1080, y: 1080 },
-  bgColor: { label: "Red", color: "blue" },
+  bgColor: "blue",
   iso: { label:"Words 1", svg:"i_words1" },
   bgBlendMode: "overlay",
   bgOpacity: 0.5,
@@ -58,7 +58,7 @@ const defaultSettings = {
   bigTextFont: { id: 'Montserrat', label: 'Moderna', weight: '700' },
   bigTextSize: { size: 20, label: 'md'},
   bigTextLineHeight: 1,
-  bigTextColor: { label: "Blanco", color: "white" },
+  bigTextColor: "white",
   bigTextShadow: true,
   bigTextAlign: 'left',
   bigTextVerticalAlign: 'items-center',
@@ -102,7 +102,7 @@ function downloadFinalImage(area: HTMLElement, name: string): void {
   .finally(() => previewDownloading.value = false)
 }
 
-const uiHoverInput = computed(() => { return 'outline-2 hover:outline-dotted hover:outline-'+settings.value.bigTextColor.color })
+const uiHoverInput = computed(() => { return 'outline-2 hover:outline-dotted hover:outline-'+settings.value.bigTextColor })
 const nLinesInParagraph = computed(() => settings.value.bigText.split(/\n/).length)
 const isoAlign = computed(() => {
   switch (settings.value.bigTextAlign) {
@@ -144,7 +144,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
             <div class="absolute w-full z-20 flex flex-col p-4">
               <!-- ISO -->
               <div :style="isoSize" :class="isoAlign">
-                <nuxt-icon :name="settings.iso.svg" filled :class="settings.bigTextColor.color"/>
+                <nuxt-icon :name="settings.iso.svg" filled :class="settings.bigTextColor"/>
               </div>
               <!-- BIG TEXT -->
               <UTextarea
@@ -157,7 +157,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
                   font-size: ${settings.bigTextSize.size}px;
                   font-family: ${settings.bigTextFont.id};
                   font-weight: ${settings.bigTextFont.weight || '400'};
-                  color: ${settings.bigTextColor.color};
+                  color: ${settings.bigTextColor};
                   line-height: ${settings.bigTextSize.size * settings.bigTextLineHeight}px;
                   margin-top: ${settings.bigTextSize.size * .5}px;
                   text-align: ${settings.bigTextAlign};
@@ -191,7 +191,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
             <div
               class="w-full h-full absolute top-0 left-0 opacity-50"
               :style="`
-                background-color: ${settings.bgColor.color};
+                background-color: ${settings.bgColor};
                 mix-blend-mode: ${settings.bgBlendMode};
                 opacity: ${settings.bgOpacity};
               `"
@@ -209,7 +209,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           </div>
         </div>
         <!-- CONFIG and EXPORT: -->
-        <section class="space-y-4">
+        <section class="space-y-4 w-96">
 
           <!-- SETTINGS: -->
           <UDivider label="Format & image crop" />
@@ -220,7 +220,6 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           <!-- TEXT -->
           <TextFormat
             v-model:size="settings.bigTextSize"
-            v-model:color="settings.bigTextColor"
             v-model:shadow="settings.bigTextShadow"
             v-model:align="settings.bigTextAlign"
             v-model:valign="settings.bigTextVerticalAlign"

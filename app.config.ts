@@ -26,10 +26,6 @@ export default defineAppConfig({
         size: 'sm',
         variant: 'soft',
       }
-    },
-    checkbox: {
-      // strategy: 'override',
-      label: 'text-xs mt-0.5',
     }
   }
 })

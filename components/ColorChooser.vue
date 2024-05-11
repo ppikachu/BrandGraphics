@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const color: any = defineModel('color')
+const colortext = defineModel('colortext')
 const opacity = defineModel('opacity')
 const open = ref(false)
 const props = defineProps({ position: { type: String, default: 'left' } })
@@ -8,21 +8,21 @@ interface Color {
   color: string;
 }
 const colores = [
-  { label: "Fucsia", color: "fuchsia" },
-  { label: "Rosa", color: "pink" },
-  { label: "Rojo", color: "red" },
-  { label: "Naranja", color: "orange" },
+  { label: "Fucsia",   color: "fuchsia" },
+  { label: "Rosa",     color: "pink" },
+  { label: "Rojo",     color: "red" },
+  { label: "Naranja",  color: "orange" },
   { label: "Amarillo", color: "yellow" },
-  { label: "Lima", color: "lime" },
-  { label: "Verde", color: "green" },
+  { label: "Lima",     color: "lime" },
+  { label: "Verde",    color: "green" },
   { label: "Turquesa", color: "teal" },
-  { label: "Cyan", color: "cyan" },
-  { label: "Azul", color: "blue" },
-  { label: "Indigo", color: "indigo" },
-  { label: "Púrpura", color: "purple" },
-  { label: "Violeta", color: "violet" },
-  { label: "Blanco", color: "white" },
-  { label: "Negro", color: "black" },
+  { label: "Cyan",     color: "cyan" },
+  { label: "Azul",     color: "blue" },
+  { label: "Indigo",   color: "indigo" },
+  { label: "Púrpura",  color: "purple" },
+  { label: "Violeta",  color: "violet" },
+  { label: "Blanco",   color: "white" },
+  { label: "Negro",    color: "black" },
 ]
 
 function leftorright() {
@@ -39,7 +39,7 @@ function bgColor(c: Color) {
   // normal tailwind bg
   estilo.push('bg-' + c.color + '-400')
   // selected:
-  if (color.value?.color === c.color) estilo.push('border-2')
+  if (colortext.value === c.color) estilo.push('border-2')
   return estilo
 }
 
@@ -59,7 +59,7 @@ const fixcolor = (c: Color) => {
         icon="i-mdi-format-color-fill"
         block
         variant="solid"
-        :color="color?.color"
+        :color="colortext"
         :ui="{ rounded: leftorright }"
         :class="leftorright()"
       />
@@ -73,7 +73,7 @@ const fixcolor = (c: Color) => {
               block
               class="flex items-center justify-center w-full h-8 rounded-md cursor-pointer"
               :class="bgColor(c)"
-              @click="color = colores[i]"
+              @click="colortext = colores[i].color"
             ><span class="text-xs text-gray-900 px-1" :class="{ 'text-white': c.color === 'black'}">{{ c.label }}</span>
             </div>
           </div>
