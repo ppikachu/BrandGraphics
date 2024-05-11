@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const colortext = defineModel('colortext')
+const color = defineModel('color')
 const opacity = defineModel('opacity')
 const open = ref(false)
 const props = defineProps({ position: { type: String, default: 'left' } })
@@ -39,7 +39,7 @@ function bgColor(c: Color) {
   // normal tailwind bg
   estilo.push('bg-' + c.color + '-400')
   // selected:
-  if (colortext.value === c.color) estilo.push('border-2')
+  if (color.value === c.color) estilo.push('border-2')
   return estilo
 }
 
@@ -59,7 +59,7 @@ const fixcolor = (c: Color) => {
         icon="i-mdi-format-color-fill"
         block
         variant="solid"
-        :color="colortext"
+        :color="color"
         :ui="{ rounded: leftorright }"
         :class="leftorright()"
       />
@@ -73,7 +73,7 @@ const fixcolor = (c: Color) => {
               block
               class="flex items-center justify-center w-full h-8 rounded-md cursor-pointer"
               :class="bgColor(c)"
-              @click="colortext = colores[i].color"
+              @click="color = colores[i].color"
             ><span class="text-xs text-gray-900 px-1" :class="{ 'text-white': c.color === 'black'}">{{ c.label }}</span>
             </div>
           </div>
