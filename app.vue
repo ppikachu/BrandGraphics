@@ -122,6 +122,11 @@ const isoSize = computed(() => {
   const size = settings.value.bigTextSize.size
   return 'width: ' + size * factor + 'px; height: ' + size * factor + 'px;'
 })
+const textPadding = computed(() => {
+  if (settings.value.bigTextAlign === 'left') return 'p-0 pr-6'
+  if (settings.value.bigTextAlign === 'center') return 'p-0'
+  if (settings.value.bigTextAlign === 'right') return 'p-0 pl-6'
+})
 // #endregion
 
 onMounted(() => { nextTick(() => { loaded.value = true }) })
@@ -145,7 +150,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           >
             <!-- OVER IMAGE -->
             <div ref="textArea" class="absolute w-full z-20" :class="{ 'border-red-500 border-2': heightTextArea > heightPreviewArea }">
-              <div class="p-4">
+              <div class="p-4 flex flex-col">
                 <!-- ISO -->
                 <div :style="isoSize" :class="isoAlign">
                   <nuxt-icon :name="settings.iso.svg" filled :class="settings.bigTextColor"/>
@@ -154,7 +159,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
                 <UTextarea
                   v-model="settings.bigText"
                   variant="none"
-                  textareaClass="p-0"
+                  :textareaClass=textPadding
                   autoresize
                   :rows="nLinesInParagraph"
                   :style="`
@@ -215,12 +220,12 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
         </div>
         <!-- CONFIG and EXPORT: -->
         <section class="space-y-4 w-96">
-          <UAlert icon="i-mdi-alert" color="yellow" class="my-4" v-if="heightTextArea > heightPreviewArea">
-            <template #description>
-              Text exceeds preview area. Shorten text or reduce font size
-            </template>
-          </UAlert>
-
+          <UAlert
+            icon="i-mdi-alert"
+            color="yellow"
+            class="my-4" v-if="heightTextArea > heightPreviewArea"
+            description="Text exceeds preview area. Shorten text or reduce font size."
+          />
           <!-- SETTINGS: -->
           <UDivider label="Format & image crop" />
           <div class="grid grid-cols-2 gap-4">
