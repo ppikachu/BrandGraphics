@@ -68,6 +68,9 @@ const settings = useStorageAsync('linkedin-local-storage', defaultSettings)
 const loaded = ref(false)
 const dropZoneRef = ref<HTMLDivElement>()
 const previewArea = ref<HTMLElement>()
+const textArea = ref<HTMLElement>()
+const { height: heightTextArea } = useElementSize(textArea)
+const { height: heightPreviewArea } = useElementSize(previewArea)
 const { isOverDropZone } = useDropZone(dropZoneRef, { onDrop, dataTypes: ['image/jpeg', 'image/png'] })
 const file = shallowRef()
 const filename = ref('test')
@@ -141,30 +144,32 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
             :class="settings.bigTextVerticalAlign"
           >
             <!-- OVER IMAGE -->
-            <div class="absolute w-full z-20 flex flex-col p-4">
-              <!-- ISO -->
-              <div :style="isoSize" :class="isoAlign">
-                <nuxt-icon :name="settings.iso.svg" filled :class="settings.bigTextColor"/>
+            <div ref="textArea" class="absolute w-full z-20" :class="{ 'border-red-500 border-2': heightTextArea > heightPreviewArea }">
+              <div class="p-4">
+                <!-- ISO -->
+                <div :style="isoSize" :class="isoAlign">
+                  <nuxt-icon :name="settings.iso.svg" filled :class="settings.bigTextColor"/>
+                </div>
+                <!-- BIG TEXT -->
+                <UTextarea
+                  v-model="settings.bigText"
+                  variant="none"
+                  textareaClass="p-0"
+                  autoresize
+                  :rows="nLinesInParagraph"
+                  :style="`
+                    font-size: ${settings.bigTextSize.size}px;
+                    font-family: ${settings.bigTextFont.id};
+                    font-weight: ${settings.bigTextFont.weight || '400'};
+                    color: ${settings.bigTextColor};
+                    line-height: ${settings.bigTextSize.size * settings.bigTextLineHeight}px;
+                    margin-top: ${settings.bigTextSize.size * .5}px;
+                    text-align: ${settings.bigTextAlign};
+                    text-shadow: ${settings.bigTextShadow ? '1px 1px 1px #000' : 'none'}
+                  `"
+                  :ui="{ variant: { none: uiHoverInput }, form: 'overflow-hidden' }"
+                /><!-- ^^^ importante! ui para ocultar la barra de scroll -->
               </div>
-              <!-- BIG TEXT -->
-              <UTextarea
-                v-model="settings.bigText"
-                variant="none"
-                textareaClass="p-0"
-                autoresize
-                :rows="nLinesInParagraph"
-                :style="`
-                  font-size: ${settings.bigTextSize.size}px;
-                  font-family: ${settings.bigTextFont.id};
-                  font-weight: ${settings.bigTextFont.weight || '400'};
-                  color: ${settings.bigTextColor};
-                  line-height: ${settings.bigTextSize.size * settings.bigTextLineHeight}px;
-                  margin-top: ${settings.bigTextSize.size * .5}px;
-                  text-align: ${settings.bigTextAlign};
-                  text-shadow: ${settings.bigTextShadow ? '1px 1px 1px #000' : 'none'}
-                `"
-                :ui="{ variant: { none: uiHoverInput }, form: 'overflow-hidden' }"
-              /><!-- ^^^ importante! ui para ocultar la barra de scroll -->
             </div>
             <!-- INPUT IMAGE -->
             <div class="absolute top-0 left-0 w-full h-full">
@@ -210,6 +215,11 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
         </div>
         <!-- CONFIG and EXPORT: -->
         <section class="space-y-4 w-96">
+          <UAlert icon="i-mdi-alert" color="yellow" class="my-4" v-if="heightTextArea > heightPreviewArea">
+            <template #description>
+              Text exceeds preview area. Shorten text or reduce font size
+            </template>
+          </UAlert>
 
           <!-- SETTINGS: -->
           <UDivider label="Format & image crop" />
@@ -245,9 +255,9 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           </UButton>
 
           <!-- DEBUG: -->
-          <!-- <DevOnly>
-            <UAlert icon="i-mdi-asterisk" color="yellow" :description="JSON.stringify(file)"/>
-          </DevOnly> -->
+          <DevOnly>
+            <UAlert icon="i-mdi-asterisk" color="yellow" :description="heightTextArea.toString()"/>
+          </DevOnly>
         </section>
       </div>
     </Transition>
