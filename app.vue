@@ -158,7 +158,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
                   v-model="settings.bigText"
                   autoresize
                   variant="none"
-                  class="Montserrat"
+                  class="Montserrat text-white"
                   :textareaClass=textPadding
                   :rows="nLinesInParagraph"
                   :style="`
