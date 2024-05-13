@@ -49,7 +49,7 @@
               </template>
             </UAccordion>
 
-            <UAlert icon="i-mdi-asterisk" class="my-4">
+            <UAlert icon="i-mdi-alert-circle" color="green" class="my-4">
               <template #description>
                 <span class="italic text-xs">Esta herramienta trabaja con las imágenes que tienes guardadas en tu dispositivo. No son guardadas en ningún sitio o subidas a ningún servidor para ser procesadas</span> 😎
               </template>
