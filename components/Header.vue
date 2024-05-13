@@ -55,7 +55,8 @@
               </template>
             </UAlert />
 
-            <UButton icon="i-mdi-close" label="Cerrar" @click="isOpen = false" :block="ismobile.isMobileOrTablet" class="mb-4"/>
+            <UButton icon="i-mdi-close" label="Cerrar" @click="isOpen = false" :block="ismobile.isMobileOrTablet" class="mb-8"/>
+            <a href="https://toyos.vercel.app" target="_blank" class="text-xs mb-4 text-gray-500">Developed by TOYOS - {{ new Date().getFullYear() }}</a>
           </UContainer>
         </UModal>
       </div>
