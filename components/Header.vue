@@ -1,6 +1,6 @@
 <template>
   <section class="absolute top-0 w-full">
-    <div class="h-16 px-2 max-w-96 md:max-w-[800px] lg:max-w-[990px] mx-auto flex flex-row justify-between items-center">
+    <div class="h-16 px-2 max-w-96 lg:max-w-[800px] mx-auto flex flex-row justify-between items-center">
       <div id="title" class="slide-enter-content flex items-center space-x-1">
         <img src="/favicon-32x32.png" class="w-5 h-5">
         <span class="uppercase mt-0.5">{{ runtimeConfig.public.NAME }}</span>

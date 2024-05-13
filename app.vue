@@ -138,7 +138,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
     <Transition>
       <div v-show="loaded" class="flex flex-col lg:flex-row items-center gap-4 md:gap-8">
         <!-- 9X9: -->
-        <div class="mx-auto w-96 md:w-max">
+        <div class="mx-auto w-96">
           <div
             ref="previewArea"
             class="flex relative"
