@@ -2,8 +2,6 @@
 import { toJpeg } from 'html-to-image'
 //@ts-ignore
 import testImage from '@/assets/test.jpg'
-import BlendMode from './components/BlendMode.vue';
-import { useStorage } from '@vueuse/core'
 
 const runtimeConfig = useRuntimeConfig()
 useSeoMeta({
@@ -50,7 +48,7 @@ useHead({
 const defaultSettings = {
   startbase64: testImage,
   photoAlign: 'object-center',
-  frameSize: { label: "Square", x: 1080, y: 1080 },
+  frameSize: { label: "Portrait Post 1920x1080", x: 1920, y: 1080 },
   bgColor: "blue",
   iso: { label:"Words 1", svg:"i_words1" },
   bgBlendMode: "overlay",
@@ -61,7 +59,7 @@ const defaultSettings = {
   bigTextAlign: 'left',
   bigTextVerticalAlign: 'items-center',
 }
-const settings = useStorage('linkedin-local-storage', defaultSettings)
+const settings = useStorageAsync('linkedin-local-storage', defaultSettings)
 
 const loaded = ref(false)
 const dropZoneRef = ref<HTMLDivElement>()
@@ -108,11 +106,11 @@ const nLinesInParagraph = computed(() => settings.value.bigText.split(/\n/).leng
 const isoAlign = computed(() => {
   switch (settings.value.bigTextAlign) {
     case 'left':
-      return 'items-start self-start'
+      return 'self-start'
     case 'center':
-      return 'items-center self-center'
+      return 'self-center'
     case 'right':
-      return 'items-end self-end'
+      return 'self-end'
   }
 })
 const isoRelativeSize = 2
@@ -134,7 +132,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
   <div class="flex flex-col items-center justify-center min-h-screen dark:bg-gray-950 py-16">
     <Header />
     <!-- LOADING -->
-    <div v-show="!loaded" class="h-96 w-48 flex items-center justify-center">
+    <div v-show="!loaded" class="h-96 w-48 mx-auto flex items-center justify-center">
       <UProgress animation="swing" size="xs" />
     </div>
     <Transition>
@@ -248,7 +246,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
             icon="i-heroicons-arrow-down-on-square-16-solid"
             size="md"
             block
-            @click="previewArea && downloadFinalImage(previewArea, filename+settings.frameSize.label)"
+            @click="previewArea && downloadFinalImage(previewArea, filename+' '+settings.frameSize.label)"
             :loading="downloading"
           >
             DOWNLOAD
