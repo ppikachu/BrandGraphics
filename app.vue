@@ -3,6 +3,7 @@ import { toJpeg } from 'html-to-image'
 //@ts-ignore
 import testImage from '@/assets/test.jpg'
 import BlendMode from './components/BlendMode.vue';
+import { useStorage } from '@vueuse/core'
 
 const runtimeConfig = useRuntimeConfig()
 useSeoMeta({
@@ -54,16 +55,13 @@ const defaultSettings = {
   iso: { label:"Words 1", svg:"i_words1" },
   bgBlendMode: "overlay",
   bgOpacity: 0.5,
-  bigText: 'LINKED\nIN.',
-  bigTextFont: { id: 'Montserrat', label: 'Moderna', weight: '700' },
-  bigTextSize: { size: 20, label: 'md'},
-  bigTextLineHeight: 1,
+  bigText: 'This is your LinkedIn picture.\nGet it right!',
+  bigTextSize: 20,
   bigTextColor: "white",
-  bigTextShadow: true,
   bigTextAlign: 'left',
   bigTextVerticalAlign: 'items-center',
 }
-const settings = useStorageAsync('linkedin-local-storage', defaultSettings)
+const settings = useStorage('linkedin-local-storage', defaultSettings)
 
 const loaded = ref(false)
 const dropZoneRef = ref<HTMLDivElement>()
@@ -74,7 +72,7 @@ const { height: heightPreviewArea } = useElementSize(previewArea)
 const { isOverDropZone } = useDropZone(dropZoneRef, { onDrop, dataTypes: ['image/jpeg', 'image/png'] })
 const file = shallowRef()
 const filename = ref('test')
-const previewDownloading = ref(false)
+const downloading = ref(false)
 
 // const debug = process.env.NODE_ENV === "development" ? true : false
 const debug = false
@@ -94,7 +92,7 @@ function onDrop(files: File[] | null) {
   }
 }
 function downloadFinalImage(area: HTMLElement, name: string): void {
-  previewDownloading.value = true
+  downloading.value = true
   if (!debug) toJpeg(area, { quality: 0.95, pixelRatio: settings.value.frameSize.x / 384 })
   .then(function (dataUrl) {
     var link = document.createElement('a')
@@ -102,7 +100,7 @@ function downloadFinalImage(area: HTMLElement, name: string): void {
     link.href = dataUrl
     link.click()
   })
-  .finally(() => previewDownloading.value = false)
+  .finally(() => downloading.value = false)
 }
 
 const uiHoverInput = computed(() => { return 'outline-2 hover:outline-dotted hover:outline-'+settings.value.bigTextColor })
@@ -117,15 +115,15 @@ const isoAlign = computed(() => {
       return 'items-end self-end'
   }
 })
-const factor = 1.5
+const isoRelativeSize = 2
 const isoSize = computed(() => {
-  const size = settings.value.bigTextSize.size
-  return 'width: ' + size * factor + 'px; height: ' + size * factor + 'px;'
+  const size = settings.value.bigTextSize
+  return 'width: ' + size * isoRelativeSize + 'px; height: ' + size * isoRelativeSize + 'px;'
 })
 const textPadding = computed(() => {
-  if (settings.value.bigTextAlign === 'left') return 'p-0 pr-6'
-  if (settings.value.bigTextAlign === 'center') return 'p-0'
-  if (settings.value.bigTextAlign === 'right') return 'p-0 pl-6'
+  if (settings.value.bigTextAlign === 'left') return 'p-1 pr-6'
+  if (settings.value.bigTextAlign === 'center') return 'p-1'
+  if (settings.value.bigTextAlign === 'right') return 'p-1 pl-6'
 })
 // #endregion
 
@@ -146,31 +144,28 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           <div
             ref="previewArea"
             class="flex relative"
-            :class="settings.bigTextVerticalAlign"
+            :class="settings.bigTextVerticalAlign, {'border-red-500 border-2': heightTextArea > heightPreviewArea }"
           >
             <!-- OVER IMAGE -->
-            <div ref="textArea" class="absolute w-full z-20" :class="{ 'border-red-500 border-2': heightTextArea > heightPreviewArea }">
+            <div ref="textArea" class="absolute w-full z-20">
               <div class="p-4 flex flex-col">
                 <!-- ISO -->
-                <div :style="isoSize" :class="isoAlign">
-                  <nuxt-icon :name="settings.iso.svg" filled :class="settings.bigTextColor"/>
+                <div :style="isoSize" :class="isoAlign" class="p-1">
+                  <nuxt-icon :name="settings.iso.svg" filled />
                 </div>
                 <!-- BIG TEXT -->
                 <UTextarea
                   v-model="settings.bigText"
-                  variant="none"
-                  :textareaClass=textPadding
                   autoresize
+                  variant="none"
+                  class="Montserrat"
+                  :textareaClass=textPadding
                   :rows="nLinesInParagraph"
                   :style="`
-                    font-size: ${settings.bigTextSize.size}px;
-                    font-family: ${settings.bigTextFont.id};
-                    font-weight: ${settings.bigTextFont.weight || '400'};
-                    color: ${settings.bigTextColor};
-                    line-height: ${settings.bigTextSize.size * settings.bigTextLineHeight}px;
-                    margin-top: ${settings.bigTextSize.size * .5}px;
+                    font-size: ${settings.bigTextSize}px;
+                    line-height: ${settings.bigTextSize}px;
                     text-align: ${settings.bigTextAlign};
-                    text-shadow: ${settings.bigTextShadow ? '1px 1px 1px #000' : 'none'}
+                    text-shadow: '1px 1px 1px #000';
                   `"
                   :ui="{ variant: { none: uiHoverInput }, form: 'overflow-hidden' }"
                 /><!-- ^^^ importante! ui para ocultar la barra de scroll -->
@@ -217,15 +212,16 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
               :style="`height: ${settings.frameSize.y / settings.frameSize.x * 384}px;`"
             >
           </div>
+          <UAlert
+            v-if="heightTextArea > heightPreviewArea"
+            description="Text exceeds preview area. Shorten text or reduce font size."
+            icon="i-mdi-alert"
+            color="yellow"
+            class="my-4 z-20"
+          />
         </div>
         <!-- CONFIG and EXPORT: -->
         <section class="space-y-4 w-96">
-          <UAlert
-            icon="i-mdi-alert"
-            color="yellow"
-            class="my-4" v-if="heightTextArea > heightPreviewArea"
-            description="Text exceeds preview area. Shorten text or reduce font size."
-          />
           <!-- SETTINGS: -->
           <UDivider label="Format & image crop" />
           <div class="grid grid-cols-2 gap-4">
@@ -235,7 +231,6 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           <!-- TEXT -->
           <TextFormat
             v-model:size="settings.bigTextSize"
-            v-model:shadow="settings.bigTextShadow"
             v-model:align="settings.bigTextAlign"
             v-model:valign="settings.bigTextVerticalAlign"
             v-model:iso="settings.iso"
@@ -254,15 +249,15 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
             size="md"
             block
             @click="previewArea && downloadFinalImage(previewArea, filename+settings.frameSize.label)"
-            :loading="previewDownloading"
+            :loading="downloading"
           >
             DOWNLOAD
           </UButton>
 
           <!-- DEBUG: -->
-          <DevOnly>
+          <!-- <DevOnly>
             <UAlert icon="i-mdi-asterisk" color="yellow" :description="heightTextArea.toString()"/>
-          </DevOnly>
+          </DevOnly> -->
         </section>
       </div>
     </Transition>

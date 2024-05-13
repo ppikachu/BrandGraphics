@@ -15,8 +15,8 @@ const sizes = [
         v-for="s in sizes"
         block
         :label="s.label"
-        @click="model = s"
-        :class="model.label === s.label ? 'opacity-100' : 'opacity-50'"
+        @click="model = s.size"
+        :class="model === s.size ? 'opacity-100' : 'opacity-50'"
       />
     </UButtonGroup>
   </UFormGroup>
