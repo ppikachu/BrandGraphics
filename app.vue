@@ -51,6 +51,7 @@ const defaultSettings = {
   frameSize: { label: "Portrait Post 1920x1080", x: 1920, y: 1080 },
   bgColor: "blue",
   iso: { label:"Words 1", svg:"i_words1" },
+  bgFilter: "aden",
   bgBlendMode: "overlay",
   bgOpacity: 0.5,
   bigText: 'This is your LinkedIn picture.\nGet it right!',
@@ -156,16 +157,14 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
                   v-model="settings.bigText"
                   autoresize
                   variant="none"
-                  class="Montserrat text-white"
                   :textareaClass=textPadding
                   :rows="nLinesInParagraph"
                   :style="`
                     font-size: ${settings.bigTextSize}px;
                     line-height: ${settings.bigTextSize}px;
                     text-align: ${settings.bigTextAlign};
-                    text-shadow: '1px 1px 1px #000';
                   `"
-                  :ui="{ variant: { none: uiHoverInput }, form: 'overflow-hidden' }"
+                  :ui="{ variant: { none: uiHoverInput }, form: 'overflow-hidden Montserrat' }"
                 /><!-- ^^^ importante! ui para ocultar la barra de scroll -->
               </div>
             </div>
@@ -190,25 +189,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
                 </div>
               </label>
             </div>
-            <!-- GRADIENT -->
-            <div
-              class="w-full h-full absolute top-0 left-0 opacity-50"
-              :style="`
-                background-color: ${settings.bgColor};
-                mix-blend-mode: ${settings.bgBlendMode};
-                opacity: ${settings.bgOpacity};
-              `"
-            />
-            <!-- IMAGE -->
-            <img
-              :src="settings.startbase64"
-              alt="fondo-pieza"
-              :width="settings.frameSize.x"
-              :height="settings.frameSize.y"
-              class="object-cover w-full"
-              :class="settings.photoAlign"
-              :style="`height: ${settings.frameSize.y / settings.frameSize.x * 384}px;`"
-            >
+            <Background :settings="settings" />
           </div>
           <UAlert
             v-if="heightTextArea > heightPreviewArea"
@@ -234,11 +215,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
             v-model:iso="settings.iso"
           />
           <!-- COLOR -->
-          <UDivider label="Color tint" class="pt-4" />
-          <div class="grid grid-cols-2">
-            <ColorChooser v-model:color="settings.bgColor" v-model:opacity="settings.bgOpacity" />
-            <BlendMode v-model="settings.bgBlendMode" />
-          </div>
+          <Filter v-model="settings.bgFilter" />
           <!-- END SETTINGS: -->
 
           <!-- BUTTONS: -->
@@ -268,7 +245,9 @@ body {
 }
 .Montserrat {
   font-family: "Montserrat";
+  color: white;
   font-weight: 700;
+  text-shadow: 1px 1px 1px black;
 }
 .v-enter-active,
 .v-leave-active {
