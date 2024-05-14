@@ -202,10 +202,11 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
         <!-- CONFIG and EXPORT: -->
         <section class="space-y-4 w-96">
           <!-- SETTINGS: -->
-          <UDivider label="Format & image crop" />
+          <UDivider label="Format & Image" />
+          <Format v-model="settings.frameSize" />
           <div class="grid grid-cols-2 gap-4">
-            <Format v-model="settings.frameSize" />
             <PhotoAlign v-model="settings.photoAlign" />
+            <Filter v-model="settings.bgFilter" />
           </div>
           <!-- TEXT -->
           <TextFormat
@@ -215,10 +216,10 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
             v-model:iso="settings.iso"
           />
           <!-- COLOR -->
-          <Filter v-model="settings.bgFilter" />
           <!-- END SETTINGS: -->
 
           <!-- BUTTONS: -->
+          <UDivider label="Get Image" />
           <UButton
             icon="i-heroicons-arrow-down-on-square-16-solid"
             size="md"

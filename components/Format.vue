@@ -8,12 +8,10 @@ const socialSizes = [[
 </script>
 
 <template>
-  <UFormGroup label="Format" size="xs">
-    <UDropdown :items="socialSizes" :ui="{ wrapper: 'w-full', width: 'w-auto' }">
-      <UButton :label="model.label" trailing-icon="i-heroicons-chevron-up-20-solid" block />
-      <template #item="{ item }">
-        <UButton color="white" variant="ghost" :label="item.label" @click="model = item" />
-      </template>
-    </UDropdown>
-  </UFormGroup>
+  <UDropdown :items="socialSizes" :ui="{ wrapper: 'w-full', width: 'w-auto' }">
+    <UButton :label="model.label" trailing-icon="i-heroicons-chevron-up-20-solid" block />
+    <template #item="{ item }">
+      <UButton color="white" variant="ghost" :label="item.label" @click="model = item" />
+    </template>
+  </UDropdown>
 </template>

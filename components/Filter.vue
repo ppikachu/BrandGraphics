@@ -34,7 +34,7 @@ const filtros = [
 </script>
 
 <template>
-  <UDivider label="Filter" class="pt-4" />
+  <UFormGroup label="Filter" size="xs">
   <UPopover v-model:open="open" :popper="{ placement: 'top-start' }">
     <UButton
       icon="i-ri-camera-lens-fill"
@@ -57,4 +57,5 @@ const filtros = [
       </UCard>
     </template>
   </UPopover>
+</UFormGroup>
 </template>
