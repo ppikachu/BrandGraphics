@@ -50,7 +50,7 @@ const defaultSettings = {
   photoAlign: 'object-center',
   frameSize: { label: "Portrait Post 1920x1080", x: 1920, y: 1080 },
   bgColor: "blue",
-  iso: { label:"Words 1", svg:"i_words1" },
+  iso: "i_words1",
   bgFilter: "aden",
   bgBlendMode: "overlay",
   bgOpacity: 0.5,
@@ -149,8 +149,8 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
             <div ref="textArea" class="absolute w-full z-20">
               <div class="p-4 flex flex-col">
                 <!-- ISO -->
-                <div :style="isoSize" :class="isoAlign" class="p-1">
-                  <nuxt-icon :name="settings.iso.svg" filled />
+                <div v-if="settings.iso" :style="isoSize" :class="isoAlign" class="p-1">
+                  <nuxt-icon :name="settings.iso" filled />
                 </div>
                 <!-- BIG TEXT -->
                 <UTextarea
@@ -206,7 +206,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           <Format v-model="settings.frameSize" />
           <div class="grid grid-cols-2 gap-4">
             <PhotoAlign v-model="settings.photoAlign" />
-            <Filter v-model="settings.bgFilter" />
+            <Filter v-model="settings.bgFilter" :base64="settings.startbase64" />
           </div>
           <!-- TEXT -->
           <TextFormat
@@ -215,7 +215,6 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
             v-model:valign="settings.bigTextVerticalAlign"
             v-model:iso="settings.iso"
           />
-          <!-- COLOR -->
           <!-- END SETTINGS: -->
 
           <!-- BUTTONS: -->
