@@ -131,9 +131,10 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
       <UProgress animation="swing" size="xs" />
     </div>
     <Transition>
-      <div v-show="loaded" class="flex flex-col lg:flex-row items-center gap-4 md:gap-8">
+      <div v-show="loaded" class="flex flex-col lg:flex-row items-center lg:items-start gap-4 md:gap-8">
         <!-- 9X9: -->
         <div class="mx-auto w-96">
+          <UDivider label="Preview" class="mb-4" />
           <div
             ref="previewArea"
             class="flex relative"
@@ -141,11 +142,10 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           >
             <Background :settings="settings" />
             <!-- OVER IMAGE -->
-            <div ref="textArea" class="absolute w-full">
-              <div class="p-4 flex flex-col gap-2">
+            <div ref="textArea" class="absolute w-full p-4 flex flex-col gap-2">
                 <!-- ISO -->
                 <div v-if="settings.iso" :style="isoSize" :class="isoAlign">
-                  <nuxt-icon :name="settings.iso" filled />
+                  <nuxt-icon :name="settings.iso" filled class="shadow" />
                 </div>
                 <!-- BIG TEXT -->
                 <div
@@ -160,7 +160,6 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
                 >
                   {{ settings.bigText }}
                 </div>
-              </div>
             </div>
             <!-- INPUT IMAGE -->
             <div class="absolute top-0 left-0 w-full h-full">
@@ -254,8 +253,7 @@ body {
   opacity: 0;
 }
 .shadow {
-  -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
-  filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
-  /* Similar syntax to box-shadow */
+  filter: drop-shadow( 1px 1px 1px black);
+  -webkit-filter: drop-shadow( 1px 1px 1px black);
 }
 </style>
