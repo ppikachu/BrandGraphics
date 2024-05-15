@@ -127,7 +127,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen dark:bg-gray-950 py-16">
+  <div class="flex flex-col items-center lg:justify-center min-h-screen dark:bg-gray-950 py-16">
     <Header />
     <!-- LOADING -->
     <div v-show="!loaded" class="h-96 w-48 mx-auto flex items-center justify-center">

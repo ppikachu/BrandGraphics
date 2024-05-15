@@ -51,7 +51,7 @@ const filtros = [
           :key="i"
           size="xs"
           :color="model === filtros[i].class ? 'primary' : ''"
-          @click="model = filtros[i].class"
+          @click="model = filtros[i].class, open = false"
           :ui="{ inline: 'flex flex-col gap-1', padding: { xs: 'px-0 pt-0 pb-0.5' } }"
         >
           <figure :class="f.class" class="w-full rounded overflow-hidden">
