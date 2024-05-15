@@ -45,21 +45,20 @@ const filtros = [
       variant="solid"
     />
     <template #panel>
-      <UCard :ui="{ body: { base: 'grid grid-cols-4 gap-2', padding: 'sm:p-2' } }">
-          <UButton
-            v-for="f, i in filtros"
-            :key="i"
-            block
-            size="xs"
-            :color="model === filtros[i].class ? 'primary' : ''"
-            @click="model = filtros[i].class"
-            :ui="{ block: 'flex flex-col gap-1', padding: { xs: 'px-0 pt-0 pb-0.5' } }"
-          >
-            <figure :class="f.class" class="w-full rounded overflow-hidden">
-              <img :src="base64" :alt="f.label" class="object-cover h-10" />
-            </figure>
-            <div class="text-xs px-1" :class="{ 'text-white': f.label === 'black'}">{{ f.label }}</div>
-          </UButton>
+      <UCard :ui="{ body: { base: 'grid grid-cols-4 lg:grid-cols-6 gap-2', padding: 'sm:p-2' } }">
+        <UButton
+          v-for="f, i in filtros"
+          :key="i"
+          size="xs"
+          :color="model === filtros[i].class ? 'primary' : ''"
+          @click="model = filtros[i].class"
+          :ui="{ inline: 'flex flex-col gap-1', padding: { xs: 'px-0 pt-0 pb-0.5' } }"
+        >
+          <figure :class="f.class" class="w-full rounded overflow-hidden">
+            <img :src="base64" :alt="f.label" class="object-cover h-10" />
+          </figure>
+          <div class="text-xs px-1" :class="{ 'text-white': f.label === 'black'}">{{ f.label }}</div>
+        </UButton>
       </UCard>
     </template>
   </UPopover>
