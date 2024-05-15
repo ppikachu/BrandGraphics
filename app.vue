@@ -102,8 +102,6 @@ function downloadFinalImage(area: HTMLElement, name: string): void {
   .finally(() => downloading.value = false)
 }
 
-const uiHoverInput = computed(() => { return 'outline-2 hover:outline-dotted hover:outline-'+settings.value.bigTextColor })
-const nLinesInParagraph = computed(() => settings.value.bigText.split(/\n/).length)
 const isoAlign = computed(() => {
   switch (settings.value.bigTextAlign) {
     case 'left':
@@ -120,9 +118,8 @@ const isoSize = computed(() => {
   return 'width: ' + size * isoRelativeSize + 'px; height: ' + size * isoRelativeSize + 'px;'
 })
 const textPadding = computed(() => {
-  if (settings.value.bigTextAlign === 'left') return 'p-1 pr-6'
-  if (settings.value.bigTextAlign === 'center') return 'p-1'
-  if (settings.value.bigTextAlign === 'right') return 'p-1 pl-6'
+  if (settings.value.bigTextAlign === 'left') return 'pr-6'
+  if (settings.value.bigTextAlign === 'right') return 'pl-6'
 })
 // #endregion
 
@@ -147,25 +144,24 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           >
             <!-- OVER IMAGE -->
             <div ref="textArea" class="absolute w-full z-20">
-              <div class="p-4 flex flex-col">
+              <div class="p-4 flex flex-col gap-2">
                 <!-- ISO -->
-                <div v-if="settings.iso" :style="isoSize" :class="isoAlign" class="p-1">
+                <div v-if="settings.iso" :style="isoSize" :class="isoAlign">
                   <nuxt-icon :name="settings.iso" filled />
                 </div>
                 <!-- BIG TEXT -->
-                <UTextarea
-                  v-model="settings.bigText"
-                  autoresize
-                  variant="none"
-                  :textareaClass=textPadding
-                  :rows="nLinesInParagraph"
+                <div
+                  class="Montserrat"
+                  :class=textPadding
                   :style="`
+                    
                     font-size: ${settings.bigTextSize}px;
                     line-height: ${settings.bigTextSize}px;
                     text-align: ${settings.bigTextAlign};
                   `"
-                  :ui="{ variant: { none: uiHoverInput }, form: 'overflow-hidden Montserrat' }"
-                /><!-- ^^^ importante! ui para ocultar la barra de scroll -->
+                >
+                  {{ settings.bigText }}
+                </div>
               </div>
             </div>
             <!-- INPUT IMAGE -->
@@ -209,6 +205,8 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
             <Filter v-model="settings.bgFilter" :base64="settings.startbase64" />
           </div>
           <!-- TEXT -->
+          <UDivider label="Edit Text" />
+          <UTextarea v-model="settings.bigText" autoresize />
           <TextFormat
             v-model:size="settings.bigTextSize"
             v-model:align="settings.bigTextAlign"
@@ -244,6 +242,7 @@ body {
   font-family: "JetBrains Mono", sans-serif;
 }
 .Montserrat {
+  white-space: pre-line;
   font-family: "Montserrat";
   color: white;
   font-weight: 700;

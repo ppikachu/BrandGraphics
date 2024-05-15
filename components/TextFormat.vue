@@ -9,7 +9,6 @@ const shadow = defineModel('shadow')
 </script>
 
 <template>
-  <UDivider label="Edit Text" />
   <section class="space-y-2">
     <div class="grid grid-cols-2 gap-4">
       <IsoChooser v-model="iso" />
