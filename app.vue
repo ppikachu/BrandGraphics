@@ -49,11 +49,8 @@ const defaultSettings = {
   startbase64: testImage,
   photoAlign: 'object-center',
   frameSize: { label: "Portrait Post 1920x1080", x: 1920, y: 1080 },
-  bgColor: "blue",
   iso: "i_words1",
   bgFilter: "aden",
-  bgBlendMode: "overlay",
-  bgOpacity: 0.5,
   bigText: 'This is your LinkedIn picture.\nGet it right!',
   bigTextSize: 20,
   bigTextColor: "white",
@@ -112,7 +109,7 @@ const isoAlign = computed(() => {
       return 'self-end'
   }
 })
-const isoRelativeSize = 2
+const isoRelativeSize = 1.5
 const isoSize = computed(() => {
   const size = settings.value.bigTextSize
   return 'width: ' + size * isoRelativeSize + 'px; height: ' + size * isoRelativeSize + 'px;'
@@ -127,7 +124,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
 </script>
 
 <template>
-  <div class="flex flex-col items-center lg:justify-center min-h-screen dark:bg-gray-950 py-16">
+  <div class="flex flex-col items-center lg:justify-center min-h-svh dark:bg-gray-950 py-16">
     <Header />
     <!-- LOADING -->
     <div v-show="!loaded" class="h-96 w-48 mx-auto flex items-center justify-center">
@@ -142,8 +139,9 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
             class="flex relative"
             :class="settings.bigTextVerticalAlign, {'border-red-500 border-2': heightTextArea > heightPreviewArea }"
           >
+            <Background :settings="settings" />
             <!-- OVER IMAGE -->
-            <div ref="textArea" class="absolute w-full z-20">
+            <div ref="textArea" class="absolute w-full">
               <div class="p-4 flex flex-col gap-2">
                 <!-- ISO -->
                 <div v-if="settings.iso" :style="isoSize" :class="isoAlign">
@@ -176,16 +174,15 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
               <label
                 ref="dropZoneRef"
                 for="image_uploads"
-                class="group absolute z-10 w-full h-full cursor-pointer hover:outline-dashed outline-offset-4 outline-primary outline-2 rounded"
+                class="group absolute flex w-full h-full cursor-pointer items-center justify-center hover:outline-dashed outline-offset-4 outline-primary outline-2 rounded"
                 :class="{'outline-dashed outline-green-500': isOverDropZone }"
               >
-                <div class="hidden group-hover:flex z-20 bg-primary rounded px-2 py-1 space-x-1 max-w-64 mx-auto relative top-8">
+                <div class="hidden group-hover:flex z-20 bg-primary rounded px-2 py-1 space-x-1 max-w-64">
                   <UIcon name="i-heroicons-arrow-up-on-square" class="w-5 h-5 flex-shrink-0" />
                   <span class="text-sm uppercase">click (o arrastrar) para cambiar la imagen</span>
                 </div>
               </label>
             </div>
-            <Background :settings="settings" />
           </div>
           <UAlert
             v-if="heightTextArea > heightPreviewArea"
@@ -198,7 +195,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
         <!-- CONFIG and EXPORT: -->
         <section class="space-y-4 w-96">
           <!-- SETTINGS: -->
-          <UDivider label="Format & Image" />
+          <UDivider label="Format & Image (click above to change)" />
           <Format v-model="settings.frameSize" />
           <div class="grid grid-cols-2 gap-4">
             <PhotoAlign v-model="settings.photoAlign" />
