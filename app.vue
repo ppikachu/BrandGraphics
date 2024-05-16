@@ -47,7 +47,7 @@ useHead({
 
 const defaultSettings = {
   startbase64: testImage,
-  photoAlign: 'object-center',
+  photoPosition: 50,
   frameSize: { label: "Portrait Post 1920x1080", x: 1920, y: 1080 },
   iso: "i_words1",
   bgFilter: "aden",
@@ -57,6 +57,12 @@ const defaultSettings = {
   bigTextAlign: 'left',
   bigTextVerticalAlign: 'items-center',
 }
+
+/**
+ * Retrieves settings from local storage or uses default settings.
+ * @param defaultSettings - The default settings if no data is found in local storage.
+ * @returns The settings object retrieved from local storage or default settings.
+ */
 const settings = useStorageAsync('linkedin-local-storage', defaultSettings)
 
 const loaded = ref(false)
@@ -197,8 +203,8 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           <UDivider label="Format & Image (click above to change)" />
           <Format v-model="settings.frameSize" />
           <div class="grid grid-cols-2 gap-4">
-            <PhotoAlign v-model="settings.photoAlign" />
-            <Filter v-model="settings.bgFilter" :base64="settings.startbase64" />
+            <PhotoPosition v-model="settings.photoPosition" />
+            <Filter v-model="settings.bgFilter" :base64="settings.startbase64" :position="settings.photoPosition" :frameSize="settings.frameSize" />
           </div>
           <!-- TEXT -->
           <UDivider label="Edit Text" />
