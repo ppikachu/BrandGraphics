@@ -20,6 +20,12 @@ useHead({
   htmlAttrs: {
     lang: 'es'
   },
+  meta: [
+    {
+      name: 'theme-color',
+      content: '#FFFFFF'
+    }
+  ],
   link: [
     {
       rel: 'apple-touch-icon',
@@ -38,10 +44,6 @@ useHead({
       sizes: '16x16',
       href: '/favicon-16x16.png'
     },
-    {
-      rel: 'manifest',
-      href: '/site.webmanifest'
-    }
   ]
 })
 
@@ -124,6 +126,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
 </script>
 
 <template>
+  <VitePwaManifest />
   <div class="flex flex-col items-center lg:justify-center min-h-svh dark:bg-gray-950 py-16">
     <Header />
     <!-- LOADING -->
