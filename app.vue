@@ -47,7 +47,6 @@ useHead({
 
 const defaultSettings = {
   startbase64: testImage,
-  photoAlign: 'object-center',
   photoPosition: 50,
   frameSize: { label: "Portrait Post 1920x1080", x: 1920, y: 1080 },
   iso: "i_words1",
@@ -64,7 +63,7 @@ const defaultSettings = {
  * @param defaultSettings - The default settings if no data is found in local storage.
  * @returns The settings object retrieved from local storage or default settings.
  */
-const settings = useStorageAsync<Settings>('linkedin-local-storage', defaultSettings)
+const settings = useStorageAsync('linkedin-local-storage', defaultSettings)
 
 const loaded = ref(false)
 const dropZoneRef = ref<HTMLDivElement>()
@@ -205,7 +204,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           <Format v-model="settings.frameSize" />
           <div class="grid grid-cols-2 gap-4">
             <PhotoPosition v-model="settings.photoPosition" />
-            <Filter v-model="settings.bgFilter" :base64="settings.startbase64" />
+            <Filter v-model="settings.bgFilter" :base64="settings.startbase64" :position="settings.photoPosition" :frameSize="settings.frameSize" />
           </div>
           <!-- TEXT -->
           <UDivider label="Edit Text" />
