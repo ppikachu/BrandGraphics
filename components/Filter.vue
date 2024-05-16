@@ -3,7 +3,7 @@ const model = defineModel()
 const open = ref(false)
 defineProps({
   base64 : { type: String, default: '' },
-  position: { type: Number, default: 10 },
+  position: { type: Number, default: 50 },
   frameSize: { type: Object, default: { label: "Portrait Post 1920x1080", x: 1920, y: 1080 } }
 })
 const filtros = [
