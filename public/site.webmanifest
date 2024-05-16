@@ -1,6 +1,6 @@
 {
-  "name": "Grillagram",
-  "short_name": "Crea un mosaico de imagenes.",
+  "name": "Linkedin thumbnail creator",
+  "short_name": "Linkedin thumbnail creator",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

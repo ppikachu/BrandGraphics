@@ -1,9 +1,6 @@
 <script lang="ts" setup>
 import '~/assets/cssgram.min.css'
-
-defineProps({
-  settings: Object
-})
+const { settings } = defineProps({ settings: Object })
 </script>
 
 <template>
@@ -15,7 +12,10 @@ defineProps({
       :height="settings?.frameSize.y"
       class="object-cover"
       :class="settings?.photoAlign"
-      :style="`height: ${settings?.frameSize.y / settings?.frameSize.x * 384}px;`"
+      :style="`
+        object-position: 0 ${settings?.photoPosition}%;
+        height: ${settings?.frameSize.y / settings?.frameSize.x * 384}px;
+      `"
     >
   </figure>
 </template>
