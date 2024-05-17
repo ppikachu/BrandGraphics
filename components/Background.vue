@@ -10,17 +10,37 @@ const { isOverDropZone } = useDropZone(dropZoneRef, { onDrop, dataTypes: ['image
 const file = shallowRef()
 const filename = ref('test')
 
-function onFileInput(e: Event) {
-  const { base64: fileBase64 } = useBase64((e.target as HTMLInputElement).files![0])
-  props.settings.startbase64 = fileBase64 as unknown as string
+/**
+ * Reset the photo position to the center.
+ */
+function resetPhoto() {
+  props.settings!.photoPosition = 50
 }
-// called when files are dropped on zone
-function onDrop(files: File[] | null) {
+
+/**
+ * Handle file input event to set the base64 value in settings and reset the photo position.
+ *
+ * @param {Event} e - The event object containing file input details.
+ * @return {void} This function does not return anything.
+ */
+function onFileInput(e: Event): void {
+  const { base64: fileBase64 } = useBase64((e.target as HTMLInputElement).files![0])
+  props.settings!.startbase64 = fileBase64 as unknown as string
+  resetPhoto()
+}
+/**
+ * Handle the drop event when files are dropped on the zone.
+ *
+ * @param {File[] | null} files - The array of files dropped or null.
+ * @return {void} This function does not return anything.
+ */
+function onDrop(files: File[] | null): void {
   if (files) {
     file.value = files[0]
     filename.value = file.value.name
     const { base64: fileBase64 } = useBase64(files[0] )
     props.settings!.startbase64 = fileBase64 as unknown as string
+    resetPhoto()
   }
 }
 
