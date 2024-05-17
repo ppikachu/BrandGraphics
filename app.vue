@@ -66,33 +66,12 @@ const defaultSettings = {
 const settings = useStorageAsync('linkedin-local-storage', defaultSettings)
 
 const loaded = ref(false)
-const dropZoneRef = ref<HTMLDivElement>()
 const previewArea = ref<HTMLElement>()
-const textArea = ref<HTMLElement>()
-const { height: heightTextArea } = useElementSize(textArea)
-const { height: heightPreviewArea } = useElementSize(previewArea)
-const { isOverDropZone } = useDropZone(dropZoneRef, { onDrop, dataTypes: ['image/jpeg', 'image/png'] })
-const file = shallowRef()
 const filename = ref('test')
 const downloading = ref(false)
-
 // const debug = process.env.NODE_ENV === "development" ? true : false
 const debug = false
 
-// #region FUNCTIONS
-function onFileInput(e: Event) {
-  const { base64: fileBase64 } = useBase64((e.target as HTMLInputElement).files![0])
-  settings.value.startbase64 = fileBase64 as unknown as string
-}
-// called when files are dropped on zone
-function onDrop(files: File[] | null) {
-  if (files) {
-    file.value = files[0]
-    filename.value = file.value.name
-    const { base64: fileBase64 } = useBase64(files[0] )
-    settings.value.startbase64 = fileBase64 as unknown as string
-  }
-}
 function downloadFinalImage(area: HTMLElement, name: string): void {
   downloading.value = true
   if (!debug) toJpeg(area, { quality: 0.95, pixelRatio: settings.value.frameSize.x / 384 })
@@ -104,28 +83,6 @@ function downloadFinalImage(area: HTMLElement, name: string): void {
   })
   .finally(() => downloading.value = false)
 }
-
-const isoAlign = computed(() => {
-  switch (settings.value.bigTextAlign) {
-    case 'left':
-      return 'self-start'
-    case 'center':
-      return 'self-center'
-    case 'right':
-      return 'self-end'
-  }
-})
-const isoRelativeSize = 1.5
-const isoSize = computed(() => {
-  const size = settings.value.bigTextSize
-  return 'width: ' + size * isoRelativeSize + 'px; height: ' + size * isoRelativeSize + 'px;'
-})
-const textPadding = computed(() => {
-  if (settings.value.bigTextAlign === 'left') return 'pr-6'
-  if (settings.value.bigTextAlign === 'right') return 'pl-6'
-})
-// #endregion
-
 onMounted(() => { nextTick(() => { loaded.value = true }) })
 </script>
 
@@ -138,76 +95,22 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
     </div>
     <Transition>
       <div v-show="loaded" class="flex flex-col lg:flex-row items-center lg:items-start gap-4 md:gap-8">
-        <!-- 9X9: -->
-        <div class="mx-auto w-96">
+        <!-- PREVIEW: -->
+        <section id="previewArea">
           <UDivider label="Preview" class="mb-4" />
-          <div
-            ref="previewArea"
-            class="flex relative"
-            :class="settings.bigTextVerticalAlign, {'border-red-500 border-2': heightTextArea > heightPreviewArea }"
-          >
-            <Background :settings="settings" />
-            <!-- OVER IMAGE -->
-            <div ref="textArea" class="absolute w-full p-4 flex flex-col gap-2">
-                <!-- ISO -->
-                <div v-if="settings.iso" :style="isoSize" :class="isoAlign">
-                  <nuxt-icon :name="settings.iso" filled class="shadow" />
-                </div>
-                <!-- BIG TEXT -->
-                <div
-                  class="Montserrat"
-                  :class=textPadding
-                  :style="`
-                    
-                    font-size: ${settings.bigTextSize}px;
-                    line-height: ${settings.bigTextSize}px;
-                    text-align: ${settings.bigTextAlign};
-                  `"
-                >
-                  {{ settings.bigText }}
-                </div>
-            </div>
-            <!-- INPUT IMAGE -->
-            <div class="absolute top-0 left-0 w-full h-full">
-              <input id="image_uploads"
-                type="file"
-                name="image_uploads"
-                accept=".jpg, .jpeg, .png"
-                @change="onFileInput"
-                class="hidden"
-              >
-              <label
-                ref="dropZoneRef"
-                for="image_uploads"
-                class="group absolute flex w-full h-full cursor-pointer items-center justify-center hover:outline-dashed outline-offset-4 outline-primary outline-2 rounded"
-                :class="{'outline-dashed outline-green-500': isOverDropZone }"
-              >
-                <div class="hidden group-hover:flex z-20 bg-primary rounded px-2 py-1 space-x-1 max-w-64">
-                  <UIcon name="i-heroicons-arrow-up-on-square" class="w-5 h-5 flex-shrink-0" />
-                  <span class="text-sm uppercase">click (o arrastrar) para cambiar la imagen</span>
-                </div>
-              </label>
-            </div>
-          </div>
-          <UAlert
-            v-if="heightTextArea > heightPreviewArea"
-            description="Text exceeds preview area. Shorten text or reduce font size."
-            icon="i-mdi-alert"
-            color="yellow"
-            class="my-4 z-20"
-          />
-        </div>
+          <div ref="previewArea"><Background :settings="settings" /></div>
+        </section>
         <!-- CONFIG and EXPORT: -->
         <section class="space-y-4 w-96">
           <!-- SETTINGS: -->
-          <UDivider label="Format & Image (click above to change)" />
+          <UDivider label="1. Format & Image (click to change)" />
           <Format v-model="settings.frameSize" />
           <div class="grid grid-cols-2 gap-4">
             <PhotoPosition v-model="settings.photoPosition" />
             <Filter v-model="settings.bgFilter" :base64="settings.startbase64" :position="settings.photoPosition" :frameSize="settings.frameSize" />
           </div>
           <!-- TEXT -->
-          <UDivider label="Edit Text" />
+          <UDivider label="2. Edit Text" />
           <UTextarea v-model="settings.bigText" autoresize />
           <TextFormat
             v-model:size="settings.bigTextSize"
@@ -218,7 +121,7 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           <!-- END SETTINGS: -->
 
           <!-- BUTTONS: -->
-          <UDivider label="Get Image" />
+          <UDivider label="3. Get Image" />
           <UButton
             icon="i-heroicons-arrow-down-on-square-16-solid"
             size="md"
@@ -243,13 +146,6 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
 body {
   font-family: "JetBrains Mono", sans-serif;
 }
-.Montserrat {
-  white-space: pre-line;
-  font-family: "Montserrat";
-  color: white;
-  font-weight: 700;
-  text-shadow: 1px 1px 1px black;
-}
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.8s ease;
@@ -257,9 +153,5 @@ body {
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
-}
-.shadow {
-  filter: drop-shadow( 1px 1px 1px black);
-  -webkit-filter: drop-shadow( 1px 1px 1px black);
 }
 </style>
