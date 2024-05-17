@@ -47,6 +47,12 @@
                   </ol>
                 </div>
               </template>
+              <template #reset>
+                <div class="text-sm prose dark:prose-invert">
+                  <p>Reset settings to default values.</p>
+                  <UButton icon="i-mdi-refresh" label="Reset" @click="resetSettings" :block="ismobile.isMobileOrTablet" />
+                </div>
+              </template>
             </UAccordion>
 
             <UAlert icon="i-mdi-alert-circle" color="green" class="my-4">
@@ -83,6 +89,16 @@ const items = [
     label: 'Cómo funciona',
     icon: 'i-ic-baseline-rocket-launch',
     slot: 'next-level'
+  },
+  {
+    label: 'Reset to default',
+    icon: 'i-mdi-refresh',
+    slot: 'reset'
   }
 ]
+async function resetSettings() {
+  localStorage.clear()
+  console.log('clearing local storage');
+  window.location.reload()
+}
 </script>
