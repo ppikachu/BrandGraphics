@@ -27,6 +27,7 @@ const colores = [
 
 function leftorright() {
   if (props.position === 'center') return 'rounded-md'
+  if (props.position === 'none') return 'rounded-none'
   return props.position === 'left' ? 'rounded-l-md' : 'rounded-r-md'
 }
 
@@ -68,6 +69,7 @@ const fixcolor = (c: Color) => {
           <div class="grid grid-cols-5 gap-2 mb-4">
             <div
               v-for="c, i in colores"
+              :key="i"
               :label="c.label"
               :color="fixcolor(c)?.color"
               block
@@ -83,20 +85,3 @@ const fixcolor = (c: Color) => {
     </UPopover>
   </UFormGroup>
 </template>
-
-<style>
-.fuchsia { filter: invert(36%) sepia(71%) saturate(2022%) hue-rotate(268deg) brightness(96%) contrast(95%); }
-.pink    { filter: invert(17%) sepia(92%) saturate(3000%) hue-rotate(321deg) brightness(97%) contrast(100%); }
-.red     { filter: invert(37%) sepia(48%) saturate(2924%) hue-rotate(339deg) brightness(102%) contrast(88%); }
-.yellow  { filter: invert(65%) sepia(36%) saturate(3103%) hue-rotate(11deg) brightness(109%) contrast(94%); }
-.lime    { filter: invert(76%) sepia(84%) saturate(4291%) hue-rotate(46deg) brightness(117%) contrast(83%); }
-.green   { }
-.teal    { }
-.cyan    { }
-.blue    { }
-.indigo  { }
-.purple  { }
-.violet  { }
-.white   { }
-.black   { }
-</style>
