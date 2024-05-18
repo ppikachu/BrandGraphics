@@ -38,7 +38,7 @@ export default defineNuxtConfig({
           name: 'Linkedin Thumbnail Generator',
           short_name: 'Linkedin Thumbnails',
           description: 'Esta es una aplicación para generar imagen compatibles con los formatos de LinkedIn.',
-          theme_color: '#ffffff',
+          theme_color: '#000000',
           icons: [
             {
               src: '/android-chrome-192x192.png',
