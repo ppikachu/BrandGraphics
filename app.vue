@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { toJpeg } from 'html-to-image'
+import confetti from 'canvas-confetti'
 //@ts-ignore
 import testImage from '@/assets/test.jpg'
 
 const runtimeConfig = useRuntimeConfig()
+const { $pwa } = useNuxtApp()
+
 useSeoMeta({
   title: runtimeConfig.public.NAME,
 	description: runtimeConfig.public.DESCRIPTION,
@@ -83,9 +86,17 @@ function downloadFinalImage(area: HTMLElement, name: string): void {
     link.href = dataUrl
     link.click()
   })
-  .finally(() => downloading.value = false)
+  .finally(() => {
+    confetti({
+      colors: ['#3b82f6', '#1d4ed8', '#1e3a8a'],
+    })
+    downloading.value = false
+  })
 }
-onMounted(() => { nextTick(() => { loaded.value = true }) })
+onMounted(() => {
+  if ($pwa?.offlineReady) console.log('offline ready')
+  nextTick(() => { loaded.value = true })
+  })
 </script>
 
 <template>
@@ -101,7 +112,9 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
         <!-- PREVIEW: -->
         <section id="previewArea">
           <UDivider label="Preview" class="mb-4" />
-          <div ref="previewArea"><Background :settings="settings" /></div>
+          <div ref="previewArea">
+            <Background :settings="settings" />
+          </div>
         </section>
         <!-- CONFIG and EXPORT: -->
         <section class="space-y-4 w-96">
@@ -134,6 +147,15 @@ onMounted(() => { nextTick(() => { loaded.value = true }) })
           >
             DOWNLOAD
           </UButton>
+
+          <UAlert v-show="$pwa?.needRefresh" icon="i-mdi-alert-circle" color="yellow">
+            <template #description>
+              New content available, click on reload button to update.
+              <button @click="$pwa?.updateServiceWorker()">
+                Reload
+              </button>
+            </template>
+          </UAlert>
 
           <!-- DEBUG: -->
           <!-- <DevOnly>
