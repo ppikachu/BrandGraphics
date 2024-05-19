@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { toJpeg } from 'html-to-image'
+//@ts-ignore
 import confetti from 'canvas-confetti'
 //@ts-ignore
 import testImage from '@/assets/test.jpg'
-
+// const testImage = 'https://picsum.photos/800'
 const runtimeConfig = useRuntimeConfig()
 const { $pwa } = useNuxtApp()
+// const { width, height } = useWindowSize()
 
 useSeoMeta({
   title: runtimeConfig.public.NAME,
@@ -51,11 +53,12 @@ useHead({
 })
 
 const defaultSettings = {
-  startbase64: testImage,
-  photoPosition: 50,
   frameSize: { label: "Portrait Post 1920x1080", x: 1920, y: 1080 },
+  startbase64: testImage,
+  photoPosition: 33,
+  bgFlip: false,
+  bgFilter: "nashville",
   iso: "i_words1",
-  bgFilter: "aden",
   bigText: 'This is your LinkedIn picture.\nGet it right!',
   bigTextSize: 20,
   bigTextColor: "white",
@@ -88,7 +91,10 @@ function downloadFinalImage(area: HTMLElement, name: string): void {
   })
   .finally(() => {
     confetti({
-      colors: ['#3b82f6', '#1d4ed8', '#1e3a8a'],
+      colors: ['#93c5fd', '#3b82f6', '#1d4ed8', '#1e3a8a'],
+      particleCount: 200,
+      spread: 120,
+      origin: { y: 0.7 }
     })
     downloading.value = false
   })
@@ -121,7 +127,8 @@ onMounted(() => {
           <!-- SETTINGS: -->
           <UDivider label="1. Format & Image (click to change)" />
           <Format v-model="settings.frameSize" />
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-3 gap-4">
+            <BgFlip v-model="settings.bgFlip" />
             <PhotoPosition v-model="settings.photoPosition" />
             <Filter v-model="settings.bgFilter" :base64="settings.startbase64" :position="settings.photoPosition" :frameSize="settings.frameSize" />
           </div>
@@ -159,7 +166,7 @@ onMounted(() => {
 
           <!-- DEBUG: -->
           <!-- <DevOnly>
-            <UAlert icon="i-mdi-asterisk" color="yellow" :description="heightTextArea.toString()"/>
+            <UAlert icon="i-mdi-asterisk" color="yellow" :description="width+'x'+height"/>
           </DevOnly> -->
         </section>
       </div>

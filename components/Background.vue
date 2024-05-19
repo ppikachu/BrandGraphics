@@ -79,6 +79,7 @@ const textPadding = computed(() => {
             width: 384px;
             height: ${settings?.frameSize.y / settings?.frameSize.x * 384}px;
             object-position: ${settings?.photoPosition}% ${settings?.photoPosition}%;
+            transform: ${settings?.bgFlip ? 'scaleX(-1)' : 'scaleX(1)'};
           `"
         >
       </div>
@@ -93,7 +94,7 @@ const textPadding = computed(() => {
             </div>
             <!-- BIG TEXT -->
             <div
-              class="Montserrat"
+              class="Jura"
               :class=textPadding
               :style="`
                 font-size: ${settings?.bigTextSize}px;
@@ -128,10 +129,6 @@ const textPadding = computed(() => {
           </div>
         </label>
       </div>
-
-      <DevOnly>
-        <div class="absolute top-0 z-50 text-xs text-center w-full p-2">TextArea:{{ heightTextArea }} - PreviewArea:{{ heightPreviewArea }}</div>
-      </DevOnly>
   </div>
 
   <UAlert
@@ -144,9 +141,13 @@ const textPadding = computed(() => {
 </template>
 
 <style>
-.Montserrat {
+.flip-horizontally {
+  transform: scaleX(-1);
+}
+
+.Jura {
   white-space: pre-line;
-  font-family: "Montserrat";
+  font-family: "Jura";
   color: white;
   font-weight: 700;
   text-shadow: 1px 1px 1px black;
