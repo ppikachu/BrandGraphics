@@ -147,7 +147,7 @@ onMounted(() => {
           <UDivider label="3. Get Image" />
           <UButton
             icon="i-heroicons-arrow-down-on-square-16-solid"
-            size="md"
+            size="xl"
             block
             @click="previewArea && downloadFinalImage(previewArea, filename+' '+settings.frameSize.label)"
             :loading="downloading"

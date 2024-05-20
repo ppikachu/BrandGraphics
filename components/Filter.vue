@@ -44,7 +44,6 @@ const filtros = [
       icon="i-ri-camera-lens-fill"
       :label="filtros.find(f => f.class === model)?.label || 'None'"
       block
-      variant="solid"
     />
     <template #panel>
       <UCard :ui="{ body: { base: 'grid grid-cols-4 lg:grid-cols-7 gap-2', padding: 'sm:p-2' } }">
