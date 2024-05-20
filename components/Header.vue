@@ -56,11 +56,11 @@
 
             <UAlert icon="i-mdi-alert-circle" color="green" class="my-4">
               <template #description>
-                <span class="italic text-xs">Esta herramienta trabaja con las imágenes que tienes guardadas en tu dispositivo. No son guardadas en ningún sitio o subidas a ningún servidor para ser procesadas</span> 😎
+                <span class="italic text-xs">This tool works with the images you have saved on your device. They are not saved anywhere or uploaded to any server to be processed </span>😎
               </template>
             </UAlert />
 
-            <UButton icon="i-mdi-close" label="Cerrar" @click="isOpen = false" :block="ismobile.isMobileOrTablet" class="mb-8"/>
+            <UButton icon="i-mdi-close" label="Close" @click="isOpen = false" :block="ismobile.isMobileOrTablet" class="mb-8"/>
             <a href="https://toyos.vercel.app" target="_blank" class="text-xs mb-4 text-gray-500">Developed by TOYOS - {{ new Date().getFullYear() }}</a>
           </UContainer>
         </UModal>
