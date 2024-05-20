@@ -18,21 +18,27 @@ const blendmodes = [[
 
 <template>
   <UFormGroup label="Logo" size="xs">
-    <UDropdown :items="blendmodes" :popper="{ placement: 'top' }" :ui="{ wrapper: 'w-full', width: 'w-auto', item: { size: 'text-sm' } }">
+    <UDropdown
+      :items="blendmodes"
+      :popper="{ placement: 'top' }"
+      :ui="{ wrapper: 'w-full', width: 'w-auto', item: { size: 'text-sm' } }"
+    >
       <UButton :label="blendmodes[0].find(x => x.svg === model)?.label" block >
         <nuxt-icon v-if="model" :name="model" filled class="w-4" />
         <span class="truncate">{{ model ? label(model) : 'None' }}</span>
       </UButton>
 
       <template #item="{ item }">
-        <nuxt-icon :name="item.svg" class="w-4" filled />
-        <span
-          class="truncate pr-1"
+        <div class="flex items-center gap-1.5">
+          <nuxt-icon :name="item.svg" class="w-4" filled />
+          <span
+            class="truncate pr-1"
           :class="{ 'text-primary': model === item.svg }"
-          @click="model = item.svg"
-        >
-          {{ item.label }}
-        </span>
+            @click="model = item.svg"
+          >
+            {{ item.label }}
+          </span>
+        </div>
       </template>
     </UDropdown>
   </UFormGroup>
