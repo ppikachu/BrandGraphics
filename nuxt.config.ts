@@ -2,6 +2,9 @@ import { VitePWA } from 'vite-plugin-pwa'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  colorMode: {
+    preference: 'dark'
+  },
   modules: [
     "@vueuse/nuxt",
     "@nuxt/ui",
