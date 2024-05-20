@@ -56,7 +56,7 @@
 
             <UAlert icon="i-mdi-alert-circle" color="green" class="my-4">
               <template #description>
-                <span class="italic text-xs">This tool works with the images you have saved on your device. They are not saved anywhere or uploaded to any server to be processed </span>😎
+                <span class="italic text-xs">This tool works with the images on your device. They are not uploaded to a server to be processed </span>😎
               </template>
             </UAlert />
 
