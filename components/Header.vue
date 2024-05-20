@@ -13,8 +13,10 @@
         <UButton icon="i-heroicons-question-mark-circle-16-solid" color="gray" variant="link" size="lg" @click="isOpen = true"/>
         <UModal v-model="isOpen" :ui="{ container: 'items-center sm:items-center' }" >
           <UContainer class="flex flex-col justify-center items-center">
-            <h3 class="text-center text-primary my-4">Ayuda</h3>
-
+            <h3 class="text-center text-primary my-4">Help</h3>
+            <div class="text-sm prose dark:prose-invert mb-4">
+              <p>This is an application to generate images compatible with LinkedIn formats.</p>
+            </div>
             <UAccordion :items="items" color="primary" variant="solid" size="md">
               <template #caracteristicas>
                 <div class="text-sm prose dark:prose-invert">
