@@ -14,36 +14,33 @@
         <UModal v-model="isOpen" :ui="{ container: 'items-center sm:items-center' }" >
           <UContainer class="flex flex-col justify-center items-center">
             <h3 class="text-center text-primary my-4">Ayuda</h3>
-            <div class="text-sm prose dark:prose-invert mb-4">
-              <p>Esta es una aplicación para generar imagen compatibles con los formatos de LinkedIn.</p>
-            </div>
-            
+
             <UAccordion :items="items" color="primary" variant="solid" size="md">
               <template #caracteristicas>
                 <div class="text-sm prose dark:prose-invert">
                   <ol>
-                    <li>Opciones de personalización: Sobreimpresiones de texto para que su imagen se destaque.</li>
-                    <li>Aspecto consistente: Asegúrate de una presentación profesional y visualmente atractiva que refleje tu marca o estilo personal.</li>
-                    <li>Salida de alta calidad: Disfruta resultados crujientes y de alta resolución.</li>
-                    <li>Compartir fácilmente: Guarda en tu dispositivo para uso futuro.</li>
+                    <li>Personalization Options: Text overlays to make your image stand out.</li>
+                    <li>Consistent appearance: Ensure a professional and visually appealing presentation that reflects your brand or personal style.</li>
+                    <li>High-quality output: Enjoy crisp, high-resolution results.</li>
+                    <li>Easy sharing: Save to your device for future use.</li>
                   </ol>
                 </div>
               </template>
               <template #ideal-para>
                 <div class="text-sm prose dark:prose-invert">
                   <ul>
-                    <li>Empresas que desean mostrar productos o servicios de manera única.</li>
-                    <li>Creativos que quieren experimentar con historias visuales innovadoras.</li>
-                    <li>Influencers que buscan mejorar su contenido.</li>
+                    <li>Companies that want to show products or services in a unique way.</li>
+                    <li>Creatives who want to experiment with innovative visual stories.</li>
+                    <li>Influencers looking to improve their content.</li>
                   </ul>
                 </div>
               </template>
               <template #next-level>
                 <div class="text-sm prose dark:prose-invert">
                   <ol>
-                    <li>Arrastra una imagen al area de la foto (desktop) o clickealo (en móviles y desktop) para elegir una imagen*. Verás la vista previa de la imagen.</li>
-                    <li>Elije el formato según lo que necesites. Cambia el texto y ajusta los parámetros hasta que estés conforme con lo que ves en la vista previa.</li>
-                    <li>Cuando estés conforme, dale clic a "Descargar".</li>
+                    <li>Drag an image to the photo area (desktop) or click on it (mobile and desktop) to choose an image*. You will see the preview of the image.</li>
+                    <li>Choose the format according to what you need. Change the text and adjust the parameters until you're happy with what you see in the preview.</li>
+                    <li>When you are satisfied, click "Download".</li>
                   </ol>
                 </div>
               </template>
@@ -76,17 +73,17 @@ const ismobile = useDevice()
 const isOpen = ref(false)
 const items = [
   {
-    label: 'Características clave',
+    label: 'Key Features',
     icon: 'i-mdi-star-face',
     slot: 'caracteristicas'
   },
   {
-    label: 'Ideal para',
+    label: 'Ideal for',
     icon: 'i-mdi-hand-okay',
     slot: 'ideal-para'
   },
   {
-    label: 'Cómo funciona',
+    label: 'How it works',
     icon: 'i-ic-baseline-rocket-launch',
     slot: 'next-level'
   },

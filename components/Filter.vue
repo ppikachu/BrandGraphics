@@ -46,7 +46,7 @@ const filtros = [
       block
     />
     <template #panel>
-      <UCard :ui="{ body: { base: 'grid grid-cols-4 lg:grid-cols-7 gap-2', padding: 'sm:p-2' } }">
+      <UCard :ui="{ body: { base: 'grid grid-cols-5 lg:grid-cols-7 gap-2', padding: 'sm:p-2' } }">
         <UButton
           v-for="f, i in filtros"
           :key="i"
