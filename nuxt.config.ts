@@ -1,4 +1,3 @@
-import { VitePWA } from 'vite-plugin-pwa'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -29,33 +28,30 @@ export default defineNuxtConfig({
           : "http://localhost:3000",
     },
   },
-  vite: {
-    plugins: [
-      VitePWA({
-        registerType: 'autoUpdate',
-        devOptions: {
-          enabled: true
+
+  pwa: {
+    registerType: 'autoUpdate',
+    devOptions: {
+      enabled: true
+    },
+    includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+    manifest: {
+      name: 'Linkedin Thumbnail Generator',
+      short_name: 'Linkedin Thumbnails',
+      description: 'Esta es una aplicación para generar imagen compatibles con los formatos de LinkedIn.',
+      theme_color: '#000000',
+      icons: [
+        {
+          src: '/android-chrome-192x192.png',
+          sizes: '192x192',
+          type: 'image/png'
         },
-        includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
-        manifest: {
-          name: 'Linkedin Thumbnail Generator',
-          short_name: 'Linkedin Thumbnails',
-          description: 'Esta es una aplicación para generar imagen compatibles con los formatos de LinkedIn.',
-          theme_color: '#000000',
-          icons: [
-            {
-              src: '/android-chrome-192x192.png',
-              sizes: '192x192',
-              type: 'image/png'
-            },
-            {
-              src: '/android-chrome-512x512.png',
-              sizes: '512x512',
-              type: 'image/png'
-            }
-          ]
+        {
+          src: '/android-chrome-512x512.png',
+          sizes: '512x512',
+          type: 'image/png'
         }
-      })
-    ],
-  }
+      ]
+    }
+  },
 })
