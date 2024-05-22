@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "nuxt-icons",
     "@nuxtjs/device",
-    "@vite-pwa/nuxt"
+    // "@vite-pwa/nuxt"
   ],
 
   runtimeConfig: {
@@ -29,29 +29,41 @@ export default defineNuxtConfig({
     },
   },
 
-  pwa: {
-    registerType: 'autoUpdate',
-    devOptions: {
-      enabled: true
-    },
-    includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
-    manifest: {
-      name: 'Linkedin Thumbnail Generator',
-      short_name: 'Linkedin Thumbnails',
-      description: 'Esta es una aplicación para generar imagen compatibles con los formatos de LinkedIn.',
-      theme_color: '#000000',
-      icons: [
-        {
-          src: '/android-chrome-192x192.png',
-          sizes: '192x192',
-          type: 'image/png'
-        },
-        {
-          src: '/android-chrome-512x512.png',
-          sizes: '512x512',
-          type: 'image/png'
-        }
-      ]
-    }
-  },
+  // pwa: {
+  //   // payloadExtraction: 'default',
+  //   // appManifest: true,
+  //   registerType: 'autoUpdate',
+  //   workbox: {
+  //     navigateFallback: "/",
+  //     globPatterns: ['**/*.{js,css,html,ico,png,svg}']
+  //   },
+  //   devOptions: {
+  //     enabled: true
+  //   },
+  //   includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+  //   manifest: {
+  //     name: 'Linkedin Thumbnail Generator',
+  //     short_name: 'Linkedin Thumbnails',
+  //     description: 'Esta es una aplicación para generar imagen compatibles con los formatos de LinkedIn.',
+  //     start_url: '/',
+  //     id: '/',
+  //     theme_color: '#000000',
+  //     background_color: '#000000',
+  //     display: 'standalone',
+
+  //     icons: [
+  //       {
+  //         src: '/android-chrome-192x192.png',
+  //         sizes: '192x192',
+  //         type: 'image/png'
+  //       },
+  //       {
+  //         src: '/android-chrome-512x512.png',
+  //         sizes: '512x512',
+  //         type: 'image/png',
+  //         purpose: "any",
+  //       }
+  //     ]
+  //   }
+  // },
 })

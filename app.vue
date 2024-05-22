@@ -100,13 +100,13 @@ function downloadFinalImage(area: HTMLElement, name: string): void {
   })
 }
 onMounted(() => {
-  if ($pwa?.offlineReady) console.log('offline ready')
+  // if ($pwa?.offlineReady) console.log('offline ready')
   nextTick(() => { loaded.value = true })
   })
 </script>
 
 <template>
-  <VitePwaManifest />
+  <!-- <VitePwaManifest /> -->
   <div class="flex flex-col items-center lg:justify-center min-h-svh dark:bg-gray-950 py-16">
     <Header />
     <!-- LOADING -->
@@ -155,14 +155,14 @@ onMounted(() => {
             DOWNLOAD
           </UButton>
 
-          <UAlert v-show="$pwa?.needRefresh" icon="i-mdi-alert-circle" color="yellow">
+          <!-- <UAlert v-show="$pwa?.needRefresh" icon="i-mdi-alert-circle" color="yellow">
             <template #description>
               New content available, click on reload button to update.
               <button @click="$pwa?.updateServiceWorker()">
                 Reload
               </button>
             </template>
-          </UAlert>
+          </UAlert> -->
 
           <!-- DEBUG: -->
           <!-- <DevOnly>
