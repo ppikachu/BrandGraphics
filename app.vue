@@ -4,9 +4,8 @@ import { toJpeg } from 'html-to-image'
 import confetti from 'canvas-confetti'
 //@ts-ignore
 import testImage from '@/assets/test.jpg'
-// const testImage = 'https://picsum.photos/800'
 const runtimeConfig = useRuntimeConfig()
-const { $pwa } = useNuxtApp()
+// const { $pwa } = useNuxtApp()
 // const { width, height } = useWindowSize()
 
 useSeoMeta({
@@ -74,7 +73,7 @@ const defaultSettings = {
 const settings = useStorageAsync('linkedin-local-storage', defaultSettings)
 
 const loaded = ref(false)
-const previewArea = ref<HTMLElement>()
+const captureArea = ref<HTMLElement>()
 const filename = ref('test')
 const downloading = ref(false)
 // const debug = process.env.NODE_ENV === "development" ? true : false
@@ -116,9 +115,9 @@ onMounted(() => {
     <Transition>
       <div v-show="loaded" class="flex flex-col lg:flex-row items-center lg:items-start gap-4 md:gap-8">
         <!-- PREVIEW: -->
-        <section id="previewArea">
-          <UDivider label="Preview" class="mb-4" />
-          <div ref="previewArea">
+        <section id="preview">
+          <!-- <UDivider :label="$t('preview')" class="mb-4" /> -->
+          <div ref="captureArea">
             <Background :settings="settings" />
           </div>
         </section>
@@ -130,11 +129,11 @@ onMounted(() => {
           <div class="grid grid-cols-3 gap-4">
             <BgFlip v-model="settings.bgFlip" />
             <PhotoPosition v-model="settings.photoPosition" />
-            <Filter v-model="settings.bgFilter" :base64="settings.startbase64" :position="settings.photoPosition" :frameSize="settings.frameSize" />
+            <Filter v-model="settings.bgFilter" :base64="settings.startbase64" :position="settings.photoPosition" :frameSize="settings.frameSize" :flip="settings.bgFlip" />
           </div>
           <!-- TEXT -->
           <UDivider label="2. Edit Text" />
-          <UTextarea v-model="settings.bigText" autoresize />
+          <UTextarea v-model="settings.bigText" autoresize size="xl" />
           <TextFormat
             v-model:size="settings.bigTextSize"
             v-model:align="settings.bigTextAlign"
@@ -149,7 +148,7 @@ onMounted(() => {
             icon="i-heroicons-arrow-down-on-square-16-solid"
             size="xl"
             block
-            @click="previewArea && downloadFinalImage(previewArea, filename+' '+settings.frameSize.label)"
+            @click="captureArea && downloadFinalImage(captureArea, filename+' '+settings.frameSize.label)"
             :loading="downloading"
           >
             DOWNLOAD

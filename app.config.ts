@@ -23,7 +23,7 @@ export default defineAppConfig({
     },
     button: {
       default: {
-        size: 'lg',
+        size: 'xs',
         variant: 'soft',
       },
       padding: {

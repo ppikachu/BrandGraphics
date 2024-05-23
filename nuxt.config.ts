@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "nuxt-icons",
     "@nuxtjs/device",
+    "@nuxtjs/i18n",
     // "@vite-pwa/nuxt"
   ],
 
@@ -27,6 +28,10 @@ export default defineNuxtConfig({
           ? "https://linkedin-susan.vercel.app/"
           : "http://localhost:3000",
     },
+  },
+
+  i18n: {
+    // Module Options
   },
 
   // pwa: {

@@ -6,8 +6,8 @@
         <span class="uppercase mt-0.5">{{ runtimeConfig.public.NAME }}</span>
       </div>
       <div id="switches" class="flex flex-row gap-1 h-fit">
+        <LocaleToggle />
         <LightDarkSwitch />
-        <!-- <LocaleToggle /> -->
         <!-- <LocaleSwitch /> -->
         <!-- HELP: -->
         <UButton icon="i-heroicons-question-mark-circle-16-solid" color="gray" variant="link" size="lg" @click="isOpen = true"/>
