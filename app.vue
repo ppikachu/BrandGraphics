@@ -112,7 +112,7 @@ onMounted(() => {
       <UProgress animation="swing" size="xs" />
     </div>
     <Transition>
-      <div v-show="loaded" class="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-8">
+      <div v-show="loaded" class="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-8">
         <!-- PREVIEW: -->
         <section id="preview">
           <!-- <UDivider :label="$t('preview')" class="mb-4" /> -->

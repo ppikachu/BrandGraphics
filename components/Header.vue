@@ -5,19 +5,18 @@
         <img src="/favicon-32x32.png" class="w-5 h-5">
         <span class="uppercase mt-0.5">{{ runtimeConfig.public.NAME }}</span>
       </div>
-      <div id="switches" class="flex flex-row gap-1 h-fit">
-        <LocaleToggle />
-        <LightDarkSwitch />
+      <div id="switches" class="flex flex-row gap-1">
+        <!-- <LocaleToggle /> -->
+        <!-- <LightDarkSwitch /> -->
         <!-- <LocaleSwitch /> -->
         <!-- HELP: -->
         <UButton icon="i-heroicons-question-mark-circle-16-solid" color="gray" variant="link" size="lg" @click="isOpen = true"/>
         <UModal v-model="isOpen" :ui="{ container: 'items-center sm:items-center' }" >
-          <UContainer class="flex flex-col justify-center items-center">
-            <h3 class="text-center text-primary my-4">Help</h3>
-            <div class="text-sm prose dark:prose-invert mb-4">
-              <p>This is an application to generate images compatible with LinkedIn formats.</p>
-            </div>
-            <UAccordion :items="items" color="primary" variant="solid" size="md">
+          <UCard :ui="{ body: { padding: 'px-8' } }">
+            <h3 class="text-center text-primary my-4 text-xl">Help</h3>
+            <UButton icon="i-mdi-close" @click="isOpen = false" :block="ismobile.isMobileOrTablet" class="mb-8 absolute top-6 right-8"/>
+
+            <UAccordion :items="items" size="lg">
               <template #caracteristicas>
                 <div class="text-sm prose dark:prose-invert">
                   <ol>
@@ -60,9 +59,8 @@
               </template>
             </UAlert />
 
-            <UButton icon="i-mdi-close" label="Close" @click="isOpen = false" :block="ismobile.isMobileOrTablet" class="mb-8"/>
-            <a href="https://toyos.vercel.app" target="_blank" class="text-xs mb-4 text-gray-500">Developed by TOYOS - {{ new Date().getFullYear() }}</a>
-          </UContainer>
+            <a href="https://toyos.vercel.app" target="_blank" class="block text-xs text-center mb-4 text-gray-500">Developed by TOYOS - {{ new Date().getFullYear() }}</a>
+          </UCard>
         </UModal>
       </div>
     </div>
