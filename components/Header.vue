@@ -14,7 +14,7 @@
         <UModal v-model="isOpen" :ui="{ container: 'items-center sm:items-center' }" >
           <UCard :ui="{ body: { padding: 'px-8' } }">
             <h3 class="text-center text-primary my-4 text-xl">Help</h3>
-            <UButton icon="i-mdi-close" @click="isOpen = false" :block="ismobile.isMobileOrTablet" class="mb-8 absolute top-6 right-8"/>
+            <UButton icon="i-mdi-close" @click="isOpen = false" class="mb-8 absolute top-6 right-8"/>
 
             <UAccordion :items="items" size="lg">
               <template #caracteristicas>
