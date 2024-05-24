@@ -2,14 +2,11 @@
 import '~/assets/cssgram.min.css'
 const props = defineProps({ settings: Object })
 const dropZoneRef = ref<HTMLDivElement>()
-const previewArea = ref<HTMLElement>()
-const textArea = ref<HTMLElement>()
-const { height: heightTextArea } = useElementSize(textArea)
-const { height: heightPreviewArea } = useElementSize(previewArea)
 const { isOverDropZone } = useDropZone(dropZoneRef, { onDrop, dataTypes: ['image/jpeg', 'image/png'] })
+const ismobile = useDevice()
 const file = shallowRef()
 const filename = ref('test')
-
+const isOpen = ref(false)
 /**
  * Reset the photo position to the center.
  */
@@ -43,71 +40,22 @@ function onDrop(files: File[] | null): void {
     resetPhoto()
   }
 }
-
-const isoAlign = computed(() => {
-  switch (props.settings?.bigTextAlign) {
-    case 'left':
-      return 'self-start'
-    case 'center':
-      return 'self-center'
-    case 'right':
-      return 'self-end'
-  }
-})
-const isoRelativeSize = 1.5
-const isoSize = computed(() => {
-  const size = props.settings?.bigTextSize
-  return 'width: ' + size * isoRelativeSize + 'px; height: ' + size * isoRelativeSize + 'px;'
-})
-const textPadding = computed(() => {
-  if (props.settings?.bigTextAlign === 'left') return 'pr-6'
-  if (props.settings?.bigTextAlign === 'right') return 'pl-6'
-})
+function close() {
+  isOpen.value = false
+}
 </script>
 
 <template>
-  <div class="mx-auto w-96 relative" :class="{'border-red-500 border-2': heightTextArea > heightPreviewArea }">
+  <section class="relative">
+    <!-- BIG PREVIEW -->
+    <UModal v-if="!ismobile.isMobileOrTablet" v-model="isOpen" :ui="{ container: 'items-center', width: 'w-full sm:max-w-5xl', padding: 'p-4 sm:px-32', }">
+      <UButton class="absolute top-2 right-2 z-10" @click="isOpen = false" icon="i-mdi-close" label="Close" variant="link"/>
+      <OverPhoto :settings="settings" @close="close"/>
+    </UModal>
 
-      <div id="previewArea" ref="previewArea"
-        :class="settings?.bgFilter"
-      >
-        <img
-          :src="settings?.startbase64"
-          alt="fondo-pieza"
-          class="object-cover"
-          :style="`
-            width: 384px;
-            height: ${settings?.frameSize.y / settings?.frameSize.x * 384}px;
-            object-position: ${settings?.photoPosition}% ${settings?.photoPosition}%;
-            transform: ${settings?.bgFlip ? 'scaleX(-1)' : 'scaleX(1)'};
-          `"
-        >
-      </div>
-
-      <!-- OVER IMAGE -->
-      <div id="textArea" ref="textArea" class="absolute top-0 flex w-full min-h-full" :class="settings?.bigTextVerticalAlign">
-        <div class="p-4 w-full">
-          <div class="flex flex-col gap-2">
-            <!-- ISO -->
-            <div v-if="settings?.iso" :style="isoSize" :class="isoAlign">
-              <nuxt-icon :name="settings?.iso" filled class="shadow" />
-            </div>
-            <!-- BIG TEXT -->
-            <div
-              class="Jura"
-              :class=textPadding
-              :style="`
-                font-size: ${settings?.bigTextSize}px;
-                line-height: ${settings?.bigTextSize}px;
-                text-align: ${settings?.bigTextAlign};
-              `"
-            >
-              {{ settings?.bigText }}
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div class="mx-auto max-w-96 relative group">
+      <UButton v-if="!ismobile.isMobileOrTablet" class="absolute invisible group-hover:visible group/preview top-2 right-2 z-20" @click="isOpen = true" icon="i-mdi-eye" variant="link" label="Preview"/>
+      <OverPhoto :settings="settings"/>
       <!-- INPUT IMAGE -->
       <div class="absolute top-0 left-0 w-full h-full">
         <input id="image_uploads"
@@ -120,7 +68,7 @@ const textPadding = computed(() => {
         <label
           ref="dropZoneRef"
           for="image_uploads"
-          class="group absolute flex w-full h-full cursor-pointer items-center justify-center hover:outline-dashed outline-offset-4 outline-primary outline-2 rounded"
+          class="absolute flex w-full h-full cursor-pointer items-center justify-center opacity-0 hover:opacity-100 outline-dashed outline-offset-4 outline-primary outline-2 rounded transition-opacity"
           :class="{'outline-dashed outline-green-500': isOverDropZone }"
         >
           <div class="hidden group-hover:flex z-20 bg-primary rounded px-2 py-1 space-x-1 max-w-80">
@@ -129,31 +77,7 @@ const textPadding = computed(() => {
           </div>
         </label>
       </div>
-  </div>
+    </div>
 
-  <UAlert
-    v-if="heightTextArea > heightPreviewArea"
-    description="Text exceeds preview area. Shorten text or reduce font size."
-    icon="i-mdi-alert"
-    color="yellow"
-    class="my-4 z-20"
-  />
+  </section>
 </template>
-
-<style>
-.flip-horizontally {
-  transform: scaleX(-1);
-}
-
-.Jura {
-  white-space: pre-line;
-  font-family: "Jura";
-  color: white;
-  font-weight: 700;
-  text-shadow: 1px 1px 1px black;
-}
-.shadow {
-  filter: drop-shadow( 1px 1px 1px black);
-  -webkit-filter: drop-shadow( 1px 1px 1px black);
-}
-</style>

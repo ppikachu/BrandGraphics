@@ -6,7 +6,6 @@ import confetti from 'canvas-confetti'
 import testImage from '@/assets/test.jpg'
 const runtimeConfig = useRuntimeConfig()
 // const { $pwa } = useNuxtApp()
-// const { width, height } = useWindowSize()
 
 useSeoMeta({
   title: runtimeConfig.public.NAME,
@@ -113,7 +112,7 @@ onMounted(() => {
       <UProgress animation="swing" size="xs" />
     </div>
     <Transition>
-      <div v-show="loaded" class="flex flex-col lg:flex-row items-center lg:items-start gap-4 md:gap-8">
+      <div v-show="loaded" class="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-8">
         <!-- PREVIEW: -->
         <section id="preview">
           <!-- <UDivider :label="$t('preview')" class="mb-4" /> -->
@@ -122,7 +121,7 @@ onMounted(() => {
           </div>
         </section>
         <!-- CONFIG and EXPORT: -->
-        <section class="space-y-4 w-96">
+        <section class="space-y-4 max-w-96">
           <!-- SETTINGS: -->
           <UDivider label="1. Format & Image (click to change)" />
           <Format v-model="settings.frameSize" />
@@ -162,11 +161,6 @@ onMounted(() => {
               </button>
             </template>
           </UAlert> -->
-
-          <!-- DEBUG: -->
-          <!-- <DevOnly>
-            <UAlert icon="i-mdi-asterisk" color="yellow" :description="width+'x'+height"/>
-          </DevOnly> -->
         </section>
       </div>
     </Transition>
