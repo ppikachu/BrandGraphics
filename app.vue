@@ -74,6 +74,7 @@ const settings = useStorageAsync('linkedin-local-storage', defaultSettings)
 const loaded = ref(false)
 const captureArea = ref<HTMLElement>()
 const filename = ref('test')
+const canDownload = ref(true)
 const downloading = ref(false)
 // const debug = process.env.NODE_ENV === "development" ? true : false
 const debug = false
@@ -118,7 +119,7 @@ onMounted(() => {
         <section id="preview">
           <!-- <UDivider :label="$t('preview')" class="mb-4" /> -->
           <div ref="captureArea">
-            <Background :settings="settings" />
+            <Background :settings="settings" v-model="canDownload" />
           </div>
         </section>
 
@@ -133,7 +134,7 @@ onMounted(() => {
             <Filter v-model="settings.bgFilter" :base64="settings.startbase64" :position="settings.photoPosition" :frameSize="settings.frameSize" :flip="settings.bgFlip" />
           </div>
           <!-- TEXT -->
-          <UDivider label="2. Edit Text" />
+          <UDivider :label="$t('editText')" />
           <UTextarea v-model="settings.bigText" autoresize size="xl" />
           <TextFormat
             v-model:size="settings.bigTextSize"
@@ -144,16 +145,14 @@ onMounted(() => {
           <!-- END SETTINGS: -->
 
           <!-- DOWNLOAD: -->
-          <UDivider label="3. Get Image" />
+          <UDivider :label="$t('getImage')" />
           <UButton
+            :label="canDownload ? $t('download') : $t('fix_before_download')"
+            :loading="downloading" :disabled="!canDownload"
             icon="i-heroicons-arrow-down-on-square-16-solid"
-            size="xl"
-            block
+            size="xl" block class="uppercase"
             @click="captureArea && downloadFinalImage(captureArea, filename+' '+settings.frameSize.label)"
-            :loading="downloading"
-          >
-            DOWNLOAD
-          </UButton>
+          />
 
           <!-- <UAlert v-show="$pwa?.needRefresh" icon="i-mdi-alert-circle" color="yellow">
             <template #description>

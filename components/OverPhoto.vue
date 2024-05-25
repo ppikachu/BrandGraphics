@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import '~/assets/cssgram.min.css'
 const props = defineProps({ settings: Object })
+const model = defineModel()
 const previewArea = ref<HTMLElement>()
 const textArea = ref<HTMLElement>()
 const { width: widthTextArea, height: heightTextArea } = useElementSize(textArea)
@@ -31,6 +32,11 @@ const isoAlign = computed(() => {
 function textSize() {
   return props.settings?.bigTextSize * widthTextArea.value * textRelativeSize + 'px'
 }
+const overflownText = computed(() => {
+  const overHeight = heightTextArea.value > heightPreviewArea.value
+  model.value = !overHeight
+  return overHeight
+})
 const padding = computed(() => {
   return 'padding: ' + widthTextArea.value * paddingRelativeSize + 'px;'
 })
@@ -41,10 +47,7 @@ const textPadding = computed(() => {
 </script>
 
 <template>
-  <div ref="previewArea"
-    class="relative"
-    :class="{'outline-red-500 outline outline-1': heightTextArea > heightPreviewArea }"
-  >
+  <div ref="previewArea" :class="{'outline-red-500 outline outline-1': overflownText }">
     <div :class="settings?.bgFilter">
       <img
         :src="settings?.startbase64"
@@ -79,7 +82,7 @@ const textPadding = computed(() => {
     </div>
 
     <Transition :duration="200">
-      <div v-show="heightTextArea > heightPreviewArea" class="absolute left-2 bottom-2 right-2">
+      <div v-show="overflownText" class="absolute left-2 bottom-2 right-2">
         <UAlert
           description="Text exceeds preview area. Shorten text or reduce font size."
           icon="i-mdi-alert"

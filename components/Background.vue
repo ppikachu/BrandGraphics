@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const props = defineProps({ settings: Object })
+const model = defineModel()
 const ismobile = useDevice()
 const file = shallowRef()
 const filename = ref('test')
@@ -57,7 +58,7 @@ function close() {
 
     <div class="mx-auto max-w-96 relative group">
       <UButton v-if="!ismobile.isMobileOrTablet" class="absolute invisible group-hover:visible group/preview top-2 right-2 z-10" @click="isOpen = true" icon="i-mdi-eye" variant="solid" label="Preview"/>
-      <OverPhoto :settings="settings"/>
+      <OverPhoto :settings="settings" v-model="model"/>
       <!-- INPUT IMAGE -->
       <div class="absolute top-0 left-0 w-full h-full">
         <input id="image_uploads"
