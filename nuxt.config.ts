@@ -32,6 +32,9 @@ export default defineNuxtConfig({
 
   i18n: {
     // Module Options
+    detectBrowserLanguage: {
+      useCookie: true,
+    },
   },
 
   // pwa: {
