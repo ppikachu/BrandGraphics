@@ -111,6 +111,7 @@ onMounted(() => {
     <div v-show="!loaded" class="h-96 w-48 mx-auto flex items-center justify-center">
       <UProgress animation="swing" size="xs" />
     </div>
+
     <Transition>
       <div v-show="loaded" class="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-8">
         <!-- PREVIEW: -->
@@ -120,6 +121,7 @@ onMounted(() => {
             <Background :settings="settings" />
           </div>
         </section>
+
         <!-- CONFIG and EXPORT: -->
         <section class="space-y-4 max-w-96">
           <!-- SETTINGS: -->
@@ -141,7 +143,7 @@ onMounted(() => {
           />
           <!-- END SETTINGS: -->
 
-          <!-- BUTTONS: -->
+          <!-- DOWNLOAD: -->
           <UDivider label="3. Get Image" />
           <UButton
             icon="i-heroicons-arrow-down-on-square-16-solid"
