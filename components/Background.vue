@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import '~/assets/cssgram.min.css'
 const props = defineProps({ settings: Object })
-const dropZoneRef = ref<HTMLDivElement>()
-const { isOverDropZone } = useDropZone(dropZoneRef, { onDrop, dataTypes: ['image/jpeg', 'image/png'] })
 const ismobile = useDevice()
 const file = shallowRef()
 const filename = ref('test')
 const isOpen = ref(false)
+const dropZoneRef = ref<HTMLDivElement>()
+const { isOverDropZone } = useDropZone(dropZoneRef, { onDrop, dataTypes: ['image/jpeg', 'image/png'] })
+
 /**
  * Reset the photo position to the center.
  */
@@ -25,6 +25,7 @@ function onFileInput(e: Event): void {
   props.settings!.startbase64 = fileBase64 as unknown as string
   resetPhoto()
 }
+
 /**
  * Handle the drop event when files are dropped on the zone.
  *
@@ -40,6 +41,7 @@ function onDrop(files: File[] | null): void {
     resetPhoto()
   }
 }
+
 function close() {
   isOpen.value = false
 }
@@ -54,7 +56,7 @@ function close() {
     </UModal>
 
     <div class="mx-auto max-w-96 relative group">
-      <UButton v-if="!ismobile.isMobileOrTablet" class="absolute invisible group-hover:visible group/preview top-2 right-2 z-20" @click="isOpen = true" icon="i-mdi-eye" variant="link" label="Preview"/>
+      <UButton v-if="!ismobile.isMobileOrTablet" class="absolute invisible group-hover:visible group/preview top-2 right-2 z-10" @click="isOpen = true" icon="i-mdi-eye" variant="solid" label="Preview"/>
       <OverPhoto :settings="settings"/>
       <!-- INPUT IMAGE -->
       <div class="absolute top-0 left-0 w-full h-full">
@@ -68,13 +70,10 @@ function close() {
         <label
           ref="dropZoneRef"
           for="image_uploads"
-          class="absolute flex w-full h-full cursor-pointer items-center justify-center opacity-0 hover:opacity-100 outline-dashed outline-offset-4 outline-primary outline-2 rounded transition-opacity"
-          :class="{'outline-dashed outline-green-500': isOverDropZone }"
+          class="absolute flex w-full h-full cursor-pointer items-center justify-center opacity-0 hover:opacity-100 outline-dashed outline-offset-4 outline-2 rounded transition-opacity"
+          :class="isOverDropZone ? 'outline-green-500' : 'outline-primary'"
         >
-          <div class="hidden group-hover:flex z-20 bg-primary rounded px-2 py-1 space-x-1 max-w-80">
-            <UIcon name="i-heroicons-arrow-up-on-square" class="w-5 h-5 flex-shrink-0" />
-            <span class="text-sm uppercase">click (or drop) to choose image</span>
-          </div>
+          <UAlert icon="i-heroicons-arrow-up-on-square" description="click (or drop) to change image" class="hidden group-hover:block uppercase max-w-80" color="primary" :ui="{ padding: 'p-2' }" />
         </label>
       </div>
     </div>
