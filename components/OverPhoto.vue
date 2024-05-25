@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import '~/assets/cssgram.min.css'
 const props = defineProps({ settings: Object })
 const previewArea = ref<HTMLElement>()
 const textArea = ref<HTMLElement>()
@@ -40,9 +41,8 @@ const textPadding = computed(() => {
 </script>
 
 <template>
-  <div
+  <div ref="previewArea"
     class="relative"
-    ref="previewArea"
     :class="{'outline-red-500 outline outline-1': heightTextArea > heightPreviewArea }"
   >
     <div :class="settings?.bgFilter">
@@ -58,21 +58,14 @@ const textPadding = computed(() => {
       >
     </div>
     <!-- OVER IMAGE -->
-    <div id="textArea"
-      ref="textArea"
-      class="absolute top-0 flex w-full min-h-full transition"
-      :class="settings?.bigTextVerticalAlign"
-      :style="padding"
-    >
-      <div class="flex flex-col gap-2 w-full">
+    <div ref="textArea" :class="settings?.bigTextVerticalAlign" class="absolute top-0 flex w-full min-h-full transition">
+      <div class="flex flex-col gap-2 w-full" :style="padding">
         <!-- ISO -->
         <div v-if="settings?.iso" :style="isoSize" :class="isoAlign">
           <nuxt-icon :name="settings?.iso" filled class="shadow" />
         </div>
         <!-- BIG TEXT -->
-        <div
-          class="Jura"
-          :class=textPadding
+        <div class="Jura" :class=textPadding
           :style="`
             font-size: ${textSize()};
             line-height: ${textSize()};
