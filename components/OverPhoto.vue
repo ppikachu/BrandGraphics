@@ -47,7 +47,7 @@ const textPadding = computed(() => {
 </script>
 
 <template>
-  <div ref="previewArea" class="relative overflow-hidden border-b-2 border-dashed" :class="overflownText ? 'border-yellow-500' : 'border-gray-950'">
+  <div ref="previewArea" class="relative overflow-hidden border-b-2 border-dashed" :class="overflownText ? 'border-yellow-500' : 'border-white dark:border-gray-950'">
     <div :class="settings?.bgFilter">
       <img
         :src="settings?.startbase64"
