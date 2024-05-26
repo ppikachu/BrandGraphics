@@ -1,19 +1,21 @@
 <script lang="ts" setup>
 const model = defineModel({ type: String })
-function label(svg : string) { return blendmodes[0].find(x => x.svg === svg)?.label }
 
 const blendmodes = [[
-  { label:"None",       svg:"" },
-  { label:"Words 1",    svg:"i_words1" },
-  { label:"Words 2",    svg:"i_words2" },
-  { label:"Words 3",    svg:"i_words3" },
-  { label:"Emotions 1", svg:"i_emotions1" },
-  { label:"Emotions 2", svg:"i_emotions2" },
-  { label:"Emotions 3", svg:"i_emotions3" },
-  { label:"Behavior 1", svg:"i_behavior1" },
-  { label:"Behavior 2", svg:"i_behavior2" },
-  { label:"Behavior 3", svg:"i_behavior3" },
+  { label: "None",       svg: "",            click: () => model.value = "" },
+  { label: "Words 1",    svg: "i_words1",    click: () => model.value = "i_words1" },
+  { label: "Words 2",    svg: "i_words2",    click: () => model.value = "i_words2" },
+  { label: "Words 3",    svg: "i_words3",    click: () => model.value = "i_words3" },
+  { label: "Emotions 1", svg: "i_emotions1", click: () => model.value = "i_emotions1" },
+  { label: "Emotions 2", svg: "i_emotions2", click: () => model.value = "i_emotions2" },
+  { label: "Emotions 3", svg: "i_emotions3", click: () => model.value = "i_emotions3" },
+  { label: "Behavior 1", svg: "i_behavior1", click: () => model.value = "i_behavior1" },
+  { label: "Behavior 2", svg: "i_behavior2", click: () => model.value = "i_behavior2" },
+  { label: "Behavior 3", svg: "i_behavior3", click: () => model.value = "i_behavior3" },
 ]]
+
+function label(svg : string) { return blendmodes[0].find(x => x.svg === svg)?.label }
+
 </script>
 
 <template>
@@ -31,11 +33,7 @@ const blendmodes = [[
       <template #item="{ item }">
         <div class="flex items-center gap-1.5">
           <nuxt-icon :name="item.svg" class="w-4" filled />
-          <span
-            class="truncate pr-1"
-          :class="{ 'text-primary': model === item.svg }"
-            @click="model = item.svg"
-          >
+          <span class="truncate pr-1" :class="{ 'text-primary': model === item.svg }">
             {{ item.label }}
           </span>
         </div>

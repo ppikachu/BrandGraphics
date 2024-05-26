@@ -51,7 +51,7 @@ useHead({
 })
 
 const defaultSettings = {
-  frameSize: { label: "Portrait Post 1920x1080", x: 1920, y: 1080 },
+  frameSize: { label: "Linkedin Portrait Post", x: 1920, y: 1080 },
   startbase64: testImage,
   photoPosition: 33,
   bgFlip: false,

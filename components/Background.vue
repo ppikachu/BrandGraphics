@@ -51,7 +51,7 @@ function close() {
 <template>
   <section class="relative">
     <!-- BIG PREVIEW -->
-    <UModal v-if="!ismobile.isMobileOrTablet" v-model="isOpen" :ui="{ container: 'items-center', width: 'w-full sm:max-w-5xl', padding: 'p-4 sm:px-32', }">
+    <UModal v-if="!ismobile.isMobileOrTablet" v-model="isOpen" :ui="{ container: 'items-center', width: 'w-full sm:max-w-2xl', padding: 'p-4 sm:px-32', }">
       <UButton class="absolute top-2 right-2 z-10" @click="isOpen = false" icon="i-mdi-close" label="Close" variant="link"/>
       <OverPhoto :settings="settings" @close="close"/>
     </UModal>

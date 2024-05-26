@@ -7,10 +7,6 @@ const textArea = ref<HTMLElement>()
 const { width: widthTextArea, height: heightTextArea } = useElementSize(textArea)
 const { height: heightPreviewArea } = useElementSize(previewArea)
 
-function format() {
-  //HACK: heavily hardcoded! needs to be fixed for other formats
-  return props.settings?.frameSize.x === 1920 ? 'aspect-video' : 'aspect-square'
-}
 const isoRelativeSize = .005
 const textRelativeSize = .004
 const paddingRelativeSize = .05
@@ -52,9 +48,9 @@ const textPadding = computed(() => {
       <img
         :src="settings?.startbase64"
         alt="fondo-pieza"
-        class="object-cover"
-        :class="format()"
+        class="object-cover transition-all"
         :style="`
+          aspect-ratio: ${settings?.frameSize.x} / ${settings?.frameSize.y};
           object-position: ${settings?.photoPosition}% ${settings?.photoPosition}%;
           transform: ${settings?.bgFlip ? 'scaleX(-1)' : 'scaleX(1)'};
         `"
