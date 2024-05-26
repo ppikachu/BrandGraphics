@@ -42,6 +42,7 @@ export default defineNuxtConfig({
         name: 'Español'
       }
     ],
+    defaultLocale: 'en',
   },
 
   // pwa: {
