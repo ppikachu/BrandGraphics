@@ -47,7 +47,7 @@ const textPadding = computed(() => {
 </script>
 
 <template>
-  <div ref="previewArea" class="relative overflow-hidden" :class="{'outline-red-500 outline outline-1': overflownText }">
+  <div ref="previewArea" class="relative overflow-hidden border-b-2 border-dashed" :class="overflownText ? 'border-yellow-500' : 'border-gray-950'">
     <div :class="settings?.bgFilter">
       <img
         :src="settings?.startbase64"
@@ -84,9 +84,10 @@ const textPadding = computed(() => {
     <Transition :duration="200">
       <div v-show="overflownText" class="absolute top-0 p-4 flex items-center justify-center w-full h-full">
         <UAlert
-          description="Text exceeds preview area. Shorten text or reduce font size."
+          :description="$t('text_warning')"
           icon="i-mdi-alert"
-          color="red"
+          class="max-w-96"
+          color="yellow"
         />
     </div>
     </Transition>

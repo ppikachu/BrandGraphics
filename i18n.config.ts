@@ -1,16 +1,15 @@
-import { format } from "path";
-
 export default defineI18nConfig(() => ({
   legacy: false,
   locale: 'en',
   messages: {
     en: {
       preview: 'Preview',
-      formatAndImage: 'Format & Image (click to change)',
+      formatAndImage: '1. Format & Image (click to change)',
       portraitPost: 'Portrait Post 1920x1080',
       squarePost: 'Square Post 1080x1080',
-      flip: 'Flip',
-      crop: 'Crop',
+      flip: 'Mirror',
+      yes: 'Yes',
+      crop: 'Frame Crop',
       filter: 'Filter',
       editText: '2. Edit Text',
       logo: 'Logo',
@@ -21,15 +20,30 @@ export default defineI18nConfig(() => ({
       download: 'Download',
       help: 'Help',
       fix_before_download: 'Fix before download',
-
+      key_features: {
+        title: 'Key Features',
+        content: '<ul><li>Personalization Options: Text overlays to make your image stand out.</li><li>Consistent appearance: Ensure a professional and visually appealing presentation that reflects your brand or personal style.</li><li>High-quality output: Enjoy crisp, high-resolution results.</li><li>Easy sharing: Save to your device for future use.</li></ul>',
+      },
+      ideal_for: {
+        title: 'Ideal for',
+        content: '<ul><li>Companies that want to show products or services in a unique way.</li><li>Professionalize your feed by visually unifying post thumbnails and headers</li></ul>',
+      },
+      next_level: {
+        title: 'How it works',
+        content: '<ol><li>Drag an image to the photo area (desktop) or click on it (mobile and desktop) to choose an image*. You will see the preview of the image.</li><li>Choose the format according to what you need. Change the text and adjust the parameters.</li><li>When you are satisfied, click "Download".</li></ol>',
+      },
+      reset_to_default: 'Reset to default',
+      disclosure: 'This tool works with images stored on your device. They are not uploaded to a server to be processed',
+      text_warning: 'Text exceeds preview area. Shorten text or reduce font size.',
     },
     es: {
       preview: 'Vista previa',
-      formatAndImage: 'Formato & Imagen (click para cambiar)',
+      formatAndImage: '1. Formato & Imagen (click para cambiar)',
       portraitPost: 'Portada 1920x1080',
       squarePost: 'Cuadrado 1080x1080',
-      flip: 'Voltear',
-      crop: 'Cortar',
+      flip: 'Espejo',
+      yes: 'Si',
+      crop: 'Encuadre',
       filter: 'Filtro',
       editText: '2. Editar texto',
       logo: 'Logo',
@@ -39,7 +53,22 @@ export default defineI18nConfig(() => ({
       getImage: '3. Obtener imagen',
       download: 'Descargar',
       help: 'Ayuda',
-      fix_before_download: 'Arreglar error antes de descargar',
+      fix_before_download: 'Arregla error para descargar',
+      key_features: {
+        title: 'Características principales',
+        content: '<ul><li>Opciones de personalización: Sobreimpresiones de texto para que su imagen se destaque.</li><li>Aspecto consistente: Asegúrate de una presentación profesional y visualmente atractiva que refleje tu marca o estilo personal.</li><li>Salida de alta calidad: Disfruta resultados crujientes y de alta resolución.</li><li>Compartir fácilmente: Guarda en tu dispositivo para uso futuro.</li></ul>',
+      },
+      ideal_for: {
+        title: 'Ideal para',
+        content: '<ul><li>Empresas que desean mostrar productos o servicios de manera única.</li><li>Profesionalizar su feed unificando visualmente las miniaturas y los encabezados de publicaciones.</li></ul>',
+      },
+      next_level: {
+        title: 'Como funciona',
+        content: '<ol><li>Arrastra una imagen al mosaico (desktop) o clickealo (en móviles y desktop) para elegir una imagen*. Verás la vista previa del mosaico.</li><li>Cambia el texto y ajusta los parámetros hasta que estés conforme con lo que ves en la vista previa.</li><li>Cuando estés conforme, dale clic a "Descargar".</li></ol>',
+      },
+      reset_to_default: 'Resetear a los valores por defecto',
+      disclosure: 'Este herramienta funciona con imagenes en tu dispositivo. No se suben a un servidor para ser procesadas',
+      text_warning: 'Texto excede el area de vista previa. Recorta el texto o disminuye el tamaño de la fuente.',
     }
   }
 }))

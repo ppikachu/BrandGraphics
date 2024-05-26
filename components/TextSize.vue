@@ -9,7 +9,7 @@ const sizes = [
 </script>
 
 <template>
-  <UFormGroup label="Size" size="xs">
+  <UFormGroup :label="$t('size')" size="xs">
     <UButtonGroup :ui="{ wrapper: { horizontal: 'grid grid-cols-3'} }">
       <UButton
         v-for="s in sizes"

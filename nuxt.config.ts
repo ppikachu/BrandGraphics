@@ -32,9 +32,16 @@ export default defineNuxtConfig({
 
   i18n: {
     // Module Options
-    detectBrowserLanguage: {
-      useCookie: true,
-    },
+    locales: [
+      {
+        code: 'en',
+        name: 'English'
+      },
+      {
+        code: 'es',
+        name: 'Español'
+      }
+    ],
   },
 
   // pwa: {

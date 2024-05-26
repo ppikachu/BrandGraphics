@@ -55,7 +55,7 @@ function format() {
     />
   <UModal v-model="open" fullscreen >
     
-    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 md:gap-4 p-4 sm:p-8 lg:p-12 bg-gray-950">
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 md:gap-4 p-4 container mx-auto bg-gray-950">
       <UButton
         v-for="f, i in filtros"
         :key="i"

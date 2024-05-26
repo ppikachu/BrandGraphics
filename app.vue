@@ -124,9 +124,8 @@ onMounted(() => {
         </section>
 
         <!-- CONFIG and EXPORT: -->
-        <section class="space-y-4 max-w-96">
+        <section class="space-y-4 max-w-96 md:w-96">
           <!-- SETTINGS: -->
-          <UDivider label="1. Format & Image (click to change)" />
           <Format v-model="settings.frameSize" />
           <div class="grid grid-cols-3 gap-4">
             <BgFlip v-model="settings.bgFlip" />

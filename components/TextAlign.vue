@@ -3,7 +3,7 @@ const model: any = defineModel()
 </script>
 
 <template>
-  <UFormGroup label="Align" size="xs">
+  <UFormGroup :label="$t('align')" size="xs">
     <UButtonGroup :ui="{ wrapper: { horizontal: 'grid grid-cols-3'} }">
       <UButton
         icon="i-heroicons-bars-3-bottom-left-16-solid"

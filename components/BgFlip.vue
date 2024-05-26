@@ -3,9 +3,9 @@ const model = defineModel()
 </script>
 
 <template>
-  <UFormGroup label="Flip" size="xs">
+  <UFormGroup :label="$t('flip')" size="xs">
     <UButton
-      label="Flip"
+      :label="model ? $t('yes') : 'No'"
       icon="i-mdi-flip-horizontal"
       block
       :class="model ? 'opacity-100' : 'opacity-50'"

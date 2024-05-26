@@ -5,12 +5,10 @@
 		:ui="{ width: 'w-fit' }"
 	>
 		<UButton
-			color="white"
-			class="h-fit"
-			size="xs"
-			variant="ghost"
-			:trailing-icon="shlocale === 'en' ? 'i-circle-flags-us' : 'i-circle-flags-es'"
-			:ui="{ rounded: 'rounded-full' }"
+			color="gray"
+			class="h-fit uppercase"
+			square
+			:label="shlocale"
 		/>
 	</UDropdown>
 </template>
@@ -34,11 +32,9 @@ function shortLocale() {
 const items = [
 	[{
 		label: 'Español',
-		icon: 'i-circle-flags-es',
 		click: () => { SwitchLanguage('es') }
 	}, {
 		label: 'English',
-		icon: 'i-circle-flags-us',
 		click: () => { SwitchLanguage('en') }
 	}]
 ]

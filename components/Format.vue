@@ -8,6 +8,7 @@ const socialSizes = [[
 </script>
 
 <template>
+  <UDivider :label="$t('formatAndImage')" />
   <UDropdown :items="socialSizes" :ui="{ wrapper: 'w-full', width: 'w-auto' }">
     <UButton :label="model.label" trailing-icon="i-heroicons-chevron-up-20-solid" block />
     <template #item="{ item }">

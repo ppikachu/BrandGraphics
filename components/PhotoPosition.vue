@@ -4,7 +4,7 @@ const model = defineModel()
 
 <template>
   <ClientOnly>
-    <UFormGroup label="Crop" size="xs">
+    <UFormGroup :label="$t('crop')" size="xs">
       <URange
         v-model="model"
         :min="0"
