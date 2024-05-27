@@ -44,7 +44,7 @@ const textPadding = computed(() => {
 
 <template>
   <div ref="previewArea" class="relative overflow-hidden border-b-2 border-dashed" :class="overflownText ? 'border-yellow-500' : 'border-white dark:border-gray-950'">
-    <div :class="settings?.bgFilter">
+    <div :class="settings?.bgFilter" class="transition-all" :style="`transform: ${settings?.bgFlip ? 'scaleX(-1)' : 'scaleX(1)'};`">
       <img
         :src="settings?.startbase64"
         alt="fondo-pieza"
@@ -52,7 +52,6 @@ const textPadding = computed(() => {
         :style="`
           aspect-ratio: ${settings?.frameSize.x} / ${settings?.frameSize.y};
           object-position: ${settings?.photoPosition}% ${settings?.photoPosition}%;
-          transform: ${settings?.bgFlip ? 'scaleX(-1)' : 'scaleX(1)'};
         `"
       >
     </div>
@@ -64,7 +63,7 @@ const textPadding = computed(() => {
           <nuxt-icon :name="settings?.iso" filled class="shadow" />
         </div>
         <!-- BIG TEXT -->
-        <div class="Jura" :class=textPadding
+        <div class="text-preview" :class=textPadding
           :style="`
             font-size: ${textSize()};
             line-height: ${textSize()};
@@ -90,22 +89,3 @@ const textPadding = computed(() => {
 
   </div>
 </template>
-
-<style>
-.flip-horizontally {
-  transform: scaleX(-1);
-}
-
-.Jura {
-  white-space: pre-line;
-  overflow-wrap: break-word;
-  font-family: "Jura";
-  color: white;
-  font-weight: 700;
-  text-shadow: 1px 1px 1px black;
-}
-.shadow {
-  filter: drop-shadow( 1px 1px 1px black);
-  -webkit-filter: drop-shadow( 1px 1px 1px black);
-}
-</style>

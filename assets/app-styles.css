@@ -1,0 +1,35 @@
+.app-font {
+  font-family: "JetBrains Mono", sans-serif;
+}
+.text-preview {
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  font-family: "Jura";
+  color: white;
+  font-weight: 700;
+  text-shadow: 1px 1px 1px black;
+}
+
+.nuxt-icon svg {
+  width:  100%;
+  height: auto;
+  margin-bottom: 0;
+}
+
+.shadow {
+  filter: drop-shadow( 1px 1px 1px black);
+  -webkit-filter: drop-shadow( 1px 1px 1px black);
+}
+
+/* TRANSITIONS */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.8s ease;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+.flip-horizontally {
+  transform: scaleX(-1);
+}

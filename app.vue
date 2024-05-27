@@ -16,12 +16,12 @@ useSeoMeta({
 })
 useHead({
   htmlAttrs: {
-    lang: 'es'
+    lang: useI18n().locale
   },
   meta: [
     {
       name: 'theme-color',
-      content: '#FFFFFF'
+      content: '#09090b'
     }
   ],
   link: [

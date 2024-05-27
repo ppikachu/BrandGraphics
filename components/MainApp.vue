@@ -1,23 +1,8 @@
 <script setup lang="ts">
+import '~/assets/app-styles.css'
 import { toJpeg } from 'html-to-image'
 //@ts-ignore
 import confetti from 'canvas-confetti'
-//@ts-ignore
-import testImage from '@/assets/test.jpg'
-
-const defaultSettings = {
-  frameSize: { x: 1920, y: 1080 },
-  startbase64: testImage,
-  photoPosition: 33,
-  bgFlip: false,
-  bgFilter: "nashville",
-  iso: "i_words1",
-  bigText: 'This is your Post image.\nGet it right!',
-  bigTextSize: 20,
-  bigTextColor: "white",
-  bigTextAlign: 'left',
-  bigTextVerticalAlign: 'items-end',
-}
 
 /**
  * Retrieves settings from local storage or uses default settings.
@@ -56,11 +41,11 @@ function downloadFinalImage(area: HTMLElement, name: string): void {
 onMounted(() => {
   // if ($pwa?.offlineReady) console.log('offline ready')
   nextTick(() => { loaded.value = true })
-  })
+})
 </script>
 
 <template>
-  <div class="flex flex-col items-center lg:justify-center min-h-svh dark:bg-gray-950 py-16">
+  <div class="app-font flex flex-col items-center lg:justify-center min-h-svh dark:bg-gray-950 py-16">
     <Header />
     <!-- LOADING -->
     <div v-show="!loaded" class="h-96 w-48 mx-auto flex items-center justify-center">
@@ -120,17 +105,3 @@ onMounted(() => {
     </Transition>
   </div>
 </template>
-
-<style>
-body {
-  font-family: "JetBrains Mono", sans-serif;
-}
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.8s ease;
-}
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-</style>

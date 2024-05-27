@@ -52,12 +52,12 @@ function close() {
   <section class="relative">
     <!-- BIG PREVIEW -->
     <UModal v-if="!ismobile.isMobileOrTablet" v-model="isOpen" :ui="{ container: 'items-center', width: 'w-full sm:max-w-2xl', padding: 'p-4 sm:px-32', }">
-      <UButton class="absolute top-2 right-2 z-10" @click="isOpen = false" icon="i-mdi-close" label="Close" variant="link"/>
+      <UButton class="absolute top-2 right-2 z-10" @click="isOpen = false" icon="i-mdi-close" :label="$t('close')" variant="soft"/>
       <OverPhoto :settings="settings" @close="close"/>
     </UModal>
 
     <div class="mx-auto max-w-96 relative group">
-      <UButton v-if="!ismobile.isMobileOrTablet" class="absolute invisible group-hover:visible group/preview top-2 right-2 z-10" @click="isOpen = true" icon="i-mdi-eye" variant="solid" :label="$t('preview')"/>
+      <UButton v-if="!ismobile.isMobileOrTablet" class="absolute invisible group-hover:visible group/preview top-2 right-2 z-10" @click="isOpen = true" icon="i-mdi-eye" variant="soft" :label="$t('preview')"/>
       <OverPhoto :settings="settings" v-model="model"/>
       <!-- INPUT IMAGE -->
       <div class="absolute top-0 left-0 w-full h-full">
@@ -74,7 +74,7 @@ function close() {
           class="absolute flex w-full h-full cursor-pointer items-center justify-center opacity-0 hover:opacity-100 outline-dashed outline-offset-4 outline-2 rounded transition-opacity"
           :class="isOverDropZone ? 'outline-green-500' : 'outline-primary'"
         >
-          <UAlert icon="i-heroicons-arrow-up-on-square" description="click (or drop) to change image" class="hidden group-hover:block uppercase max-w-80" color="primary" :ui="{ padding: 'p-2' }" />
+          <UButton icon="i-heroicons-arrow-up-on-square" :label="$t('uploadPhoto')" size="lg" class="invisible group-hover:visible uppercase max-w-80 pointer-events-none"/>
         </label>
       </div>
     </div>

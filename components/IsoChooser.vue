@@ -41,11 +41,3 @@ function label(svg : string) { return blendmodes[0].find(x => x.svg === svg)?.la
     </UDropdown>
   </UFormGroup>
 </template>
-
-<style>
-.nuxt-icon svg {
-  width:  100%;
-  height: auto;
-  margin-bottom: 0;
-}
-</style>

@@ -38,11 +38,6 @@ const filtros = [
 { label: "Willow", class: "willow" },
 { label: "X-pro II", class: "xpro2" }
 ]
-
-function format() {
-  //HACK: heavily hardcoded! needs to be fixed for other formats
-  return props.frameSize.x === 1920 ? 'aspect-video' : 'aspect-square'
-}
 </script>
 
 <template>
@@ -53,35 +48,35 @@ function format() {
       block
       @click="open = true"
     />
-  <UModal v-model="open" fullscreen >
-    
-    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 md:gap-4 p-4 container mx-auto bg-gray-950">
-      <UButton
-        v-for="f, i in filtros"
-        :key="i"
-        size="xs"
-        :color="model === filtros[i].class ? 'primary' : 'black'"
-        @click="model = filtros[i].class, open = false"
-        :ui="{ inline: 'flex flex-col gap-2', padding: { xs: 'px-0 pt-0 pb-0.5' } }"
-      >
-        <figure :class="f.class" class="rounded overflow-hidden w-full">
-          <img
-            :src="base64"
-            :alt="f.label"
-            class="object-cover w-full"
-            :class="format()"
-            :style="`
-              object-position: ${position}% ${position}%;
-              transform: ${props.flip ? 'scaleX(-1)' : 'scaleX(1)'};
-            `"
-          />
-        </figure>
-        <div class="text-xs px-0.5 pb-1" :class="{ 'text-white': f.label === 'black'}">{{ f.label }}</div>
-      </UButton>
-      <div class="min-h-20 flex justify-center">
-        <UButton @click="open = false" icon="i-mdi-close" block variant="soft" label="Close"/>
-      </div>
-    </div>
-  </UModal>
-</UFormGroup>
+    <UModal v-model="open" :ui="{ width: 'sm:max-w-4xl' }" >
+      <UCard>
+        <div class="flex justify-end container mx-auto mb-4 app-font">
+          <UButton @click="open = false" icon="i-mdi-close" :label="$t('close')" variant="soft"/>
+        </div>
+        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 md:gap-4 app-font">
+          <UButton
+            v-for="f, i in filtros"
+            :key="i"
+            :color="model === filtros[i].class ? 'primary' : 'black'"
+            @click="model = filtros[i].class, open = false"
+            :ui="{ inline: 'flex flex-col gap-2', padding: { xs: 'px-0 pt-0 pb-0.5' } }"
+          >
+            <figure :class="f.class" class="rounded overflow-hidden w-full">
+              <img
+                :src="base64"
+                :alt="f.label"
+                class="object-cover w-full"
+                :style="`
+                  aspect-ratio: ${props.frameSize.x} / ${props.frameSize.y};
+                  object-position: ${position}% ${position}%;
+                  transform: ${props.flip ? 'scaleX(-1)' : 'scaleX(1)'};
+                `"
+              />
+            </figure>
+            <div class="text-sm px-0.5 pb-1">{{ f.label }}</div>
+          </UButton>
+        </div>
+      </UCard>
+    </UModal>
+  </UFormGroup>
 </template>
