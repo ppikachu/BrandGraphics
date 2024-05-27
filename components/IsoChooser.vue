@@ -1,43 +1,26 @@
 <script lang="ts" setup>
-const model = defineModel({ type: String })
-
-const blendmodes = [[
-  { label: "None",       svg: "",            click: () => model.value = "" },
-  { label: "Words 1",    svg: "i_words1",    click: () => model.value = "i_words1" },
-  { label: "Words 2",    svg: "i_words2",    click: () => model.value = "i_words2" },
-  { label: "Words 3",    svg: "i_words3",    click: () => model.value = "i_words3" },
-  { label: "Emotions 1", svg: "i_emotions1", click: () => model.value = "i_emotions1" },
-  { label: "Emotions 2", svg: "i_emotions2", click: () => model.value = "i_emotions2" },
-  { label: "Emotions 3", svg: "i_emotions3", click: () => model.value = "i_emotions3" },
-  { label: "Behavior 1", svg: "i_behavior1", click: () => model.value = "i_behavior1" },
-  { label: "Behavior 2", svg: "i_behavior2", click: () => model.value = "i_behavior2" },
-  { label: "Behavior 3", svg: "i_behavior3", click: () => model.value = "i_behavior3" },
-]]
-
-function label(svg : string) { return blendmodes[0].find(x => x.svg === svg)?.label }
-
+const model: any = defineModel({ type: String })
+function label(svg : string) { return graphics.find(x => x.svg === svg)?.label }
 </script>
 
 <template>
   <UFormGroup label="Logo" size="xs">
-    <UDropdown
-      :items="blendmodes"
-      :popper="{ placement: 'top' }"
-      :ui="{ wrapper: 'w-full', width: 'w-auto', item: { size: 'text-sm' } }"
+    <USelectMenu
+      v-model="model"
+      value-attribute="svg"
+      :options="graphics"
     >
-      <UButton :label="blendmodes[0].find(x => x.svg === model)?.label" block >
-        <nuxt-icon v-if="model" :name="model" filled class="w-4" />
-        <span class="truncate">{{ model ? label(model) : 'None' }}</span>
-      </UButton>
-
-      <template #item="{ item }">
-        <div class="flex items-center gap-1.5">
-          <nuxt-icon :name="item.svg" class="w-4" filled />
-          <span class="truncate pr-1" :class="{ 'text-primary': model === item.svg }">
-            {{ item.label }}
-          </span>
-        </div>
+      <template #default="{ option: person }">
+        <UButton block >
+          <nuxt-icon v-if="model" :name="model" filled class="w-4" />
+          {{ label(model) }}
+          <UIcon name="i-heroicons-chevron-down-20-solid" class="w-5 h-5 transition-transform" :class="[person && 'transform rotate-90']" />
+        </UButton>
       </template>
-    </UDropdown>
+      <template #option="{ option: iso }">
+        <nuxt-icon :name="iso.svg" filled class="w-4" />
+        <span class="truncate">{{ iso.label }}</span>
+      </template>
+    </USelectMenu>
   </UFormGroup>
 </template>

@@ -3,9 +3,9 @@ const model = defineModel()
 const open = ref(false)
 
 const props = defineProps({
-  base64 : { type: String, default: '' },
+  base64 : { type: String },
   position: { type: Number, default: 50 },
-  frameSize: { type: Object, default: { label: "Portrait Post 1920x1080", x: 1920, y: 1080 } },
+  frameSize: { type: Object, default: { x: 1920, y: 1080 } },
   flip: { type: Boolean, default: false },
 })
 
