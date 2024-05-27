@@ -17,15 +17,14 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       DEFAULT_LANGUAGE: "es",
-      NAME: "Linkedin thumbnails",
+      NAME: "BrandGraphics",
       DESCRIPTION: "Generador de thumbnails.",
       OG_IMAGE: "/OGvisu.png",
       TWITTER_IMAGE: "/icon.png",
       ICON: "/icon.png",
-      // FIXME: url
       HOST:
         process.env.NODE_ENV === "production"
-          ? "https://linkedin-susan.vercel.app/"
+          ? "https://brandgraphics.vercel.app/"
           : "http://localhost:3000",
     },
   },
