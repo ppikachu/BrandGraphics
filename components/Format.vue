@@ -10,16 +10,19 @@ const socialSizes = [[
 ]]
 
 watch(() => selectedFormat.value, () => {
-  model.value = socialSizes[0][selectedFormat.value]
+  model.value = { x: socialSizes[0][selectedFormat.value].x, y: socialSizes[0][selectedFormat.value].y }
 })
+const findObjectByKeys = (array: any[], key1: string, value1: number, key2: string, value2: number) => {
+  return array.find(obj => obj[key1] === value1 && obj[key2] === value2)
+}
 </script>
 
 <template>
   <UDivider :label="$t('formatAndImage')" />
   <UDropdown :items="socialSizes" :ui="{ wrapper: 'w-full', width: 'w-auto' }">
-    <UButton :label="model.label + ' (' + model.x + 'x' + model.y + ')'" trailing-icon="i-heroicons-chevron-up-20-solid" block />
+    <UButton :label="findObjectByKeys(socialSizes[0], 'x', model.x, 'y', model.y).label + ' (' + model.x + 'x' + model.y + ')'" trailing-icon="i-heroicons-chevron-up-20-solid" block />
     <template #item="{ item }">
-      <span :class="{ 'text-primary': model.label === item.label }">
+      <span :class="{ 'text-primary': model.x === item.x && model.y === item.y }">
         {{ item.label }}
       </span>
     </template>
