@@ -20,6 +20,7 @@ export default defineI18nConfig(() => ({
       download: 'Download',
       help: 'Help',
       fix_before_download: 'Fix before download',
+      description: 'Introducing BrandGraphics, your go-to app for creating professional social media posts effortlessly.',
       key_features: {
         title: 'Key Features',
         content: '<ul><li>Personalization Options: Text overlays to make your image stand out.</li><li>Consistent appearance: Ensure a professional and visually appealing presentation that reflects your brand or personal style.</li><li>High-quality output: Enjoy crisp, high-resolution results.</li><li>Easy sharing: Save to your device for future use.</li></ul>',
@@ -54,6 +55,7 @@ export default defineI18nConfig(() => ({
       download: 'Descargar',
       help: 'Ayuda',
       fix_before_download: 'Arregla error para descargar',
+      description: 'BrandGraphics, la aplicación ideal para crear publicaciones en redes sociales de forma eficiente.',
       key_features: {
         title: 'Características principales',
         content: '<ul><li>Opciones de personalización: Sobreimpresiones de texto para que su imagen se destaque.</li><li>Aspecto consistente: Asegúrate de una presentación profesional y visualmente atractiva que refleje tu marca o estilo personal.</li><li>Salida de alta calidad: Disfruta resultados crujientes y de alta resolución.</li><li>Compartir fácilmente: Guarda en tu dispositivo para uso futuro.</li></ul>',

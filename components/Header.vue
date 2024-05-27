@@ -48,9 +48,10 @@ async function resetSettings() {
         <!-- HELP: -->
         <UButton icon="i-heroicons-question-mark-circle-16-solid" color="gray" variant="link" size="lg" @click="isOpen = true"/>
         <UModal v-model="isOpen" :ui="{ container: 'items-center sm:items-center' }" >
-          <UCard :ui="{ body: { padding: 'px-8' } }">
-            <h3 class="text-center text-primary my-4 text-xl">{{ $t('help') }}</h3>
-            <UButton icon="i-mdi-close" @click="isOpen = false" class="mb-8 absolute top-6 right-8"/>
+          <UCard>
+            <h3 class="text-center text-primary mb-4 text-xl">{{ $t('help') }}</h3>
+            <p class="prose dark:prose-invert mb-4">{{ $t('description') }}</p>
+            <UButton icon="i-mdi-close" @click="isOpen = false" class="mb-8 absolute top-2 sm:top-4 right-2 sm:right-4"/>
 
             <UAccordion :items="items" size="lg">
               <template #item="{ item }">
@@ -70,7 +71,7 @@ async function resetSettings() {
               </template>
             </UAlert />
 
-            <a href="https://toyos.vercel.app" target="_blank" class="block text-xs text-center mb-2 text-gray-500">Developed by TOYOS - {{ new Date().getFullYear() }}</a>
+            <a href="https://toyos.vercel.app" target="_blank" class="block text-xs text-center py-2 text-gray-500">Developed by TOYOS - {{ new Date().getFullYear() }}</a>
           </UCard>
         </UModal>
       </div>
