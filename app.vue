@@ -51,7 +51,7 @@ useHead({
 })
 
 const defaultSettings = {
-  frameSize: { label: "Linkedin Portrait Post", x: 1920, y: 1080 },
+  frameSize: { x: 1920, y: 1080 },
   startbase64: testImage,
   photoPosition: 33,
   bgFlip: false,
@@ -150,7 +150,7 @@ onMounted(() => {
             :loading="downloading" :disabled="!canDownload"
             icon="i-heroicons-arrow-down-on-square-16-solid"
             size="xl" block class="uppercase"
-            @click="captureArea && downloadFinalImage(captureArea, filename+' '+settings.frameSize.label)"
+            @click="captureArea && downloadFinalImage(captureArea, filename + ' ' + settings.frameSize.x + 'x' + settings.frameSize.y)"
           />
 
           <!-- <UAlert v-show="$pwa?.needRefresh" icon="i-mdi-alert-circle" color="yellow">
