@@ -61,7 +61,7 @@ const defaultSettings = {
   bigTextSize: 20,
   bigTextColor: "white",
   bigTextAlign: 'left',
-  bigTextVerticalAlign: 'items-center',
+  bigTextVerticalAlign: 'items-end',
 }
 
 /**
