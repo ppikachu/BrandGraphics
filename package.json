@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@nuxt/ui": "^2.16.0",
-    "@vueuse/core": "^10.9.0",
-    "@vueuse/nuxt": "^10.9.0",
+    "@vueuse/core": "^10.10.0",
+    "@vueuse/nuxt": "^10.10.0",
     "canvas-confetti": "^1.9.3",
     "html-to-image": "^1.11.11",
     "nuxt-icons": "^3.2.1",

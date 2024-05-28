@@ -52,7 +52,7 @@ onMounted(() => {
       <UProgress animation="swing" size="xs" />
     </div>
 
-    <Transition>
+    <Transition name="fade">
       <div v-show="loaded" class="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-8">
         <!-- PREVIEW: -->
         <section id="preview">

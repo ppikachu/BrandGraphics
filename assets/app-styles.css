@@ -22,14 +22,25 @@
 }
 
 /* TRANSITIONS */
-.v-enter-active,
-.v-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.8s ease;
 }
-.v-enter-from,
-.v-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
+
+.up-enter-active,
+.up-leave-active {
+  transition: all 0.8s ease;
+}
+.up-enter-from,
+.up-leave-to {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
 .flip-horizontally {
   transform: scaleX(-1);
 }

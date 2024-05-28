@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const model: any = defineModel()
+const model = defineModel() as unknown as FrameSize
 </script>
 
 <template>
@@ -7,11 +7,9 @@ const model: any = defineModel()
   <USelectMenu
     :options="socialSizes"
     v-model="model"
-    v-slot="{ open }"
   >
     <UButton block >
       {{ model.label + ' (' + model.x + 'x' + model.y + ')' }}
-      <UIcon name="i-heroicons-chevron-right-20-solid" class="w-5 h-5 transition-transform" :class="[open && 'transform rotate-90']" />
     </UButton>
   </USelectMenu>
 </template>

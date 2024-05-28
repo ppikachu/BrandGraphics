@@ -76,7 +76,7 @@ const textPadding = computed(() => {
       </div>
     </div>
 
-    <Transition :duration="200">
+    <Transition name="fade" :duration="200">
       <div v-show="overflownText" class="absolute top-0 p-4 flex items-center justify-center w-full h-full">
         <UAlert
           :description="$t('text_warning')"

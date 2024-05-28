@@ -5,15 +5,20 @@ interface FrameSize {
 }
 
 interface Settings {
-  startbase64: string;
-  photoAlign: string;
-  photoPosition: number;
   frameSize: FrameSize;
-  iso: string;
+  startbase64: string;
+  photoPosition: number;
+  bgFlip: boolean;
   bgFilter: string;
+  iso: string;
   bigText: string;
   bigTextSize: number;
   bigTextColor: string;
   bigTextAlign: string;
   bigTextVerticalAlign: string;
+}
+
+interface Graphic {
+  label: string;
+  svg: string;
 }
