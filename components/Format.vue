@@ -5,8 +5,9 @@ const model = defineModel() as unknown as FrameSize
 <template>
   <UDivider :label="$t('formatAndImage')" />
   <USelectMenu
-    :options="socialSizes"
     v-model="model"
+    :options="socialSizes"
+    selected-icon="i-ci-dot-03-m"
   >
     <UButton block >
       {{ model.label + ' (' + model.x + 'x' + model.y + ')' }}

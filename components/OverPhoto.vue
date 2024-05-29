@@ -6,8 +6,9 @@ const previewArea = ref<HTMLElement>()
 const textArea = ref<HTMLElement>()
 const { width: widthTextArea, height: heightTextArea } = useElementSize(textArea)
 const { height: heightPreviewArea } = useElementSize(previewArea)
-
 const isoRelativeSize = .005
+const bigTextFontFamily = props.settings?.bigTextFontFamily
+const bigTextFontWeight = props.settings?.bigTextFontWeight
 const textRelativeSize = .004
 const paddingRelativeSize = .05
 
@@ -89,3 +90,10 @@ const textPadding = computed(() => {
 
   </div>
 </template>
+
+<style scoped>
+.text-preview {
+  font-family: v-bind(bigTextFontFamily);
+  font-weight: v-bind(bigTextFontWeight);
+}
+</style>

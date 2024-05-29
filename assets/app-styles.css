@@ -1,12 +1,12 @@
 .app-font {
   font-family: "JetBrains Mono", sans-serif;
 }
+
+/* TEXT */
 .text-preview {
   white-space: pre-line;
   overflow-wrap: break-word;
-  font-family: "Jura";
   color: white;
-  font-weight: 700;
   text-shadow: 1px 1px 1px black;
 }
 

@@ -16,6 +16,8 @@ interface Settings {
   bigTextColor: string;
   bigTextAlign: string;
   bigTextVerticalAlign: string;
+  bigTextFontFamily: string;
+  bigTextFontWeight: string;
 }
 
 interface Graphic {

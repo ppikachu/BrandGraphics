@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const model = defineModel()
 const open = ref(false)
+const { t } = useI18n()
 
 const props = defineProps({
   base64 : { type: String },
@@ -10,7 +11,7 @@ const props = defineProps({
 })
 
 const filtros = [
-{ label: "Normal", class: "" },
+{ label: t("none"), class: "" },
 { label: "1977", class: "_1977" },
 { label: "Aden", class: "aden" },
 { label: "Brannan", class: "brannan" },
@@ -44,7 +45,7 @@ const filtros = [
   <UFormGroup :label="$t('filter')" size="xs">
     <UButton
       icon="i-ri-camera-lens-fill"
-      :label="filtros.find(f => f.class === model)?.label || 'None'"
+      :label="filtros.find(f => f.class === model)?.label || $t('none')"
       block
       @click="open = true"
     />

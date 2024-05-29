@@ -21,7 +21,6 @@ export const graphics: Graphic[] = [
   { label: "Behavior 3", svg: "i_behavior3" },
 ]
 
-
 export const defaultSettings: Settings = {
   frameSize: socialSizes[0],
   startbase64: testImage,
@@ -34,6 +33,8 @@ export const defaultSettings: Settings = {
   bigTextColor: "white",
   bigTextAlign: 'left',
   bigTextVerticalAlign: 'items-end',
+  bigTextFontFamily: 'Jura',
+  bigTextFontWeight: '700',
 }
 
 function setSize(x: number, y: number) {
