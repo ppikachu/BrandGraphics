@@ -22,12 +22,12 @@ export const graphics: Graphic[] = [
 ]
 
 export const defaultSettings: Settings = {
-  frameSize: socialSizes[0],
+  frameSize: socialSizes[1],
   startbase64: testImage,
   photoPosition: 33,
   bgFlip: false,
-  bgFilter: "nashville",
-  iso: graphics[0].svg,
+  bgFilter: "red_mult",
+  iso: graphics[6].svg,
   bigText: 'This is your Post image.\nGet it right!',
   bigTextSize: 20,
   bigTextColor: "white",
@@ -38,7 +38,7 @@ export const defaultSettings: Settings = {
 }
 
 export const extraFiltros = [
-  { label: "Red", class: "red_mult" },
+  { label: "Red *", class: "red_mult" },
   // { label: "xx2", class: "walden" },
   // { label: "xx3", class: "willow" },
 ]
