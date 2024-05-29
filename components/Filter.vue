@@ -10,7 +10,7 @@ const props = defineProps({
   flip: { type: Boolean, default: false },
 })
 
-const filtros = [
+const filtrosBase = [
 { label: t("none"), class: "" },
 { label: "1977", class: "_1977" },
 { label: "Aden", class: "aden" },
@@ -39,6 +39,8 @@ const filtros = [
 { label: "Willow", class: "willow" },
 { label: "X-pro II", class: "xpro2" }
 ]
+
+const filtros = extraFiltros.concat(filtrosBase)
 </script>
 
 <template>

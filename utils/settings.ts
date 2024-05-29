@@ -37,6 +37,12 @@ export const defaultSettings: Settings = {
   bigTextFontWeight: '700',
 }
 
+export const extraFiltros = [
+  { label: "Red", class: "red_mult" },
+  // { label: "xx2", class: "walden" },
+  // { label: "xx3", class: "willow" },
+]
+
 function setSize(x: number, y: number) {
   // localStorage.setItem('linkedin-local-storage', JSON.stringify( { "frameSize": { x: x, y: y }}))
   localStorage.setItem('linkedin-local-storage', "frameSize.x=" + x )
