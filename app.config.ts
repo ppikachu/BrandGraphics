@@ -23,12 +23,12 @@ export default defineAppConfig({
     },
     button: {
       default: {
-        size: 'xs',
+        size: 'xl',
         variant: 'soft',
       },
       padding: {
         lg: 'px-2 py-2',
-        xl: 'px-3.5 py-3.5',
+        xl: 'px-2 py-2',
       },
     }
   }
