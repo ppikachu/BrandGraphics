@@ -65,7 +65,7 @@ onMounted(() => {
         </section>
 
         <!-- CONFIG and EXPORT: -->
-        <section class="space-y-4 max-w-96 md:w-96">
+        <section class="space-y-4 min-w-full max-w-96 md:w-96 md:min-w-min px-2">
           <!-- SETTINGS: -->
           <Format v-model="settings.frameSize" />
           <div class="grid grid-cols-3 gap-4">
