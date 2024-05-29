@@ -30,7 +30,7 @@ function downloadFinalImage(area: HTMLElement, name: string): void {
   })
   .finally(() => {
     confetti({
-      colors: ['#93c5fd', '#3b82f6', '#1d4ed8', '#1e3a8a'],
+      colors: ['#fdba74', '#f97316', '#c2410c'],
       particleCount: 200,
       spread: 120,
       origin: { y: 0.7 }
