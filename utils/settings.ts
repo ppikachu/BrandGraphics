@@ -42,8 +42,3 @@ export const extraFiltros = [
   // { label: "xx2", class: "walden" },
   // { label: "xx3", class: "willow" },
 ]
-
-function setSize(x: number, y: number) {
-  // localStorage.setItem('linkedin-local-storage', JSON.stringify( { "frameSize": { x: x, y: y }}))
-  localStorage.setItem('linkedin-local-storage', "frameSize.x=" + x )
-}

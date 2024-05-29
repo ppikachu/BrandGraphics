@@ -90,10 +90,3 @@ const textPadding = computed(() => {
 
   </div>
 </template>
-
-<style scoped>
-.text-preview {
-  font-family: v-bind(bigTextFontFamily);
-  font-weight: v-bind(bigTextFontWeight);
-}
-</style>

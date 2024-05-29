@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import '~/assets/app-styles.css'
+import '~/assets/user.css'
 import '~/assets/extra-filters.css'
 import { toJpeg } from 'html-to-image'
 //@ts-ignore
