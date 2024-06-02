@@ -39,6 +39,8 @@ export const defaultSettings: Settings = {
 
 export const extraFiltros = [
   { label: "Red *", class: "red_mult" },
+  { label: "Green *", class: "green_mult" },
+  { label: "Blue *", class: "blue_mult" },
   // { label: "xx2", class: "walden" },
   // { label: "xx3", class: "willow" },
 ]

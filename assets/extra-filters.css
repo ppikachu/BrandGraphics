@@ -1,20 +1,23 @@
-/*
- * 1977
- *
- */
+/* Extra Filters */
 
-.red_mult {
+.red_mult,
+.green_mult,
+.blue_mult {
   position: relative;
   /* -webkit-filter: contrast(1.1) brightness(1.1) saturate(1.3); */
   /* filter: contrast(1.1) brightness(1.1) saturate(1.3); */
 }
 
-.red_mult img {
+.red_mult img,
+.green_mult img,
+.blue_mult img {
   width: 100%;
   z-index: 1;
 }
 
-.red_mult:before {
+.red_mult::before,
+.green_mult::before,
+.blue_mult::before {
   content: "";
   display: block;
   height: 100%;
@@ -26,7 +29,9 @@
   z-index: 2;
 }
 
-.red_mult:after {
+.red_mult::after,
+.green_mult::after,
+.blue_mult::after {
   content: "";
   display: block;
   height: 100%;
@@ -38,7 +43,17 @@
   z-index: 3;
 }
 
-.red_mult:after {
+.red_mult::after {
   background: #ff0000;
+  mix-blend-mode: multiply;
+}
+
+.green_mult::after {
+  background: #00ff00;
+  mix-blend-mode: multiply;
+}
+
+.blue_mult::after {
+  background: #0000ff;
   mix-blend-mode: multiply;
 }
