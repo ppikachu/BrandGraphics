@@ -29,6 +29,9 @@ importers:
       vue:
         specifier: ^3.4.27
         version: 3.4.27
+      vue-lite-youtube-embed:
+        specifier: ^1.2.4
+        version: 1.2.4(vue@3.4.27)
       vue-router:
         specifier: ^4.3.2
         version: 4.3.2(vue@3.4.27)
@@ -5001,6 +5004,15 @@ packages:
     engines: {node: '>= 16'}
     peerDependencies:
       vue: ^3.0.0
+
+  vue-lite-youtube-embed@1.2.4:
+    resolution: {integrity: sha512-wbhT1y9qw5djFdUb2pVUhbqdB4FXGO8UIXUsOG6UtH/85HeO7SbixuqyvQ1l0mnmnnNi0YXAYoG10staLIG9cQ==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      vue: ^2.6.14 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
 
   vue-observe-visibility@2.0.0-alpha.1:
     resolution: {integrity: sha512-flFbp/gs9pZniXR6fans8smv1kDScJ8RS7rEpMjhVabiKeq7Qz3D9+eGsypncjfIyyU84saU88XZ0zjbD6Gq/g==}
@@ -11174,6 +11186,11 @@ snapshots:
       '@intlify/shared': 9.13.1
       '@vue/devtools-api': 6.6.2
       vue: 3.4.27
+
+  vue-lite-youtube-embed@1.2.4(vue@3.4.27):
+    dependencies:
+      vue: 3.4.27
+      vue-demi: 0.14.8(vue@3.4.27)
 
   vue-observe-visibility@2.0.0-alpha.1(vue@3.4.27):
     dependencies:

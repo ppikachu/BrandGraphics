@@ -17,6 +17,7 @@
     "html-to-image": "^1.11.11",
     "nuxt-icons": "^3.2.1",
     "vue": "^3.4.27",
+    "vue-lite-youtube-embed": "^1.2.4",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {

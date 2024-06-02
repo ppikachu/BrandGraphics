@@ -36,6 +36,11 @@ export default defineI18nConfig(() => ({
         title: 'How it works',
         content: '<ol><li>Drag an image to the photo area (desktop) or click on it (mobile and desktop) to choose an image*.</li><li>Choose the format according to what you need. Change the text and adjust the parameters.</li><li>When you are satisfied, click "Download".</li></ol>',
       },
+      demo: {
+        title: 'Demo',
+        slot: 'demo',
+      },
+      missing_video_id: 'Video ID is missing!',
       reset_to_default: 'Reset to default',
       disclosure: 'This tool works with images stored on your device. They are not uploaded to a server to be processed',
       text_warning: 'Text exceeds preview area. Shorten text or reduce font size.',
@@ -74,6 +79,11 @@ export default defineI18nConfig(() => ({
         title: 'Como funciona',
         content: '<ol><li>Arrastra una imagen sobre la vista previa (desktop) o clickeala (en móviles y desktop) para elegir una imagen*.</li><li>Elige el formato que necesitas. Cambia el texto y ajusta los parámetros hasta que estés conforme con lo que ves en la vista previa.</li><li>Cuando estés conforme, dale clic a "Descargar".</li></ol>',
       },
+      demo: {
+        title: 'Demo',
+        slot: 'demo',
+      },
+      missing_video_id: 'Falta el ID del video!',
       reset_to_default: 'Resetear a los valores por defecto',
       disclosure: 'Este herramienta funciona con imagenes en tu dispositivo. No se suben a un servidor para ser procesadas',
       text_warning: 'Texto excede el area de vista previa. Recorta el texto o disminuye el tamaño de la fuente.',
