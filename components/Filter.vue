@@ -49,6 +49,7 @@ const filtros = extraFiltros.concat(filtrosBase)
       icon="i-ri-camera-lens-fill"
       :label="filtros.find(f => f.class === model)?.label || $t('none')"
       block
+      class="truncate"
       @click="open = true"
     />
     <UModal v-model="open" :ui="{ width: 'sm:max-w-4xl' }" >

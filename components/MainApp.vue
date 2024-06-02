@@ -68,10 +68,12 @@ onMounted(() => {
         <section class="space-y-4 min-w-full max-w-96 md:w-96 md:min-w-min px-2">
           <!-- SETTINGS: -->
           <Format v-model="settings.frameSize" />
-          <div class="grid grid-cols-3 gap-4">
-            <BgFlip v-model="settings.bgFlip" />
-            <PhotoPosition v-model="settings.photoPosition" />
-            <Filter v-model="settings.bgFilter" :base64="settings.startbase64" :position="settings.photoPosition" :frameSize="settings.frameSize" :flip="settings.bgFlip" />
+          <div class="grid grid-cols-5 gap-3">
+            <BgFlip v-model="settings.bgFlip" class="col-span-1" />
+            <div class="col-span-2">
+              <PhotoPosition v-model="settings.photoPosition" />
+            </div>
+            <Filter v-model="settings.bgFilter" :base64="settings.startbase64" :position="settings.photoPosition" :frameSize="settings.frameSize" :flip="settings.bgFlip" class="col-span-2" />
           </div>
           <!-- TEXT -->
           <UDivider :label="$t('editText')" />
