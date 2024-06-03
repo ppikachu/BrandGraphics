@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-const ismobile = useDevice()
 const { t } = useI18n()
 const isOpen = ref(false)
 
@@ -62,8 +61,7 @@ async function resetSettings() {
 
             <template #reset>
               <div class="text-sm prose dark:prose-invert">
-                <p>{{ $t('reset_to_default') }}</p>
-                <UButton icon="i-mdi-refresh" label="Reset" @click="resetSettings" :block="ismobile.isMobileOrTablet" />
+                <UButton icon="i-mdi-refresh" color="red" label="Reset" block @click="resetSettings" />
               </div>
             </template>
 
