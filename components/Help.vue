@@ -57,7 +57,7 @@ async function resetSettings() {
             </template>
 
             <template #demo>
-              <Youtube video="zAnzWcARGlc" />
+              <Youtube video="9efS0N2X5Kc" />
             </template>
 
             <template #reset>
