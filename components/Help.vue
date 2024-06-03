@@ -42,7 +42,7 @@ async function resetSettings() {
 
 <template>
   <div>
-    <UButton icon="i-heroicons-question-mark-circle-16-solid" color="gray" variant="link" size="lg" @click="isOpen = true"/>
+    <UButton icon="i-heroicons-question-mark-circle-16-solid" :label="$t('help')" color="gray" variant="link" size="lg" @click="isOpen = true"/>
     <UModal v-model="isOpen" :ui="{ container: 'items-center sm:items-center' }" >
       <UCard>
         <section class="app-font">
