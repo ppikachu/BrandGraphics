@@ -1,6 +1,6 @@
 //@ts-ignore
 import testImage from '@/assets/test.jpg'
-
+import { useStorage } from '@vueuse/core'
 export const socialSizes: FrameSize[] = [
   { label: "Linkedin Square Post",         x: 1080, y: 1080 },
   { label: "Linkedin Article",             x: 1920, y: 1080 },
@@ -21,7 +21,7 @@ export const graphics: Graphic[] = [
   { label: "Behavior 3", svg: "i_behavior3" },
 ]
 
-export const defaultSettings: Settings = {
+const defaultSettings: Settings = {
   frameSize: socialSizes[1],
   startbase64: testImage,
   photoPosition: 33,
@@ -36,6 +36,22 @@ export const defaultSettings: Settings = {
   bigTextFontFamily: 'Jura',
   bigTextFontWeight: '700',
 }
+/**
+ * Retrieves settings from local storage or uses default settings.
+ * @param defaultSettings - The default settings if no data is found in local storage.
+ * @returns The settings object retrieved from local storage or default settings.
+ */
+export const settings: Settings = useStorage('linkedin-local-storage', defaultSettings).value
+
+export const heightTextArea = ref(10)
+
+export const defaultPresets = [
+  {
+    name: "preset 1",
+    preset: defaultSettings,
+  },
+]
+export const settingsPresets = useStorage('linkedin-local-storage-presets', defaultPresets)
 
 export const extraFiltros = [
   { label: "Red *", class: "red_mult" },

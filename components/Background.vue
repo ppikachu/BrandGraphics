@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-const props = defineProps({ settings: Object })
-const model = defineModel()
 const ismobile = useDevice()
 const file = shallowRef()
 const filename = ref('test')
@@ -12,7 +10,7 @@ const { isOverDropZone } = useDropZone(dropZoneRef, { onDrop, dataTypes: ['image
  * Reset the photo position to the center.
  */
 function resetPhoto() {
-  props.settings!.photoPosition = 50
+  settings!.photoPosition = 50
 }
 
 /**
@@ -23,7 +21,7 @@ function resetPhoto() {
  */
 function onFileInput(e: Event): void {
   const { base64: fileBase64 } = useBase64((e.target as HTMLInputElement).files![0])
-  props.settings!.startbase64 = fileBase64 as unknown as string
+  settings!.startbase64 = fileBase64 as unknown as string
   resetPhoto()
 }
 
@@ -38,7 +36,7 @@ function onDrop(files: File[] | null): void {
     file.value = files[0]
     filename.value = file.value.name
     const { base64: fileBase64 } = useBase64(files[0] )
-    props.settings!.startbase64 = fileBase64 as unknown as string
+    settings!.startbase64 = fileBase64 as unknown as string
     resetPhoto()
   }
 }
@@ -53,12 +51,12 @@ function close() {
     <!-- BIG PREVIEW -->
     <UModal v-if="!ismobile.isMobileOrTablet" v-model="isOpen" :ui="{ container: 'items-center', width: 'w-full sm:max-w-2xl', padding: 'p-4 sm:px-32', }">
       <UButton class="absolute top-2 right-2 z-10" @click="isOpen = false" icon="i-mdi-close" :label="$t('close')" variant="soft"/>
-      <OverPhoto :settings="settings" @close="close"/>
+      <OverPhoto @close="close"/>
     </UModal>
 
     <div class="mx-auto max-w-96 relative group">
       <UButton v-if="!ismobile.isMobileOrTablet" class="absolute invisible group-hover:visible group/preview top-2 right-2 z-10" @click="isOpen = true" icon="i-mdi-eye" variant="soft" :label="$t('preview')"/>
-      <OverPhoto :settings="settings" v-model="model"/>
+      <OverPhoto />
       <!-- INPUT IMAGE -->
       <div class="absolute top-0 left-0 w-full h-full">
         <input id="image_uploads"

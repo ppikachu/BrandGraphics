@@ -6,24 +6,22 @@ import { toJpeg } from 'html-to-image'
 //@ts-ignore
 import confetti from 'canvas-confetti'
 
-/**
- * Retrieves settings from local storage or uses default settings.
- * @param defaultSettings - The default settings if no data is found in local storage.
- * @returns The settings object retrieved from local storage or default settings.
- */
-const settings = useStorageAsync('linkedin-local-storage', defaultSettings)
-
 const loaded = ref(false)
 const captureArea = ref<HTMLElement>()
 const filename = ref('test')
-const canDownload = ref(true)
+// const canDownload = ref(true)
 const downloading = ref(false)
 // const debug = process.env.NODE_ENV === "development" ? true : false
 const debug = false
+const { height: heightPreviewArea } = useElementSize(captureArea)
+
+const canDownload = computed(() => {
+  return heightTextArea.value < heightPreviewArea.value
+})
 
 function downloadFinalImage(area: HTMLElement, name: string): void {
   downloading.value = true
-  if (!debug) toJpeg(area, { quality: 0.95, pixelRatio: settings.value.frameSize.x / 384 })
+  if (!debug) toJpeg(area, { quality: 0.95, pixelRatio: settings.frameSize.x / 384 })
   .then(function (dataUrl) {
     var link = document.createElement('a')
     link.download = name
@@ -60,8 +58,10 @@ onMounted(() => {
         <section id="preview">
           <!-- <UDivider :label="$t('preview')" class="mb-4" /> -->
           <div ref="captureArea">
-            <Background :settings="settings" v-model="canDownload" />
-          </div>
+            <ClientOnly>
+              <Background />
+            </ClientOnly>
+            </div>
         </section>
 
         <!-- CONFIG and EXPORT: -->
@@ -90,7 +90,8 @@ onMounted(() => {
           <UDivider :label="$t('getImage')" />
           <UButton
             :label="canDownload ? $t('download') : $t('fix_before_download')"
-            :loading="downloading" :disabled="!canDownload"
+            :loading="downloading"
+            :disabled="!canDownload"
             icon="i-heroicons-arrow-down-on-square-16-solid"
             size="xl" block class="uppercase"
             @click="captureArea && downloadFinalImage(captureArea, filename + ' ' + settings.frameSize.x + 'x' + settings.frameSize.y)"
