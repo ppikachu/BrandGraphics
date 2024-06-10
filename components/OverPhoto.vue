@@ -1,23 +1,23 @@
 <script lang="ts" setup>
 import '~/assets/cssgram.min.css'
-const props = defineProps({ settings: Object })
-const model = defineModel()
 const previewArea = ref<HTMLElement>()
 const textArea = ref<HTMLElement>()
-const { width: widthTextArea, height: heightTextArea } = useElementSize(textArea)
+const { width: widthTextArea, height: heightText } = useElementSize(textArea)
 const { height: heightPreviewArea } = useElementSize(previewArea)
 const isoRelativeSize = .005
-const bigTextFontFamily = props.settings?.bigTextFontFamily
-const bigTextFontWeight = props.settings?.bigTextFontWeight
 const textRelativeSize = .004
 const paddingRelativeSize = .05
 
 const isoSize = computed(() => {
-  const size = props.settings?.bigTextSize * widthTextArea.value * isoRelativeSize
+  const size = settings.bigTextSize * widthTextArea.value * isoRelativeSize
   return 'width: ' + size + 'px; height: ' + size + 'px;'
 })
+
+const padding = computed(() => {
+  return 'padding: ' + widthTextArea.value * paddingRelativeSize + 'px;'
+})
 const isoAlign = computed(() => {
-  switch (props.settings?.bigTextAlign) {
+  switch (settings.bigTextAlign) {
     case 'left':
       return 'self-start'
     case 'center':
@@ -26,53 +26,57 @@ const isoAlign = computed(() => {
       return 'self-end'
   }
 })
-function textSize() {
-  return props.settings?.bigTextSize * widthTextArea.value * textRelativeSize + 'px'
-}
+const textSize = computed(() => {
+  return settings.bigTextSize * widthTextArea.value * textRelativeSize + 'px'
+})
+/**
+ * Checks if the height of the text area exceeds the height of the preview area.
+ * If it does, it updates the height of the text area and returns true. Otherwise, it returns false.
+ * @return {boolean} Whether the height of the text area exceeds the height of the preview area.
+ */
 const overflownText = computed(() => {
-  const overHeight = heightTextArea.value > heightPreviewArea.value
-  model.value = !overHeight
+  // Check if the height of the text area exceeds the height of the preview area
+  const overHeight = heightText.value > heightPreviewArea.value
+  // If the height of the text area exceeds the preview area, update the height of the text area and return true
+  heightTextArea.value = heightText.value
   return overHeight
 })
-const padding = computed(() => {
-  return 'padding: ' + widthTextArea.value * paddingRelativeSize + 'px;'
-})
 const textPadding = computed(() => {
-  if (props.settings?.bigTextAlign === 'left') return 'padding-right: ' + widthTextArea.value * paddingRelativeSize + 'px;'
-  if (props.settings?.bigTextAlign === 'right') return 'padding-left: ' + widthTextArea.value * paddingRelativeSize + 'px;'
+  if (settings.bigTextAlign === 'left') return 'padding-right: ' + widthTextArea.value * paddingRelativeSize + 'px;'
+  if (settings.bigTextAlign === 'right') return 'padding-left: ' + widthTextArea.value * paddingRelativeSize + 'px;'
 })
 </script>
 
 <template>
   <div ref="previewArea" class="relative overflow-hidden border-b-2 border-dashed" :class="overflownText ? 'border-yellow-500' : 'border-white dark:border-gray-950'">
-    <div :class="settings?.bgFilter" class="transition-all" :style="`transform: ${settings?.bgFlip ? 'scaleX(-1)' : 'scaleX(1)'};`">
+    <div :class="settings.bgFilter" class="transition-all" :style="`transform: ${settings.bgFlip ? 'scaleX(-1)' : 'scaleX(1)'};`">
       <img
-        :src="settings?.startbase64"
+        :src="settings.startbase64"
         alt="fondo-pieza"
         class="object-cover transition-all"
         :style="`
-          aspect-ratio: ${settings?.frameSize.x} / ${settings?.frameSize.y};
-          object-position: ${settings?.photoPosition}% ${settings?.photoPosition}%;
+          aspect-ratio: ${settings.frameSize.x} / ${settings.frameSize.y};
+          object-position: ${settings.photoPosition}% ${settings.photoPosition}%;
         `"
       >
     </div>
     <!-- OVER IMAGE -->
-    <div ref="textArea" :class="settings?.bigTextVerticalAlign" class="absolute top-0 flex w-full min-h-full transition">
+    <div ref="textArea" :class="settings.bigTextVerticalAlign" class="absolute top-0 flex w-full min-h-full transition">
       <div class="flex flex-col gap-2 w-full" :style="padding">
         <!-- ISO -->
-        <div v-if="settings?.iso" :style="isoSize" :class="isoAlign">
-          <nuxt-icon :name="settings?.iso" filled class="shadow" />
+        <div v-if="settings.iso !== ''" :style="isoSize" :class="isoAlign">
+          <nuxt-icon :name="settings.iso" filled class="shadow" />
         </div>
         <!-- BIG TEXT -->
         <div class="text-preview" :class=textPadding
           :style="`
-            font-size: ${textSize()};
-            line-height: ${textSize()};
-            text-align: ${settings?.bigTextAlign};
+            font-size: ${textSize};
+            line-height: ${textSize};
+            text-align: ${settings.bigTextAlign};
             ${textPadding};
           `"
         >
-          {{ settings?.bigText }}
+          {{ settings.bigText }}
         </div>
       </div>
     </div>
