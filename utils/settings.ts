@@ -51,7 +51,7 @@ export const defaultPresets = [
     preset: defaultSettings,
   },
 ]
-export const settingsPresets = useStorage('linkedin-local-storage-presets', defaultPresets)
+export const settingsPresets = useStorage('linkedin-local-storage-presets', defaultPresets).value
 
 export const extraFiltros = [
   { label: "Red *", class: "red_mult" },

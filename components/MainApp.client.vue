@@ -8,12 +8,11 @@ import confetti from 'canvas-confetti'
 
 const loaded = ref(false)
 const captureArea = ref<HTMLElement>()
+const { height: heightPreviewArea } = useElementSize(captureArea)
 const filename = ref('test')
-// const canDownload = ref(true)
 const downloading = ref(false)
 // const debug = process.env.NODE_ENV === "development" ? true : false
 const debug = false
-const { height: heightPreviewArea } = useElementSize(captureArea)
 
 const canDownload = computed(() => {
   return heightTextArea.value < heightPreviewArea.value

@@ -52,7 +52,5 @@ useHead({
 
 <template>
   <!-- <VitePwaManifest /> -->
-  <ClientOnly>
-    <MainApp />
-  </ClientOnly>
+  <MainApp />
 </template>
