@@ -9,21 +9,33 @@ import confetti from 'canvas-confetti'
 const loaded = ref(false)
 const captureArea = ref<HTMLElement>()
 const { height: heightPreviewArea } = useElementSize(captureArea)
+const heightText = ref(heightTextArea.value)
 const filename = ref('test')
 const downloading = ref(false)
 // const debug = process.env.NODE_ENV === "development" ? true : false
 const debug = false
 
 const canDownload = computed(() => {
-  return heightTextArea.value < heightPreviewArea.value
+  return heightTextArea.value > heightPreviewArea.value
 })
 
-function downloadFinalImage(area: HTMLElement, name: string): void {
+const socialSize = computed(() => {
+  return {
+    x: socialSizes.find((f: FrameSize) => f.id === settings.frameSize)?.x,
+    y: socialSizes.find((f: FrameSize) => f.id === settings.frameSize)?.y
+  }
+})
+
+const filenameSuffix = computed(() => {
+  return socialSize.value.x + 'x' + socialSize.value.y
+})
+
+function downloadFinalImage() {
   downloading.value = true
-  if (!debug) toJpeg(area, { quality: 0.95, pixelRatio: settings.frameSize.x / 384 })
+  if (!debug && socialSize.value.x) toJpeg(captureArea.value as HTMLElement, { quality: 0.9, pixelRatio: socialSize.value.x / 384 })
   .then(function (dataUrl) {
     var link = document.createElement('a')
-    link.download = name
+    link.download = filename.value + '_' + filenameSuffix.value
     link.href = dataUrl
     link.click()
   })
@@ -66,7 +78,7 @@ onMounted(() => {
         <!-- CONFIG and EXPORT: -->
         <section class="space-y-4 min-w-full max-w-96 md:w-96 md:min-w-min px-2">
           <!-- SETTINGS: -->
-          <Format v-model="settings.frameSize" />
+          <Format />
           <div class="grid grid-cols-5 gap-3">
             <BgFlip v-model="settings.bgFlip" class="col-span-1" />
             <div class="col-span-2">
@@ -88,12 +100,12 @@ onMounted(() => {
           <!-- DOWNLOAD: -->
           <UDivider :label="$t('getImage')" />
           <UButton
-            :label="canDownload ? $t('download') : $t('fix_before_download')"
+            :label="canDownload ? $t('fix_before_download') : $t('download')"
             :loading="downloading"
-            :disabled="!canDownload"
+            :disabled="canDownload"
             icon="i-heroicons-arrow-down-on-square-16-solid"
             size="xl" block class="uppercase"
-            @click="captureArea && downloadFinalImage(captureArea, filename + ' ' + settings.frameSize.x + 'x' + settings.frameSize.y)"
+            @click="captureArea && downloadFinalImage()"
           />
 
           <!-- <UAlert v-show="$pwa?.needRefresh" icon="i-mdi-alert-circle" color="yellow">

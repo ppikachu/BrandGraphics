@@ -8,6 +8,10 @@ const isoRelativeSize = .005
 const textRelativeSize = .004
 const paddingRelativeSize = .05
 
+const aspectRatio = computed(() => {
+  return socialSizes.find((f: FrameSize) => f.id === settings.frameSize)?.x + '/' + socialSizes.find((f: FrameSize) => f.id === settings.frameSize)?.y
+})
+
 const isoSize = computed(() => {
   const size = settings.bigTextSize * widthTextArea.value * isoRelativeSize
   return 'width: ' + size + 'px; height: ' + size + 'px;'
@@ -48,14 +52,14 @@ const textPadding = computed(() => {
 </script>
 
 <template>
-  <div ref="previewArea" class="relative overflow-hidden border-b-2 border-dashed" :class="overflownText ? 'border-yellow-500' : 'border-white dark:border-gray-950'">
+  <div ref="previewArea" class="relative overflow-hidden" :class="overflownText ? 'border-yellow-500 border-b-2 border-dashed' : 'border-white dark:border-gray-950'">
     <div :class="settings.bgFilter" class="transition-all" :style="`transform: ${settings.bgFlip ? 'scaleX(-1)' : 'scaleX(1)'};`">
       <img
         :src="settings.startbase64"
         alt="fondo-pieza"
         class="object-cover transition-all"
         :style="`
-          aspect-ratio: ${settings.frameSize.x} / ${settings.frameSize.y};
+          aspect-ratio: ${aspectRatio};
           object-position: ${settings.photoPosition}% ${settings.photoPosition}%;
         `"
       >
@@ -64,8 +68,8 @@ const textPadding = computed(() => {
     <div ref="textArea" :class="settings.bigTextVerticalAlign" class="absolute top-0 flex w-full min-h-full transition">
       <div class="flex flex-col gap-2 w-full" :style="padding">
         <!-- ISO -->
-        <div v-if="settings.iso !== ''" :style="isoSize" :class="isoAlign">
-          <nuxt-icon :name="settings.iso" filled class="shadow" />
+        <div v-if="settings.iso !== 1" :style="isoSize" :class="isoAlign">
+          <nuxt-icon :name="graphics.find((f: Graphic) => f.id === settings.iso)?.svg" filled class="shadow" />
         </div>
         <!-- BIG TEXT -->
         <div class="text-preview" :class=textPadding

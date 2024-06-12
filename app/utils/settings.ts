@@ -2,32 +2,32 @@
 import testImage from '@/assets/test.jpg'
 import { useStorage } from '@vueuse/core'
 export const socialSizes: FrameSize[] = [
-  { label: "Linkedin Square Post",         x: 1080, y: 1080 },
-  { label: "Linkedin Article",             x: 1920, y: 1080 },
-  { label: "Facebook Business Page Cover", x: 1200, y:  674 },
-  { label: "Facebook Story",               x: 1080, y: 1920 },
+  { id: 1, label: "Linkedin Square Post",         x: 1080, y: 1080 },
+  { id: 2, label: "Linkedin Article",             x: 1920, y: 1080 },
+  { id: 3, label: "Facebook Business Page Cover", x: 1200, y:  674 },
+  { id: 4, label: "Facebook Story",               x: 1080, y: 1920 },
 ]
 
 export const graphics: Graphic[] = [
-  { label: "None",       svg: ""            },
-  { label: "Words 1",    svg: "i_words1"    },
-  { label: "Words 2",    svg: "i_words2"    },
-  { label: "Words 3",    svg: "i_words3"    },
-  { label: "Emotions 1", svg: "i_emotions1" },
-  { label: "Emotions 2", svg: "i_emotions2" },
-  { label: "Emotions 3", svg: "i_emotions3" },
-  { label: "Behavior 1", svg: "i_behavior1" },
-  { label: "Behavior 2", svg: "i_behavior2" },
-  { label: "Behavior 3", svg: "i_behavior3" },
+  { id:  1, label: "None",       svg: ""            },
+  { id:  2, label: "Words 1",    svg: "i_words1"    },
+  { id:  3, label: "Words 2",    svg: "i_words2"    },
+  { id:  4, label: "Words 3",    svg: "i_words3"    },
+  { id:  5, label: "Emotions 1", svg: "i_emotions1" },
+  { id:  6, label: "Emotions 2", svg: "i_emotions2" },
+  { id:  7, label: "Emotions 3", svg: "i_emotions3" },
+  { id:  8, label: "Behavior 1", svg: "i_behavior1" },
+  { id:  9, label: "Behavior 2", svg: "i_behavior2" },
+  { id: 10, label: "Behavior 3", svg: "i_behavior3" },
 ]
 
 const defaultSettings: Settings = {
-  frameSize: socialSizes[1],
+  frameSize: socialSizes[1]?.id,
   startbase64: testImage,
   photoPosition: 33,
   bgFlip: false,
   bgFilter: "red_mult",
-  iso: graphics[6].svg,
+  iso: graphics[6]?.id,
   bigText: 'This is your Post image.\nGet it right!',
   bigTextSize: 20,
   bigTextColor: "white",

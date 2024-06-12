@@ -11,7 +11,7 @@ const shadow = defineModel('shadow')
 <template>
   <section class="space-y-2">
     <div class="grid grid-cols-2 gap-4">
-      <IsoChooser v-model="iso" />
+      <IsoChooser />
       <TextSize v-model="size" />
     </div>
     <div class="grid grid-cols-2 gap-4">
