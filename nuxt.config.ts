@@ -1,5 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  future: {
+    compatibilityVersion: 4,
+  },
+  debug: true,
   devtools: { enabled: true },
   colorMode: {
     preference: 'dark'
