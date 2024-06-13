@@ -22,6 +22,7 @@ export default defineI18nConfig(() => ({
       getImage: '3. Get Image',
       download: 'Download',
       help: 'Help',
+      reset_explanation: 'If you want to start over or fix an issue with the app, click the reset button below to start from scratch. Your current settings will be lost!',
       fix_before_download: 'Fix before download',
       description: 'Introducing BrandGraphics, your go-to app for creating professional social media posts effortlessly.',
       key_features: {
@@ -65,6 +66,7 @@ export default defineI18nConfig(() => ({
       getImage: '3. Obtener imagen',
       download: 'Descargar',
       help: 'Ayuda',
+      reset_explanation: 'Si quieres comenzar de nuevo o arreglar un error con la aplicación, haz clic en el botón de reset para comenzar de cero. Tus ajustes actuales se perderán!',
       fix_before_download: 'Arregla error para descargar',
       description: 'BrandGraphics, la aplicación ideal para crear publicaciones en redes sociales de forma eficiente.',
       key_features: {

@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-const model: any = defineModel()
 const sizes = [
   { size: 12, label: 'sm'},
   { size: 20, label: 'md'},
@@ -15,8 +14,8 @@ const sizes = [
         v-for="s in sizes"
         block
         :label="s.label"
-        @click="model = s.size"
-        :class="model === s.size ? 'opacity-100' : 'opacity-50'"
+        @click="settings.bigTextSize = s.size"
+        :class="settings.bigTextSize === s.size ? 'opacity-100' : 'opacity-50'"
       />
     </UButtonGroup>
   </UFormGroup>

@@ -45,9 +45,9 @@ async function resetSettings() {
     <UModal v-model="isOpen" :ui="{ container: 'items-center sm:items-center' }" >
       <UCard>
         <section class="app-font">
-          <h3 class="text-center text-primary mb-4 text-xl">{{ $t('help') }}</h3>
+          <h3 class="text-center text-primary mt-1 sm:mt-2 mb-6 uppercase text-xl">{{ $t('help') }}</h3>
           <p class="prose dark:prose-invert mb-4">{{ $t('description') }}</p>
-          <UButton icon="i-mdi-close" @click="isOpen = false" class="mb-8 absolute top-2 sm:top-4 right-2 sm:right-4"/>
+          <UButton icon="i-mdi-close" @click="isOpen = false" class="absolute top-4 sm:top-6 right-4 sm:right-6"/>
 
           <UAccordion :items="items" size="lg">
 
@@ -61,6 +61,7 @@ async function resetSettings() {
 
             <template #reset>
               <div class="text-sm prose dark:prose-invert">
+                <p>{{ $t('reset_explanation') }}</p>
                 <UButton icon="i-mdi-refresh" color="red" label="Reset" block @click="resetSettings" />
               </div>
             </template>

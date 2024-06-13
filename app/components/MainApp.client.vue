@@ -9,7 +9,6 @@ import confetti from 'canvas-confetti'
 const loaded = ref(false)
 const captureArea = ref<HTMLElement>()
 const { height: heightPreviewArea } = useElementSize(captureArea)
-const heightText = ref(heightTextArea.value)
 const filename = ref('test')
 const downloading = ref(false)
 // const debug = process.env.NODE_ENV === "development" ? true : false
@@ -26,16 +25,12 @@ const socialSize = computed(() => {
   }
 })
 
-const filenameSuffix = computed(() => {
-  return socialSize.value.x + 'x' + socialSize.value.y
-})
-
 function downloadFinalImage() {
   downloading.value = true
   if (!debug && socialSize.value.x) toJpeg(captureArea.value as HTMLElement, { quality: 0.9, pixelRatio: socialSize.value.x / 384 })
   .then(function (dataUrl) {
     var link = document.createElement('a')
-    link.download = filename.value + '_' + filenameSuffix.value
+    link.download = filename.value + '_' + socialSize.value.x + 'x' + socialSize.value.y
     link.href = dataUrl
     link.click()
   })
@@ -69,10 +64,8 @@ onMounted(() => {
         <section id="preview">
           <!-- <UDivider :label="$t('preview')" class="mb-4" /> -->
           <div ref="captureArea">
-            <ClientOnly>
-              <Background />
-            </ClientOnly>
-            </div>
+            <Background />
+          </div>
         </section>
 
         <!-- CONFIG and EXPORT: -->
@@ -80,21 +73,16 @@ onMounted(() => {
           <!-- SETTINGS: -->
           <Format />
           <div class="grid grid-cols-5 gap-3">
-            <BgFlip v-model="settings.bgFlip" class="col-span-1" />
+            <BgFlip class="col-span-1" />
             <div class="col-span-2">
-              <PhotoPosition v-model="settings.photoPosition" />
+              <PhotoPosition />
             </div>
             <Filter v-model="settings.bgFilter" :base64="settings.startbase64" :position="settings.photoPosition" :frameSize="settings.frameSize" :flip="settings.bgFlip" class="col-span-2" />
           </div>
           <!-- TEXT -->
           <UDivider :label="$t('editText')" />
           <UTextarea v-model="settings.bigText" autoresize size="xl" />
-          <TextFormat
-            v-model:size="settings.bigTextSize"
-            v-model:align="settings.bigTextAlign"
-            v-model:valign="settings.bigTextVerticalAlign"
-            v-model:iso="settings.iso"
-          />
+          <TextFormat />
           <!-- END SETTINGS: -->
 
           <!-- DOWNLOAD: -->

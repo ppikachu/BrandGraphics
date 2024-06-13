@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-const model = defineModel()
 const open = ref(false)
 const { t } = useI18n()
 
@@ -40,10 +39,11 @@ const filtrosBase = [
   { label: "X-pro II", class: "xpro2" }
 ]
 
+// Merge custom filters with the base filters
 const filtros = extraFiltros.concat(filtrosBase)
 
 const aspectRatio = computed(() => {
-  return socialSizes.find((f: FrameSize) => f.id === settings.frameSize)?.x + '/' + socialSizes.find((f: FrameSize) => f.id === settings.frameSize)?.y
+  return format.value?.x + '/' + format.value?.y
 })
 </script>
 
@@ -51,7 +51,7 @@ const aspectRatio = computed(() => {
   <UFormGroup :label="$t('filter')" size="xs">
     <UButton
       icon="i-ri-camera-lens-fill"
-      :label="filtros.find((f: Filtro) => f.class === model)?.label || $t('none')"
+      :label="filtros.find((f: Filtro) => f.class === settings.bgFilter)?.label || $t('none')"
       block
       class="truncate"
       @click="open = true"
@@ -65,8 +65,8 @@ const aspectRatio = computed(() => {
           <UButton
             v-for="f, i in filtros"
             :key="i"
-            :color="model === filtros[i].class ? 'primary' : 'black'"
-            @click="model = filtros[i].class, open = false"
+            :color="settings.bgFilter === filtros[i]?.class ? 'primary' : 'black'"
+            @click="settings.bgFilter = filtros[i]?.class || '', open = false"
             :ui="{ inline: 'flex flex-col gap-2', padding: { xs: 'px-0 pt-0 pb-0.5' } }"
           >
             <figure :class="f.class" class="rounded overflow-hidden w-full">

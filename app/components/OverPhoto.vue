@@ -12,13 +12,13 @@ const aspectRatio = computed(() => {
   return socialSizes.find((f: FrameSize) => f.id === settings.frameSize)?.x + '/' + socialSizes.find((f: FrameSize) => f.id === settings.frameSize)?.y
 })
 
+const padding = computed(() => {
+  return 'padding: ' + widthTextArea.value * paddingRelativeSize + 'px;'
+})
+
 const isoSize = computed(() => {
   const size = settings.bigTextSize * widthTextArea.value * isoRelativeSize
   return 'width: ' + size + 'px; height: ' + size + 'px;'
-})
-
-const padding = computed(() => {
-  return 'padding: ' + widthTextArea.value * paddingRelativeSize + 'px;'
 })
 const isoAlign = computed(() => {
   switch (settings.bigTextAlign) {
@@ -30,6 +30,7 @@ const isoAlign = computed(() => {
       return 'self-end'
   }
 })
+
 const textSize = computed(() => {
   return settings.bigTextSize * widthTextArea.value * textRelativeSize + 'px'
 })
@@ -41,7 +42,7 @@ const textSize = computed(() => {
 const overflownText = computed(() => {
   // Check if the height of the text area exceeds the height of the preview area
   const overHeight = heightText.value > heightPreviewArea.value
-  // If the height of the text area exceeds the preview area, update the height of the text area and return true
+  // update the height of the text area and return true/false
   heightTextArea.value = heightText.value
   return overHeight
 })
@@ -69,7 +70,7 @@ const textPadding = computed(() => {
       <div class="flex flex-col gap-2 w-full" :style="padding">
         <!-- ISO -->
         <div v-if="settings.iso !== 1" :style="isoSize" :class="isoAlign">
-          <nuxt-icon :name="graphics.find((f: Graphic) => f.id === settings.iso)?.svg" filled class="shadow" />
+          <nuxt-icon :name="graphics.find((f: Graphic) => f.id === settings.iso)?.svg || ''" filled class="shadow" />
         </div>
         <!-- BIG TEXT -->
         <div class="text-preview" :class=textPadding

@@ -10,7 +10,7 @@ const { isOverDropZone } = useDropZone(dropZoneRef, { onDrop, dataTypes: ['image
  * Reset the photo position to the center.
  */
 function resetPhoto() {
-  settings!.photoPosition = 50
+  settings.photoPosition = 50
 }
 
 /**
@@ -20,7 +20,7 @@ function resetPhoto() {
  * @return {void} This function does not return anything.
  */
 function onFileInput(e: Event): void {
-  const { base64: fileBase64 } = useBase64((e.target as HTMLInputElement).files![0])
+  const { base64: fileBase64 } = useBase64((e.target as HTMLInputElement).files![0]!)
   settings!.startbase64 = fileBase64 as unknown as string
   resetPhoto()
 }
@@ -32,7 +32,7 @@ function onFileInput(e: Event): void {
  * @return {void} This function does not return anything.
  */
 function onDrop(files: File[] | null): void {
-  if (files) {
+  if (files && files[0]) {
     file.value = files[0]
     filename.value = file.value.name
     const { base64: fileBase64 } = useBase64(files[0] )

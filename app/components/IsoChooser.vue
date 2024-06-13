@@ -8,7 +8,7 @@
     >
       <template #default>
         <UButton block >
-          <nuxt-icon v-if="settings.iso != 1" :name="graphics.find((f: Graphic) => f.id === settings.iso)?.svg" filled class="w-4" />
+          <nuxt-icon v-if="settings.iso != 1" :name="graphics.find((f: Graphic) => f.id === settings.iso)?.svg || ''" filled class="w-4" />
             {{ settings.iso !== 1 ? graphics.find((f: Graphic) => f.id === settings.iso)?.label : $t('none') }}
         </UButton>
       </template>
