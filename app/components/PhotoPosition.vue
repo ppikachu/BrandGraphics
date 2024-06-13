@@ -1,12 +1,8 @@
-<script lang="ts" setup>
-const model = defineModel()
-</script>
-
 <template>
   <ClientOnly>
     <UFormGroup :label="$t('crop')" size="xs">
       <URange
-        v-model="model"
+        v-model="settings.photoPosition"
         :min="0"
         :max="100"
         size="sm"

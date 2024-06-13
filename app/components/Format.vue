@@ -1,16 +1,14 @@
-<script lang="ts" setup>
-const model = defineModel() as unknown as FrameSize
-</script>
-
 <template>
   <UDivider :label="$t('formatAndImage')" />
   <USelectMenu
-    v-model="model"
+    v-model="settings.frameSize"
     :options="socialSizes"
+    value-attribute="id"
     selected-icon="i-ci-dot-03-m"
   >
     <UButton block >
-      {{ model.label + ' (' + model.x + 'x' + model.y + ')' }}
+      {{ format?.label }}
+      <span class="text-xs">{{ ' (' + format?.x + 'x' + format?.y + ')' }}</span>
     </UButton>
   </USelectMenu>
 </template>
