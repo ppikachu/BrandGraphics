@@ -10,13 +10,13 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.16.0",
+    "@nuxt/ui": "^2.17.0",
     "@vueuse/core": "^10.11.0",
     "@vueuse/nuxt": "^10.11.0",
     "canvas-confetti": "^1.9.3",
     "html-to-image": "^1.11.11",
     "nuxt-icons": "^3.2.1",
-    "vue": "^3.4.27",
+    "vue": "^3.4.29",
     "vue-lite-youtube-embed": "^1.2.4",
     "vue-router": "^4.3.3"
   },
