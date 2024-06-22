@@ -3,7 +3,7 @@ export default defineI18nConfig(() => ({
   locale: 'en',
   messages: {
     en: {
-      preview: 'Preview',
+      preview: 'Click for preview',
       formatAndImage: '1. Format & Image (click to change)',
       portraitPost: 'Portrait Post 1920x1080',
       squarePost: 'Square Post 1080x1080',
@@ -47,7 +47,7 @@ export default defineI18nConfig(() => ({
       text_warning: 'Text exceeds preview area. Shorten text or reduce font size.',
     },
     es: {
-      preview: 'Vista previa',
+      preview: 'Click para previsualizar',
       formatAndImage: '1. Formato & Imagen (click para cambiar)',
       portraitPost: 'Portada 1920x1080',
       squarePost: 'Cuadrado 1080x1080',
